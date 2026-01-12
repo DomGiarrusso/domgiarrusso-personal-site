@@ -9,7 +9,7 @@ function MainLayout() {
     <div className="w-full">
       {/* <ThemeToggle /> */}
       {/* header */}
-      <header>
+      <header className="sticky top-0">
         <Navbar />
       </header>
       {/* main */}
