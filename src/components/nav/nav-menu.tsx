@@ -1,5 +1,6 @@
 import {
   NavigationMenu,
+  NavigationMenuContent,
   NavigationMenuItem,
   NavigationMenuLink,
   NavigationMenuList,
@@ -9,6 +10,7 @@ import {
 import { HugeiconsIcon } from '@hugeicons/react'
 import { cn } from '@/lib/utils'
 import {
+  ContactIcon,
   DashboardSquare02Icon,
   Home,
   Home07Icon,
@@ -16,6 +18,11 @@ import {
   Navigation,
   SourceCodeSquareIcon,
 } from '@hugeicons/core-free-icons'
+import NavListItem from './nav-list-item'
+import { Dialog, DialogTrigger } from '@/components/ui/dialog'
+import ContactDialog from '../ui/contact-dialog'
+import { Separator } from '../ui/separator'
+import { ThemeToggle } from '../ui/theme-toggle'
 
 type Props = {}
 
@@ -60,6 +67,46 @@ export default function NavMenu({}: Props) {
               Gallery
             </span>
           </NavigationMenuTrigger>
+          <NavigationMenuContent className="md:flex justify-center">
+            <ul className="grid gap-3 p-2 md:w-[250px] lg:w-[500px] lg:grid-cols-[.75fr_1fr]">
+              <li className="row-span-3">
+                <NavigationMenuLink
+                  href="/gallery"
+                  className="flex h-full w-full select-none flex-col justify-end rounded-md bg-linear-to-b from-muted/50 to-muted p-6 no-underline outline-none focus:shadow-md"
+                >
+                  <h4 className="mb-2 text-lg font-bold">Gallery</h4>
+                  <p className="text-sm leading-tight text-muted-foreground">
+                    The Gallery is a collection of various works outside of
+                    professional and programming work.
+                  </p>
+                </NavigationMenuLink>
+              </li>
+              <NavListItem href="/gallery/#art" title="Art">
+                Testing out some art
+              </NavListItem>
+            </ul>
+          </NavigationMenuContent>
+        </NavigationMenuItem>
+        <NavigationMenuItem>
+          <Dialog>
+            <DialogTrigger
+              className={cn(navigationMenuTriggerStyle(), 'cursor-pointer')}
+            >
+              <span className="flex gap-1">
+                <HugeiconsIcon
+                  icon={ContactIcon}
+                  strokeWidth={2}
+                  className="mb-0.5 size-4.5"
+                />
+                Contact
+              </span>
+            </DialogTrigger>
+            <ContactDialog />
+          </Dialog>
+        </NavigationMenuItem>
+        <Separator orientation="vertical" className="mx-3" />
+        <NavigationMenuItem>
+          <ThemeToggle />
         </NavigationMenuItem>
       </NavigationMenuList>
     </NavigationMenu>
