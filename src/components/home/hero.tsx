@@ -14,7 +14,7 @@ export default function Hero({}: Props) {
         <div className="w-full p-px bg-linear-to-r from-transparent via-foreground/10 to-transparent my-8 max-w-4xl" />
         <div className="text-5xl font-bold text-center">
           <h2>
-            <span className="text-muted-foreground">Hello there,</span> I&apos;m
+            <span className="text-muted-foreground">Hello there,</span> I'm
             Dominic,
           </h2>
           <h2 className="inline-flex gap-2 justify-between items-center">
@@ -22,7 +22,7 @@ export default function Hero({}: Props) {
             <span className="inline-flex items-center">
               <HugeiconsIcon
                 icon={AtSign}
-                strokeWidth={2}
+                strokeWidth={2.5}
                 className="items-baseline size-14"
               />
               CACI
