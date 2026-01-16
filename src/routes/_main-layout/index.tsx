@@ -1,10 +1,21 @@
-import { createFileRoute } from "@tanstack/react-router";
-import { ComponentExample } from "@/components/component-example";
+import { createFileRoute } from '@tanstack/react-router'
+import { ComponentExample } from '@/components/component-example'
+import Hero from '@/components/home/hero'
 
-export const Route = createFileRoute("/_main-layout/")({ component: App });
+export const Route = createFileRoute('/_main-layout/')({ component: App })
 
 function App() {
-return (
-  <ComponentExample />
-);
+  return (
+    <>
+      {/* Hero */}
+      <Hero />
+      {/* Skills */}
+
+      {/* Projects */}
+
+      {/* About */}
+
+      {/* <ComponentExample /> */}
+    </>
+  )
 }

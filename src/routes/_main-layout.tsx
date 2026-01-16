@@ -13,7 +13,9 @@ function MainLayout() {
         <Navbar />
       </header>
       {/* main */}
-      <Outlet />
+      <main className="max-w-[1600px] mx-auto">
+        <Outlet />
+      </main>
       {/* footer */}
     </div>
   )
