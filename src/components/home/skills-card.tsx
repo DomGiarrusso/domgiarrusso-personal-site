@@ -7,23 +7,26 @@ export type SkillConfig = {
 }
 type SkillsCardProps = {
   title: string
+  titleIcon?: React.ReactNode
   className?: string
   skills: SkillConfig[]
 }
 
 export default function SkillsCard({
   title,
+  titleIcon,
   className,
   skills,
 }: SkillsCardProps) {
   return (
     <Card className={className}>
       <CardHeader>
-        <CardTitle className="text-center text-2xl font-semibold">
+        <CardTitle className="flex items-center gap-2 justify-center text-2xl font-bold">
+          {titleIcon && titleIcon}
           {title}
         </CardTitle>
       </CardHeader>
-      <CardContent className='flex flex-wrap gap-1 gap-y-2 justify-center'>
+      <CardContent>
         <DynamicSkillBadgeList skills={skills} />
       </CardContent>
     </Card>

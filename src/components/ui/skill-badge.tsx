@@ -20,7 +20,7 @@ export default function SkillBadge({
   const badgeEffects: string = ' hover:bg-secondary/80'
   const transitionControls: string = 'transition-all duration-200'
   return (
-    <Badge variant={variant} className={cn(sizeStyle, badgeEffects, transitionControls,  className)} {...props}>
+    <Badge variant={variant} className={cn(sizeStyle, badgeEffects, transitionControls, className)} {...props}>
       <span>
         {icon && icon}
       </span>
