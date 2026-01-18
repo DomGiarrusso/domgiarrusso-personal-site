@@ -1,5 +1,4 @@
 import { createFileRoute } from '@tanstack/react-router'
-import { ComponentExample } from '@/components/component-example'
 import Hero from '@/components/home/hero'
 import Skills from '@/components/home/skills'
 

@@ -1,5 +1,5 @@
-import { useEffect, useState } from 'react'
-import NavMenu from './nav-menu'
+import { useCallback, useEffect, useState } from 'react'
+import NavMenu from '@/components/nav/nav-menu'
 
 type Props = {}
 
@@ -8,7 +8,7 @@ export default function Navbar({}: Props) {
   const [isHidden, setIsHidden] = useState(false)
   const [prevScrollPosition, setPrevScrollPosition] = useState(0)
 
-  const handleScroll = () => {
+  const handleScroll = useCallback(() => {
     const scrollPosition = window.scrollY
     const isScrollingDown = scrollPosition > prevScrollPosition
     const isScrollingUp = scrollPosition < prevScrollPosition
@@ -17,13 +17,12 @@ export default function Navbar({}: Props) {
       setIsScrolled(true)
       setIsHidden(true)
     } else if (isScrollingUp && isHidden) {
-      console.log('revealing')
       setIsHidden(false)
     } else if (isScrollingUp && scrollPosition < 50) {
       setIsScrolled(false)
     }
     setPrevScrollPosition(scrollPosition)
-  }
+  }, [prevScrollPosition, isHidden])
 
   useEffect(() => {
     window.addEventListener('scroll', handleScroll)
