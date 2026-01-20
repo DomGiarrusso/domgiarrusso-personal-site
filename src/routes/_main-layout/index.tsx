@@ -3,6 +3,7 @@ import Hero from '@/components/home/hero'
 import Skills from '@/components/home/skills'
 import { supabase } from '@/lib/supabase'
 import Projects from '@/components/home/projects'
+import AboutMe from '@/components/home/about-me'
 
 export const Route = createFileRoute('/_main-layout/')({
   loader: async () => {
@@ -33,7 +34,7 @@ function App() {
       {/* Projects */}
       <Projects projects={projects} />
       {/* About */}
-
+      <AboutMe />
       {/* <ComponentExample /> */}
     </>
   )
