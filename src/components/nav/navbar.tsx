@@ -34,7 +34,7 @@ export default function Navbar({}: Props) {
 
   return (
     <nav
-      className={`w-full flex justify-center bg-background border-b border-b-foreground/10 h-16 transition-all text-lg  ${isScrolled ? 'bg-background/80 backdrop-blur-md shadow-md' : 'bg-background border-b-transparent'}`}
+      className={`flex justify-center bg-background ring ring-foreground/10 h-16 transition-all text-lg ${isScrolled ? 'bg-background/80 backdrop-blur-md shadow-md' : 'bg-background ring-transparent'}`}
     >
       <div className="w-full max-w-[1600px]  flex justify-between py-5 text-md">
         <div className="flex gap-3 w-full items-center">
