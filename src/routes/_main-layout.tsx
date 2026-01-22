@@ -1,5 +1,4 @@
 import Navbar from '@/components/nav/navbar'
-import { ThemeToggle } from '@/components/ui/theme-toggle'
 import { createFileRoute, Outlet } from '@tanstack/react-router'
 
 export const Route = createFileRoute('/_main-layout')({ component: MainLayout })
@@ -9,11 +8,13 @@ function MainLayout() {
     <div className="w-full">
       {/* <ThemeToggle /> */}
       {/* header */}
-      <header className="sticky top-0">
+      <header className="sticky top-0 z-50">
         <Navbar />
       </header>
       {/* main */}
-      <Outlet />
+      <main className="max-w-[1600px] mx-auto">
+        <Outlet />
+      </main>
       {/* footer */}
     </div>
   )

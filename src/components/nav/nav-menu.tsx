@@ -20,9 +20,9 @@ import {
 } from '@hugeicons/core-free-icons'
 import NavListItem from './nav-list-item'
 import { Dialog, DialogTrigger } from '@/components/ui/dialog'
-import ContactDialog from '../ui/contact-dialog'
-import { Separator } from '../ui/separator'
-import { ThemeToggle } from '../ui/theme-toggle'
+import ContactDialog from '@/components/ui/contact-dialog'
+import { Separator } from '@/components/ui/separator'
+import { ThemeToggle } from '@/components/ui/theme-toggle'
 
 type Props = {}
 

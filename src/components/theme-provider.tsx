@@ -32,6 +32,19 @@ export function ThemeProvider({
     return stored || defaultTheme
   })
 
+  // Sync theme from localStorage on mount to ensure correct initial state
+  // This handles cases where SSR renders with defaultTheme but client has different value
+  useEffect(() => {
+    if (typeof window === 'undefined') return
+    const stored = localStorage.getItem(storageKey) as Theme | null
+    if (stored) {
+      // Always update to ensure client state matches localStorage
+      setTheme(stored)
+    }
+    // Only run once on mount
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
+
   useEffect(() => {
     if (typeof window === 'undefined') return
 
@@ -61,9 +74,9 @@ export function ThemeProvider({
 
   const value = {
     theme,
-    setTheme: (theme: Theme) => {
-      localStorage.setItem(storageKey, theme)
-      setTheme(theme)
+    setTheme: (newTheme: Theme) => {
+      localStorage.setItem(storageKey, newTheme)
+      setTheme(newTheme)
     },
   }
 

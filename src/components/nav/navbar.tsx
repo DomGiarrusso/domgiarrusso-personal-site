@@ -1,5 +1,5 @@
-import { useEffect, useState } from 'react'
-import NavMenu from './nav-menu'
+import { useCallback, useEffect, useState } from 'react'
+import NavMenu from '@/components/nav/nav-menu'
 
 type Props = {}
 
@@ -8,7 +8,7 @@ export default function Navbar({}: Props) {
   const [isHidden, setIsHidden] = useState(false)
   const [prevScrollPosition, setPrevScrollPosition] = useState(0)
 
-  const handleScroll = () => {
+  const handleScroll = useCallback(() => {
     const scrollPosition = window.scrollY
     const isScrollingDown = scrollPosition > prevScrollPosition
     const isScrollingUp = scrollPosition < prevScrollPosition
@@ -17,13 +17,12 @@ export default function Navbar({}: Props) {
       setIsScrolled(true)
       setIsHidden(true)
     } else if (isScrollingUp && isHidden) {
-      console.log('revealing')
       setIsHidden(false)
     } else if (isScrollingUp && scrollPosition < 50) {
       setIsScrolled(false)
     }
     setPrevScrollPosition(scrollPosition)
-  }
+  }, [prevScrollPosition, isHidden])
 
   useEffect(() => {
     window.addEventListener('scroll', handleScroll)
@@ -35,7 +34,7 @@ export default function Navbar({}: Props) {
 
   return (
     <nav
-      className={`w-full flex justify-center bg-background border-b border-b-foreground/10 h-16 transition-all z-50 text-lg  ${isScrolled ? 'bg-background/80 backdrop-blur-md shadow-md' : 'bg-background border-b-transparent'}`}
+      className={`flex justify-center bg-background ring ring-foreground/10 h-16 transition-all text-lg ${isScrolled ? 'bg-background/80 backdrop-blur-md shadow-md' : 'bg-background ring-transparent'}`}
     >
       <div className="w-full max-w-[1600px]  flex justify-between py-5 text-md">
         <div className="flex gap-3 w-full items-center">

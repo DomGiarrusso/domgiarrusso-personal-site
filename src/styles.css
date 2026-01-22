@@ -124,10 +124,25 @@
     @apply border-border outline-ring/50;
   }
   body {
-    @apply font-sans bg-background text-foreground;
+    @apply font-sans text-foreground;
+    background: linear-gradient(
+      to bottom,
+      var(--background) 0%,
+      var(--background) 50%,
+      var(--color-red-200) 100%
+    );
+  }
+  
+  .dark body {
+    background: linear-gradient(
+      to bottom,
+      var(--background),
+      var(--background) 50%,
+      var(--color-blue-950)
+    );
   }
   html {
-    @apply font-sans;
+    @apply font-sans bg-background;
     font-size: var(--font-size-base);
   }
 }
