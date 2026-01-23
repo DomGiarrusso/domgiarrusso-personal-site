@@ -76,7 +76,7 @@
 }
 
 @theme inline {
-  --font-sans: 'Source Sans 3', 'Inter Variable', sans-serif;
+  --font-sans: 'Source Sans 3 Variable', 'Inter Variable', sans-serif;
   --font-size-base: 1.125rem;
   --font-weight-base: 600;
   --color-sidebar-ring: var(--sidebar-ring);
