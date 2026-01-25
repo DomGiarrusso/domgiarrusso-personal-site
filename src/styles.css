@@ -3,7 +3,7 @@
 @import 'shadcn/tailwind.css';
 @import '@fontsource-variable/inter';
 @import '@fontsource-variable/source-sans-3';
-
+@plugin "@tailwindcss/typography";
 @custom-variant dark (&:is(.dark *));
 
 :root {
@@ -144,5 +144,15 @@
   html {
     @apply font-sans bg-background;
     font-size: var(--font-size-base);
+  }
+
+
+  /* Prose Styles Modifications */
+  .prose :where(code):not(:where(pre code)) {
+    @apply rounded ring ring-foreground/10 bg-gray-200 px-1.5 py-0.5 text-[0.875em] text-secondary-foreground before:content-none! after:content-none!;
+  }
+  
+  .dark .prose :where(code):not(:where(pre code)) {
+    @apply bg-gray-700 text-secondary-foreground;
   }
 }
