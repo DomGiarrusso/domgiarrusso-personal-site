@@ -12,6 +12,7 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as MainLayoutRouteImport } from './routes/_main-layout'
 import { Route as MainLayoutIndexRouteImport } from './routes/_main-layout/index'
 import { Route as MainLayoutAboutRouteImport } from './routes/_main-layout/about'
+import { Route as MainLayoutProjectsProjectnameRouteImport } from './routes/_main-layout/projects/$projectname'
 
 const MainLayoutRoute = MainLayoutRouteImport.update({
   id: '/_main-layout',
@@ -27,27 +28,41 @@ const MainLayoutAboutRoute = MainLayoutAboutRouteImport.update({
   path: '/about',
   getParentRoute: () => MainLayoutRoute,
 } as any)
+const MainLayoutProjectsProjectnameRoute =
+  MainLayoutProjectsProjectnameRouteImport.update({
+    id: '/projects/$projectname',
+    path: '/projects/$projectname',
+    getParentRoute: () => MainLayoutRoute,
+  } as any)
 
 export interface FileRoutesByFullPath {
   '/about': typeof MainLayoutAboutRoute
   '/': typeof MainLayoutIndexRoute
+  '/projects/$projectname': typeof MainLayoutProjectsProjectnameRoute
 }
 export interface FileRoutesByTo {
   '/about': typeof MainLayoutAboutRoute
   '/': typeof MainLayoutIndexRoute
+  '/projects/$projectname': typeof MainLayoutProjectsProjectnameRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/_main-layout': typeof MainLayoutRouteWithChildren
   '/_main-layout/about': typeof MainLayoutAboutRoute
   '/_main-layout/': typeof MainLayoutIndexRoute
+  '/_main-layout/projects/$projectname': typeof MainLayoutProjectsProjectnameRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/about' | '/'
+  fullPaths: '/about' | '/' | '/projects/$projectname'
   fileRoutesByTo: FileRoutesByTo
-  to: '/about' | '/'
-  id: '__root__' | '/_main-layout' | '/_main-layout/about' | '/_main-layout/'
+  to: '/about' | '/' | '/projects/$projectname'
+  id:
+    | '__root__'
+    | '/_main-layout'
+    | '/_main-layout/about'
+    | '/_main-layout/'
+    | '/_main-layout/projects/$projectname'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -77,17 +92,26 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof MainLayoutAboutRouteImport
       parentRoute: typeof MainLayoutRoute
     }
+    '/_main-layout/projects/$projectname': {
+      id: '/_main-layout/projects/$projectname'
+      path: '/projects/$projectname'
+      fullPath: '/projects/$projectname'
+      preLoaderRoute: typeof MainLayoutProjectsProjectnameRouteImport
+      parentRoute: typeof MainLayoutRoute
+    }
   }
 }
 
 interface MainLayoutRouteChildren {
   MainLayoutAboutRoute: typeof MainLayoutAboutRoute
   MainLayoutIndexRoute: typeof MainLayoutIndexRoute
+  MainLayoutProjectsProjectnameRoute: typeof MainLayoutProjectsProjectnameRoute
 }
 
 const MainLayoutRouteChildren: MainLayoutRouteChildren = {
   MainLayoutAboutRoute: MainLayoutAboutRoute,
   MainLayoutIndexRoute: MainLayoutIndexRoute,
+  MainLayoutProjectsProjectnameRoute: MainLayoutProjectsProjectnameRoute,
 }
 
 const MainLayoutRouteWithChildren = MainLayoutRoute._addFileChildren(
