@@ -13,6 +13,7 @@ import { Route as MainLayoutRouteImport } from './routes/_main-layout'
 import { Route as MainLayoutIndexRouteImport } from './routes/_main-layout/index'
 import { Route as MainLayoutAboutRouteImport } from './routes/_main-layout/about'
 import { Route as MainLayoutProjectsProjectnameRouteImport } from './routes/_main-layout/projects/$projectname'
+import { Route as MainLayoutGalleryBentoDemoRouteImport } from './routes/_main-layout/gallery/bento-demo'
 
 const MainLayoutRoute = MainLayoutRouteImport.update({
   id: '/_main-layout',
@@ -34,15 +35,23 @@ const MainLayoutProjectsProjectnameRoute =
     path: '/projects/$projectname',
     getParentRoute: () => MainLayoutRoute,
   } as any)
+const MainLayoutGalleryBentoDemoRoute =
+  MainLayoutGalleryBentoDemoRouteImport.update({
+    id: '/gallery/bento-demo',
+    path: '/gallery/bento-demo',
+    getParentRoute: () => MainLayoutRoute,
+  } as any)
 
 export interface FileRoutesByFullPath {
   '/about': typeof MainLayoutAboutRoute
   '/': typeof MainLayoutIndexRoute
+  '/gallery/bento-demo': typeof MainLayoutGalleryBentoDemoRoute
   '/projects/$projectname': typeof MainLayoutProjectsProjectnameRoute
 }
 export interface FileRoutesByTo {
   '/about': typeof MainLayoutAboutRoute
   '/': typeof MainLayoutIndexRoute
+  '/gallery/bento-demo': typeof MainLayoutGalleryBentoDemoRoute
   '/projects/$projectname': typeof MainLayoutProjectsProjectnameRoute
 }
 export interface FileRoutesById {
@@ -50,18 +59,20 @@ export interface FileRoutesById {
   '/_main-layout': typeof MainLayoutRouteWithChildren
   '/_main-layout/about': typeof MainLayoutAboutRoute
   '/_main-layout/': typeof MainLayoutIndexRoute
+  '/_main-layout/gallery/bento-demo': typeof MainLayoutGalleryBentoDemoRoute
   '/_main-layout/projects/$projectname': typeof MainLayoutProjectsProjectnameRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/about' | '/' | '/projects/$projectname'
+  fullPaths: '/about' | '/' | '/gallery/bento-demo' | '/projects/$projectname'
   fileRoutesByTo: FileRoutesByTo
-  to: '/about' | '/' | '/projects/$projectname'
+  to: '/about' | '/' | '/gallery/bento-demo' | '/projects/$projectname'
   id:
     | '__root__'
     | '/_main-layout'
     | '/_main-layout/about'
     | '/_main-layout/'
+    | '/_main-layout/gallery/bento-demo'
     | '/_main-layout/projects/$projectname'
   fileRoutesById: FileRoutesById
 }
@@ -99,18 +110,27 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof MainLayoutProjectsProjectnameRouteImport
       parentRoute: typeof MainLayoutRoute
     }
+    '/_main-layout/gallery/bento-demo': {
+      id: '/_main-layout/gallery/bento-demo'
+      path: '/gallery/bento-demo'
+      fullPath: '/gallery/bento-demo'
+      preLoaderRoute: typeof MainLayoutGalleryBentoDemoRouteImport
+      parentRoute: typeof MainLayoutRoute
+    }
   }
 }
 
 interface MainLayoutRouteChildren {
   MainLayoutAboutRoute: typeof MainLayoutAboutRoute
   MainLayoutIndexRoute: typeof MainLayoutIndexRoute
+  MainLayoutGalleryBentoDemoRoute: typeof MainLayoutGalleryBentoDemoRoute
   MainLayoutProjectsProjectnameRoute: typeof MainLayoutProjectsProjectnameRoute
 }
 
 const MainLayoutRouteChildren: MainLayoutRouteChildren = {
   MainLayoutAboutRoute: MainLayoutAboutRoute,
   MainLayoutIndexRoute: MainLayoutIndexRoute,
+  MainLayoutGalleryBentoDemoRoute: MainLayoutGalleryBentoDemoRoute,
   MainLayoutProjectsProjectnameRoute: MainLayoutProjectsProjectnameRoute,
 }
 
