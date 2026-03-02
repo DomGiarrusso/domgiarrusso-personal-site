@@ -285,11 +285,12 @@ export function BentoGalleryGrid({
         return (
           <button
             key={item.id}
+            id={`bento-item-${item.id}`}
             type="button"
             onClick={() => onItemClick?.(item, index)}
             aria-label={ariaLabel}
             className={cn(
-              "group relative w-full h-full min-w-0 overflow-hidden rounded-xl border border-border bg-card ring-1 ring-border transition-colors hover:bg-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background",
+              "group relative w-full h-full min-w-0 cursor-pointer overflow-hidden rounded-xl border border-border bg-card ring-1 ring-border transition-colors hover:bg-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background",
               spanClasses
             )}
           >

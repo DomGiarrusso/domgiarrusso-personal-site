@@ -1,15 +1,26 @@
-import { createFileRoute } from "@tanstack/react-router";
-import { BentoGalleryGrid, type BentoItem } from "@/components/gallery/BentoGalleryGrid";
-import { useState } from "react";
+import { BentoGalleryGrid, type BentoItem } from '@/components/gallery/BentoGalleryGrid'
+import { GalleryLightbox } from '@/components/gallery/GalleryLightbox'
+import { createFileRoute } from '@tanstack/react-router'
+import { useEffect, useMemo, useRef, useState } from 'react'
 
-export const Route = createFileRoute("/_main-layout/gallery/bento-demo")({
+type BentoDemoSearch = {
+  item?: string
+}
+
+export const Route = createFileRoute('/_main-layout/gallery/bento-demo')({
+  validateSearch: (search: Record<string, unknown>): BentoDemoSearch => ({
+    item: typeof search.item === 'string' ? search.item : undefined,
+  }),
   component: BentoDemoPage,
-});
+})
 
 function BentoDemoPage() {
-  const [clickedItem, setClickedItem] = useState<BentoItem | null>(null);
+  const search = Route.useSearch()
+  const navigate = Route.useNavigate()
+  const scrollPositionRef = useRef<number>(0)
 
-  const sampleItems: BentoItem[] = [
+  const sampleItems: BentoItem[] = useMemo(
+    () => [
     {
       id: "1",
       title: "Mountain Landscape",
@@ -154,14 +165,111 @@ function BentoDemoPage() {
       fullUrl: "https://picsum.photos/id/1033/1600/900",
       variant: "square",
     },
-  ];
+  ],
+    [],
+  )
 
-  const handleItemClick = (item: BentoItem, index: number) => {
-    console.log("Clicked item:", item.id, "at index:", index);
-    setClickedItem(item);
-    // Clear after 3 seconds
-    setTimeout(() => setClickedItem(null), 3000);
-  };
+  const [open, setOpen] = useState(false)
+  const [index, setIndex] = useState(0)
+
+  const handleItemClick = (item: BentoItem, nextIndex: number) => {
+    // Save scroll position before opening
+    scrollPositionRef.current = window.scrollY
+
+    setIndex(nextIndex)
+    setOpen(true)
+
+    void navigate({
+      search: (prev) => ({ ...prev, item: item.id }),
+      replace: true,
+    })
+  }
+
+  // On initial load (and when URL changes), if ?item=<id> matches, open there.
+  useEffect(() => {
+    if (!search.item) return
+    const foundIndex = sampleItems.findIndex((it) => it.id === search.item)
+    if (foundIndex === -1) return
+
+    // Save scroll position before opening
+    scrollPositionRef.current = window.scrollY
+
+    setIndex(foundIndex)
+    setOpen(true)
+  }, [sampleItems, search.item])
+
+  // Keep ?item=<id> synced while open (including swipes/keyboard nav).
+  useEffect(() => {
+    if (!open) return
+    const item = sampleItems[index]
+    if (!item) return
+
+    if (search.item === item.id) return
+
+    void navigate({
+      search: (prev) => ({ ...prev, item: item.id }),
+      replace: true,
+    })
+  }, [index, navigate, open, sampleItems, search.item])
+
+  const onOpenChange = (nextOpen: boolean) => {
+    if (!nextOpen) {
+      // Save scroll position before closing (while lightbox is still open)
+      scrollPositionRef.current = window.scrollY
+    }
+
+    setOpen(nextOpen)
+
+    if (!nextOpen) {
+      void navigate({
+        search: (prev) => {
+          const { item: _item, ...rest } = prev
+          return rest
+        },
+        replace: true,
+      })
+    }
+  }
+
+  // Restore scroll position after navigation completes
+  // Use a scroll listener to continuously restore until position is stable
+  useEffect(() => {
+    if (typeof window === 'undefined') return
+
+    const targetScroll = scrollPositionRef.current
+    let restoreAttempts = 0
+    const maxAttempts = 20 // Stop after 20 attempts (2 seconds)
+
+    const restoreScroll = () => {
+      const currentScroll = window.scrollY
+      if (Math.abs(currentScroll - targetScroll) > 1 && restoreAttempts < maxAttempts) {
+        window.scrollTo(0, targetScroll)
+        restoreAttempts++
+        requestAnimationFrame(restoreScroll)
+      }
+    }
+
+    // Start restoration immediately
+    requestAnimationFrame(restoreScroll)
+
+    // Also use delayed attempts as backup
+    const timeout1 = setTimeout(() => {
+      if (Math.abs(window.scrollY - targetScroll) > 1) {
+        window.scrollTo(0, targetScroll)
+      }
+    }, 50)
+
+    const timeout2 = setTimeout(() => {
+      if (Math.abs(window.scrollY - targetScroll) > 1) {
+        window.scrollTo(0, targetScroll)
+      }
+    }, 150)
+
+    return () => {
+      clearTimeout(timeout1)
+      clearTimeout(timeout2)
+    }
+  }, [search.item, open])
 
   return (
     <div className="container mx-auto px-4 py-12 space-y-8">
@@ -173,14 +281,6 @@ function BentoDemoPage() {
         </p>
       </div>
 
-      {clickedItem && (
-        <div className="rounded-lg border border-border bg-card p-4 ring-1 ring-border">
-          <p className="text-sm font-medium">
-            Clicked: {clickedItem.title || clickedItem.alt} (ID: {clickedItem.id})
-          </p>
-        </div>
-      )}
-
       <div className="space-y-8">
         <section className="space-y-4">
           <h2 className="text-2xl font-semibold">Default Layout (1/2/3 columns)</h2>
@@ -188,7 +288,7 @@ function BentoDemoPage() {
             <BentoGalleryGrid
               items={sampleItems}
               onItemClick={handleItemClick}
-              
+
             />
           </div>
         </section>
@@ -201,18 +301,20 @@ function BentoDemoPage() {
             <BentoGalleryGrid
               items={sampleItems}
               onItemClick={handleItemClick}
-              columns={{
-                base: 1,
-                md: 2,
-                lg: 3,
-                xl: 5,
-              }}
             />
           </div>
         </section>
       </div>
+
+      <GalleryLightbox
+        items={sampleItems}
+        open={open}
+        index={index}
+        onIndexChange={setIndex}
+        onOpenChange={onOpenChange}
+      />
     </div>
-  );
+  )
 }
 
-export default BentoDemoPage;
+export default BentoDemoPage
