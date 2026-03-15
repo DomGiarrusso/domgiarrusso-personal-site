@@ -1,6 +1,5 @@
 import Lightbox, { type SlideImage } from 'yet-another-react-lightbox'
 import Captions from 'yet-another-react-lightbox/plugins/captions'
-import Counter from 'yet-another-react-lightbox/plugins/counter'
 import Slideshow from 'yet-another-react-lightbox/plugins/slideshow'
 import Thumbnails from 'yet-another-react-lightbox/plugins/thumbnails'
 import Zoom from 'yet-another-react-lightbox/plugins/zoom'
@@ -9,7 +8,6 @@ import { useEffect, useMemo } from 'react'
 import type { BentoItem } from './BentoGalleryGrid'
 import { HugeiconsIcon } from '@hugeicons/react'
 import {
-  Add01Icon,
   ArrowLeft01Icon,
   ArrowRight01Icon,
   Cancel01Icon,
@@ -86,16 +84,6 @@ export function GalleryLightbox({
       carousel={{
         finite: false,
         preload: 2,
-      }}
-      counter={{
-        container: {
-          style: {
-            top: 'unset',
-            bottom: 0,
-            left: '50%',
-            transform: 'translateX(-50%)',
-          },
-        },
       }}
       slideshow={{ autoplay: false, delay: 3000 }}
       zoom={{

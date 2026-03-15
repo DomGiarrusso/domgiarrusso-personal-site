@@ -81,7 +81,7 @@ export default function NavMenu({}: Props) {
                   </p>
                 </NavigationMenuLink>
               </li>
-              <NavListItem href="/gallery/#art" title="Art">
+              <NavListItem href="/gallery/art" title="Art">
                 Testing out some art
               </NavListItem>
             </ul>

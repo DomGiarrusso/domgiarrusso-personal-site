@@ -4,6 +4,7 @@ import { Card, CardContent, CardFooter } from "@/components/ui/card";
 import DynamicSkillBadgeList from "@/components/ui/dynamic-skill-badge-list";
 import { getSkills } from "@/lib/skills-registry";
 import { supabase } from "@/lib/supabase";
+import type { ProjectsRow } from "@/types/database";
 import { createFileRoute } from "@tanstack/react-router";
 import MarkdownContent from "@/components/ui/MarkdownContent";
 import { GitHubIcon } from "@/components/icons/tools-icons";
@@ -13,18 +14,18 @@ import { LinkSquare02Icon } from "@hugeicons/core-free-icons";
 
 
 export const Route = createFileRoute('/_main-layout/projects/$projectname')({
-    loader: async ({params}) => {
+    loader: async ({ params }): Promise<{ project: ProjectsRow | null }> => {
         const { projectname } = params;
         const { data, error } = await supabase
-        .from('projects')
-        .select('*')
-        .eq('slug', projectname)
-        .single()
-        
+            .from('projects')
+            .select('*')
+            .eq('slug', projectname)
+            .single();
+
         if (error) {
-            console.error("Error fetching project", error)
+            console.error("Error fetching project", error);
         }
-        return { project: data ?? null }
+        return { project: data ?? null };
     },
     component: ProjectPage,
 });
@@ -46,7 +47,7 @@ function ProjectPage() {
                 <div className="flex-1 space-y-4 pl-8">
                     <Card className="min-h-96">
                         <CardContent >
-                            <MarkdownContent>{project?.content}</MarkdownContent>
+                            <MarkdownContent>{project?.content ?? ''}</MarkdownContent>
                         </CardContent>
                         <CardFooter className="flex gap-2">
                             {project?.repo_url && 
