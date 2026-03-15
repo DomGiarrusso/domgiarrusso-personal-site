@@ -4,7 +4,7 @@ export type Json =
   | boolean
   | null
   | { [key: string]: Json | undefined }
-  | Json[]
+  | Array<Json>
 
 export type Database = {
   public: {
@@ -52,6 +52,7 @@ export type Database = {
           created_at?: string | null
           updated_at?: string | null
         }
+        Relationships: []
       }
       videos: {
         Row: {
@@ -78,6 +79,7 @@ export type Database = {
           video_url?: string
           sort_order?: number
         }
+        Relationships: []
       }
       projects: {
         Row: {
@@ -88,7 +90,7 @@ export type Database = {
           blurb: string
           thumbnail_url: string | null
           content: string
-          techstack: string[] | null
+          techstack: Array<string> | null
           repo_url: string | null
           external_url: string | null
           features: Json
@@ -103,7 +105,7 @@ export type Database = {
           blurb: string
           thumbnail_url?: string | null
           content: string
-          techstack?: string[] | null
+          techstack?: Array<string> | null
           repo_url?: string | null
           external_url?: string | null
           features: Json
@@ -118,20 +120,28 @@ export type Database = {
           blurb?: string
           thumbnail_url?: string | null
           content?: string
-          techstack?: string[] | null
+          techstack?: Array<string> | null
           repo_url?: string | null
           external_url?: string | null
           features?: Json
           sort_order?: number | null
           is_published?: boolean
         }
+        Relationships: []
       }
     }
-    Enums: Record<string, never>
+    Views: {}
+    Functions: {}
+    Enums: {}
   }
 }
 
+type PublicSchema = Database['public']
+
+export type Tables<TTableName extends keyof PublicSchema['Tables']> =
+  PublicSchema['Tables'][TTableName]['Row']
+
 // Convenience type aliases for table rows
-export type ImagesRow = Database['public']['Tables']['images']['Row']
-export type VideosRow = Database['public']['Tables']['videos']['Row']
-export type ProjectsRow = Database['public']['Tables']['projects']['Row']
+export type ImagesRow = Tables<'images'>
+export type VideosRow = Tables<'videos'>
+export type ProjectsRow = Tables<'projects'>
