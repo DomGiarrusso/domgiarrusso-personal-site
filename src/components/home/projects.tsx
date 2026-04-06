@@ -1,14 +1,13 @@
 import ProjectCard from "../ui/project-card"
+import type { ProjectsRow } from "@/types/database"
 
-type ProjectCardData = {
-    id: string
-    title: string
-    slug: string
-    blurb: string
-    thumbnail_url: string
-}
+type ProjectCardData = Pick<
+    ProjectsRow,
+    'id' | 'title' | 'slug' | 'blurb' | 'thumbnail_url'
+>
+
 type Props = {
-    projects: ProjectCardData[]
+    projects: Array<ProjectCardData>
 }
 
 export default function Projects({ projects }: Props) {
