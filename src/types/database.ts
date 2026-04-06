@@ -21,6 +21,7 @@ export type Database = {
           width: number | null
           height: number | null
           sort_order: number | null
+          is_published: boolean
           created_at: string | null
           updated_at: string | null
         }

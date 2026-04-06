@@ -1,7 +1,7 @@
+import { createFileRoute } from '@tanstack/react-router'
 import { BentoGalleryWithLightbox } from '@/components/gallery/BentoGalleryWithLightbox'
 import { supabase } from '@/lib/supabase'
 import { imageRowToBentoItem } from '@/lib/utils'
-import { createFileRoute } from '@tanstack/react-router'
 
 type PhotosSearch = {
   item?: string
@@ -16,6 +16,7 @@ export const Route = createFileRoute('/_main-layout/gallery/photos')({
       .from('images')
       .select('*')
       .eq('page', 'photos')
+      .eq('is_published', true)
       .order('sort_order', { ascending: true })
       .order('created_at', { ascending: false })
 

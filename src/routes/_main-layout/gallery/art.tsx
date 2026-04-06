@@ -1,5 +1,5 @@
-import { BentoGalleryWithLightbox } from '@/components/gallery/BentoGalleryWithLightbox'
 import { createFileRoute } from '@tanstack/react-router'
+import { BentoGalleryWithLightbox } from '@/components/gallery/BentoGalleryWithLightbox'
 import { supabase } from '@/lib/supabase'
 import { imageRowToBentoItem } from '@/lib/utils'
 
@@ -16,6 +16,7 @@ export const Route = createFileRoute('/_main-layout/gallery/art')({
       .from('images')
       .select('*')
       .eq('page', 'art')
+      .eq('is_published', true)
       .order('sort_order', { ascending: true })
       .order('created_at', { ascending: false })
 
