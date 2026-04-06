@@ -36,6 +36,7 @@ export type Database = {
           width?: number | null
           height?: number | null
           sort_order?: number | null
+          is_published?: boolean
           created_at?: string | null
           updated_at?: string | null
         }
@@ -50,6 +51,7 @@ export type Database = {
           width?: number | null
           height?: number | null
           sort_order?: number | null
+          is_published?: boolean
           created_at?: string | null
           updated_at?: string | null
         }
@@ -58,27 +60,39 @@ export type Database = {
       videos: {
         Row: {
           id: string
-          created_at: string
           title: string
-          thumbnail_url: string
+          description: string | null
           video_url: string
+          thumbnail_url: string | null
+          duration: string | null
           sort_order: number
+          is_published: boolean
+          created_at: string
+          updated_at: string
         }
         Insert: {
           id?: string
-          created_at?: string
           title: string
-          thumbnail_url: string
+          description?: string | null
           video_url: string
-          sort_order: number
+          thumbnail_url?: string | null
+          duration?: string | null
+          sort_order?: number
+          is_published?: boolean
+          created_at?: string
+          updated_at?: string
         }
         Update: {
           id?: string
-          created_at?: string
           title?: string
-          thumbnail_url?: string
+          description?: string | null
           video_url?: string
+          thumbnail_url?: string | null
+          duration?: string | null
           sort_order?: number
+          is_published?: boolean
+          created_at?: string
+          updated_at?: string
         }
         Relationships: []
       }
@@ -142,7 +156,15 @@ type PublicSchema = Database['public']
 export type Tables<TTableName extends keyof PublicSchema['Tables']> =
   PublicSchema['Tables'][TTableName]['Row']
 
+export type TablesInsert<TTableName extends keyof PublicSchema['Tables']> =
+  PublicSchema['Tables'][TTableName]['Insert']
+
+export type TablesUpdate<TTableName extends keyof PublicSchema['Tables']> =
+  PublicSchema['Tables'][TTableName]['Update']
+
 // Convenience type aliases for table rows
 export type ImagesRow = Tables<'images'>
 export type VideosRow = Tables<'videos'>
 export type ProjectsRow = Tables<'projects'>
+export type VideosInsert = TablesInsert<'videos'>
+export type VideosUpdate = TablesUpdate<'videos'>

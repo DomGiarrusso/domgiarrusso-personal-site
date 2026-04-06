@@ -87,6 +87,9 @@ export default function NavMenu({}: Props) {
               <NavListItem href="/gallery/photos" title="Photography">
                 Testing out some photos
               </NavListItem>
+              <NavListItem href="/gallery/videos" title="Videos">
+                Testing out some videos
+              </NavListItem>
             </ul>
           </NavigationMenuContent>
         </NavigationMenuItem>

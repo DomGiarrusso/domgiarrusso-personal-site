@@ -13,6 +13,7 @@ import { Route as MainLayoutRouteImport } from './routes/_main-layout'
 import { Route as MainLayoutIndexRouteImport } from './routes/_main-layout/index'
 import { Route as MainLayoutAboutRouteImport } from './routes/_main-layout/about'
 import { Route as MainLayoutProjectsProjectnameRouteImport } from './routes/_main-layout/projects/$projectname'
+import { Route as MainLayoutGalleryVideosRouteImport } from './routes/_main-layout/gallery/videos'
 import { Route as MainLayoutGalleryPhotosRouteImport } from './routes/_main-layout/gallery/photos'
 import { Route as MainLayoutGalleryBentoDemoRouteImport } from './routes/_main-layout/gallery/bento-demo'
 import { Route as MainLayoutGalleryArtRouteImport } from './routes/_main-layout/gallery/art'
@@ -37,6 +38,11 @@ const MainLayoutProjectsProjectnameRoute =
     path: '/projects/$projectname',
     getParentRoute: () => MainLayoutRoute,
   } as any)
+const MainLayoutGalleryVideosRoute = MainLayoutGalleryVideosRouteImport.update({
+  id: '/gallery/videos',
+  path: '/gallery/videos',
+  getParentRoute: () => MainLayoutRoute,
+} as any)
 const MainLayoutGalleryPhotosRoute = MainLayoutGalleryPhotosRouteImport.update({
   id: '/gallery/photos',
   path: '/gallery/photos',
@@ -60,6 +66,7 @@ export interface FileRoutesByFullPath {
   '/gallery/art': typeof MainLayoutGalleryArtRoute
   '/gallery/bento-demo': typeof MainLayoutGalleryBentoDemoRoute
   '/gallery/photos': typeof MainLayoutGalleryPhotosRoute
+  '/gallery/videos': typeof MainLayoutGalleryVideosRoute
   '/projects/$projectname': typeof MainLayoutProjectsProjectnameRoute
 }
 export interface FileRoutesByTo {
@@ -68,6 +75,7 @@ export interface FileRoutesByTo {
   '/gallery/art': typeof MainLayoutGalleryArtRoute
   '/gallery/bento-demo': typeof MainLayoutGalleryBentoDemoRoute
   '/gallery/photos': typeof MainLayoutGalleryPhotosRoute
+  '/gallery/videos': typeof MainLayoutGalleryVideosRoute
   '/projects/$projectname': typeof MainLayoutProjectsProjectnameRoute
 }
 export interface FileRoutesById {
@@ -78,6 +86,7 @@ export interface FileRoutesById {
   '/_main-layout/gallery/art': typeof MainLayoutGalleryArtRoute
   '/_main-layout/gallery/bento-demo': typeof MainLayoutGalleryBentoDemoRoute
   '/_main-layout/gallery/photos': typeof MainLayoutGalleryPhotosRoute
+  '/_main-layout/gallery/videos': typeof MainLayoutGalleryVideosRoute
   '/_main-layout/projects/$projectname': typeof MainLayoutProjectsProjectnameRoute
 }
 export interface FileRouteTypes {
@@ -88,6 +97,7 @@ export interface FileRouteTypes {
     | '/gallery/art'
     | '/gallery/bento-demo'
     | '/gallery/photos'
+    | '/gallery/videos'
     | '/projects/$projectname'
   fileRoutesByTo: FileRoutesByTo
   to:
@@ -96,6 +106,7 @@ export interface FileRouteTypes {
     | '/gallery/art'
     | '/gallery/bento-demo'
     | '/gallery/photos'
+    | '/gallery/videos'
     | '/projects/$projectname'
   id:
     | '__root__'
@@ -105,6 +116,7 @@ export interface FileRouteTypes {
     | '/_main-layout/gallery/art'
     | '/_main-layout/gallery/bento-demo'
     | '/_main-layout/gallery/photos'
+    | '/_main-layout/gallery/videos'
     | '/_main-layout/projects/$projectname'
   fileRoutesById: FileRoutesById
 }
@@ -142,6 +154,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof MainLayoutProjectsProjectnameRouteImport
       parentRoute: typeof MainLayoutRoute
     }
+    '/_main-layout/gallery/videos': {
+      id: '/_main-layout/gallery/videos'
+      path: '/gallery/videos'
+      fullPath: '/gallery/videos'
+      preLoaderRoute: typeof MainLayoutGalleryVideosRouteImport
+      parentRoute: typeof MainLayoutRoute
+    }
     '/_main-layout/gallery/photos': {
       id: '/_main-layout/gallery/photos'
       path: '/gallery/photos'
@@ -172,6 +191,7 @@ interface MainLayoutRouteChildren {
   MainLayoutGalleryArtRoute: typeof MainLayoutGalleryArtRoute
   MainLayoutGalleryBentoDemoRoute: typeof MainLayoutGalleryBentoDemoRoute
   MainLayoutGalleryPhotosRoute: typeof MainLayoutGalleryPhotosRoute
+  MainLayoutGalleryVideosRoute: typeof MainLayoutGalleryVideosRoute
   MainLayoutProjectsProjectnameRoute: typeof MainLayoutProjectsProjectnameRoute
 }
 
@@ -181,6 +201,7 @@ const MainLayoutRouteChildren: MainLayoutRouteChildren = {
   MainLayoutGalleryArtRoute: MainLayoutGalleryArtRoute,
   MainLayoutGalleryBentoDemoRoute: MainLayoutGalleryBentoDemoRoute,
   MainLayoutGalleryPhotosRoute: MainLayoutGalleryPhotosRoute,
+  MainLayoutGalleryVideosRoute: MainLayoutGalleryVideosRoute,
   MainLayoutProjectsProjectnameRoute: MainLayoutProjectsProjectnameRoute,
 }
 
