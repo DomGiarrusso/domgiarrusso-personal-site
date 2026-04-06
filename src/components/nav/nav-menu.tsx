@@ -1,3 +1,11 @@
+import { HugeiconsIcon } from '@hugeicons/react'
+import {
+  ContactIcon,
+  DashboardSquare02Icon,
+  Home07Icon,
+  SourceCodeSquareIcon,
+} from '@hugeicons/core-free-icons'
+import NavListItem from './nav-list-item'
 import {
   NavigationMenu,
   NavigationMenuContent,
@@ -7,26 +15,13 @@ import {
   NavigationMenuTrigger,
   navigationMenuTriggerStyle,
 } from '@/components/ui/navigation-menu'
-import { HugeiconsIcon } from '@hugeicons/react'
 import { cn } from '@/lib/utils'
-import {
-  ContactIcon,
-  DashboardSquare02Icon,
-  Home,
-  Home07Icon,
-  HouseIcon,
-  Navigation,
-  SourceCodeSquareIcon,
-} from '@hugeicons/core-free-icons'
-import NavListItem from './nav-list-item'
 import { Dialog, DialogTrigger } from '@/components/ui/dialog'
 import ContactDialog from '@/components/ui/contact-dialog'
 import { Separator } from '@/components/ui/separator'
 import { ThemeToggle } from '@/components/ui/theme-toggle'
 
-type Props = {}
-
-export default function NavMenu({}: Props) {
+export default function NavMenu() {
   return (
     <NavigationMenu>
       <NavigationMenuList>
@@ -67,20 +62,8 @@ export default function NavMenu({}: Props) {
               Gallery
             </span>
           </NavigationMenuTrigger>
-          <NavigationMenuContent className="md:flex justify-center">
-            <ul className="grid gap-3 p-2 md:w-[250px] lg:w-[500px] lg:grid-cols-[.75fr_1fr]">
-              <li className="row-span-3">
-                <NavigationMenuLink
-                  href="/gallery"
-                  className="flex h-full w-full select-none flex-col justify-end rounded-md bg-linear-to-b from-muted/50 to-muted p-6 no-underline outline-none focus:shadow-md"
-                >
-                  <h4 className="mb-2 text-lg font-bold">Gallery</h4>
-                  <p className="text-sm leading-tight text-muted-foreground">
-                    The Gallery is a collection of various works outside of
-                    professional and programming work.
-                  </p>
-                </NavigationMenuLink>
-              </li>
+          <NavigationMenuContent className="justify-center md:flex">
+            <ul className="grid gap-3 p-2 md:w-[250px] lg:w-[320px]">
               <NavListItem href="/gallery/art" title="Art">
                 Testing out some art
               </NavListItem>
