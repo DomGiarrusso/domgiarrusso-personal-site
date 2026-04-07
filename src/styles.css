@@ -126,6 +126,17 @@
   }
   body {
     @apply font-sans text-foreground;
+    background-color: transparent;
+    position: relative;
+    z-index: 0;
+  }
+
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: -1;
     background: linear-gradient(
       to bottom,
       var(--background) 0%,
@@ -133,8 +144,8 @@
       var(--color-red-200) 100%
     );
   }
-  
-  .dark body {
+
+  .dark body::before {
     background: linear-gradient(
       to bottom,
       var(--background),
@@ -143,16 +154,16 @@
     );
   }
   html {
-    @apply font-sans bg-background;
+    @apply font-sans;
+    background-color: var(--background);
     font-size: var(--font-size-base);
   }
-
 
   /* Prose Styles Modifications */
   .prose :where(code):not(:where(pre code)) {
     @apply rounded ring ring-foreground/10 bg-gray-200 px-1.5 py-0.5 text-[0.875em] text-secondary-foreground before:content-none! after:content-none!;
   }
-  
+
   .dark .prose :where(code):not(:where(pre code)) {
     @apply bg-gray-700 text-secondary-foreground;
   }
