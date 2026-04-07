@@ -1,14 +1,12 @@
+import type { UseGalleryWithLightboxOptions } from '@/components/gallery/useGalleryWithLightbox'
 import type { BentoItem } from '@/components/gallery/BentoGalleryGrid'
 import { BentoGalleryGrid } from '@/components/gallery/BentoGalleryGrid'
 import { GalleryLightbox } from '@/components/gallery/GalleryLightbox'
-import {
-  useGalleryWithLightbox,
-  type UseGalleryWithLightboxOptions,
-} from '@/components/gallery/useGalleryWithLightbox'
+import { useGalleryWithLightbox } from '@/components/gallery/useGalleryWithLightbox'
 import { cn } from '@/lib/utils'
 
 export type BentoGalleryWithLightboxProps = UseGalleryWithLightboxOptions & {
-  items: BentoItem[]
+  items: Array<BentoItem>
   /** Optional class for the grid wrapper */
   className?: string
   /** Optional class passed to BentoGalleryGrid */
@@ -27,10 +25,12 @@ export function BentoGalleryWithLightbox({
   className,
   gridClassName,
 }: BentoGalleryWithLightboxProps) {
-  const { handleItemClick, onOpenChange, lightboxProps } = useGalleryWithLightbox(
-    items,
-    { openItemId, onOpenItemIdChange, restoreScrollOnClose }
-  )
+  const { handleItemClick, onOpenChange, lightboxProps } =
+    useGalleryWithLightbox(items, {
+      openItemId,
+      onOpenItemIdChange,
+      restoreScrollOnClose,
+    })
 
   return (
     <div className={cn('space-y-6', className)}>

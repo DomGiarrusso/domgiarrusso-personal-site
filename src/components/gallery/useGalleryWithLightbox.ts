@@ -1,7 +1,7 @@
-import type { BentoItem } from '@/components/gallery/BentoGalleryGrid'
 import { useEffect, useRef, useState } from 'react'
+import type { BentoItem } from '@/components/gallery/BentoGalleryGrid'
 
-function useStableCallback<T extends (...args: any[]) => void>(fn: T): T {
+function useStableCallback<T extends (...args: Array<any>) => void>(fn: T): T {
   const ref = useRef(fn)
   ref.current = fn
   return useRef(((...args: Parameters<T>) => ref.current(...args)) as T).current
@@ -29,7 +29,7 @@ export type UseGalleryWithLightboxReturn = {
   handleItemClick: (item: BentoItem, index: number) => void
   onOpenChange: (open: boolean) => void
   lightboxProps: {
-    items: BentoItem[]
+    items: Array<BentoItem>
     open: boolean
     index: number
     onIndexChange: (index: number) => void
@@ -38,7 +38,7 @@ export type UseGalleryWithLightboxReturn = {
 }
 
 export function useGalleryWithLightbox(
-  items: BentoItem[],
+  items: Array<BentoItem>,
   options: UseGalleryWithLightboxOptions = {},
 ): UseGalleryWithLightboxReturn {
   const {
@@ -79,7 +79,6 @@ export function useGalleryWithLightbox(
   useEffect(() => {
     if (!open || !items.length) return
     const item = items[index]
-    if (!item) return
     onOpenItemIdChangeStable(item.id)
   }, [index, open, items, onOpenItemIdChangeStable])
 

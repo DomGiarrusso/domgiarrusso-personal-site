@@ -1,50 +1,63 @@
-import { cn } from "@/lib/utils";
-import { useMemo } from "react";
+import { useMemo } from 'react'
+import { cn } from '@/lib/utils'
 
-export type BentoVariant = "square" | "wide" | "tall" | "big";
+export type BentoVariant = 'square' | 'wide' | 'tall' | 'big'
 
 export type BentoItem = {
-  id: string;
-  title?: string | null;
-  alt: string;
-  thumbUrl: string;
-  fullUrl?: string;
-  width?: number | null;
-  height?: number | null;
-  variant?: BentoVariant;
-};
+  id: string
+  title?: string | null
+  alt: string
+  thumb_url: string
+  full_url?: string | null
+  width?: number | null
+  height?: number | null
+  variant?: BentoVariant | string | null
+}
 
 export type BentoGalleryGridProps = {
-  items: BentoItem[];
-  onItemClick?: (item: BentoItem, index: number) => void;
-  className?: string;
-};
+  items: Array<BentoItem>
+  onItemClick?: (item: BentoItem, index: number) => void
+  className?: string
+}
 
 type LayoutItem = BentoItem & {
-  effectiveVariant: BentoVariant;
-  colSpan: number;
-  rowSpan: number;
-};
+  effectiveVariant: BentoVariant
+  colSpan: number
+  rowSpan: number
+}
 
-type OccupancyGrid = boolean[][];
+type OccupancyGrid = Array<Array<boolean>>
 
 /**
  * Gets the footprint of a variant (colSpan, rowSpan)
  */
-function getVariantFootprint(
-  variant: BentoVariant,
-): { colSpan: number; rowSpan: number } {
+function getVariantFootprint(variant: BentoVariant): {
+  colSpan: number
+  rowSpan: number
+} {
   switch (variant) {
-    case "square":
-      return { colSpan: 1, rowSpan: 1 };
-    case "wide":
-      return { colSpan: 2, rowSpan: 1 };
-    case "tall":
-      return { colSpan: 1, rowSpan: 2 };
-    case "big":
-      return { colSpan: 2, rowSpan: 2 };
+    case 'square':
+      return { colSpan: 1, rowSpan: 1 }
+    case 'wide':
+      return { colSpan: 2, rowSpan: 1 }
+    case 'tall':
+      return { colSpan: 1, rowSpan: 2 }
+    case 'big':
+      return { colSpan: 2, rowSpan: 2 }
     default:
-      return { colSpan: 1, rowSpan: 1 };
+      return { colSpan: 1, rowSpan: 1 }
+  }
+}
+
+function getValidVariant(variant?: BentoItem['variant']): BentoVariant {
+  switch (variant) {
+    case 'wide':
+    case 'tall':
+    case 'big':
+    case 'square':
+      return variant
+    default:
+      return 'square'
   }
 }
 
@@ -57,22 +70,22 @@ function canPlace(
   col: number,
   colSpan: number,
   rowSpan: number,
-  columns: number
+  columns: number,
 ): boolean {
   // Check bounds
-  if (col + colSpan > columns) return false;
+  if (col + colSpan > columns) return false
 
   // Check if all cells are available
   for (let r = row; r < row + rowSpan; r++) {
     // Grow grid if needed
     while (r >= grid.length) {
-      grid.push(new Array(columns).fill(false));
+      grid.push(new Array(columns).fill(false))
     }
     for (let c = col; c < col + colSpan; c++) {
-      if (grid[r][c]) return false;
+      if (grid[r][c]) return false
     }
   }
-  return true;
+  return true
 }
 
 /**
@@ -84,14 +97,14 @@ function placeItem(
   col: number,
   colSpan: number,
   rowSpan: number,
-  columns: number
+  columns: number,
 ): void {
   for (let r = row; r < row + rowSpan; r++) {
     while (r >= grid.length) {
-      grid.push(new Array(columns).fill(false));
+      grid.push(new Array(columns).fill(false))
     }
     for (let c = col; c < col + colSpan; c++) {
-      grid[r][c] = true;
+      grid[r][c] = true
     }
   }
 }
@@ -103,62 +116,67 @@ function findPlacement(
   grid: OccupancyGrid,
   colSpan: number,
   rowSpan: number,
-  columns: number
+  columns: number,
 ): { row: number; col: number } | null {
   // Start from row 0, try each column
   for (let row = 0; row < grid.length + 10; row++) {
     // Ensure row exists
     while (row >= grid.length) {
-      grid.push(new Array(columns).fill(false));
+      grid.push(new Array(columns).fill(false))
     }
     for (let col = 0; col <= columns - colSpan; col++) {
       if (canPlace(grid, row, col, colSpan, rowSpan, columns)) {
-        return { row, col };
+        return { row, col }
       }
     }
   }
-  return null;
+  return null
 }
 
 /**
  * Computes layout with packing heuristic
  */
 function computeLayout(
-  items: BentoItem[],
-  columns: number
-): LayoutItem[] {
+  items: Array<BentoItem>,
+  columns: number,
+): Array<LayoutItem> {
   if (columns === 1) {
     // Force all square on mobile
     return items.map((item) => ({
       ...item,
-      effectiveVariant: "square",
+      effectiveVariant: 'square',
       colSpan: 1,
       rowSpan: 1,
-    }));
+    }))
   }
 
-  const grid: OccupancyGrid = [];
-  const layout: LayoutItem[] = [];
+  const grid: OccupancyGrid = []
+  const layout: Array<LayoutItem> = []
 
   // Variant priority order for fallback
-  const fallbackOrder: BentoVariant[] = ["square", "wide", "tall"];
+  const fallbackOrder: Array<BentoVariant> = ['square', 'wide', 'tall']
 
   for (const item of items) {
-    const preferredVariant = item.variant || "square";
-    let placed = false;
+    const preferredVariant = getValidVariant(item.variant)
+    let placed = false
 
     // Try preferred variant first
-    let variantToTry = preferredVariant;
-    if (columns === 2 && variantToTry === "big") {
+    let variantToTry = preferredVariant
+    if (columns === 2 && variantToTry === 'big') {
       // big not allowed on 2 columns
-      variantToTry = "wide";
+      variantToTry = 'wide'
     }
-    if (columns < 3 && variantToTry === "big") {
-      variantToTry = "square";
+    if (columns < 3 && variantToTry === 'big') {
+      variantToTry = 'square'
     }
 
-    const footprint = getVariantFootprint(variantToTry);
-    let placement = findPlacement(grid, footprint.colSpan, footprint.rowSpan, columns);
+    const footprint = getVariantFootprint(variantToTry)
+    let placement = findPlacement(
+      grid,
+      footprint.colSpan,
+      footprint.rowSpan,
+      columns,
+    )
 
     if (placement) {
       placeItem(
@@ -167,31 +185,29 @@ function computeLayout(
         placement.col,
         footprint.colSpan,
         footprint.rowSpan,
-        columns
-      );
+        columns,
+      )
       layout.push({
         ...item,
         effectiveVariant: variantToTry,
         colSpan: footprint.colSpan,
         rowSpan: footprint.rowSpan,
-      });
-      placed = true;
+      })
+      placed = true
     } else {
       // Fallback to smaller variants
       for (const fallbackVariant of fallbackOrder) {
-        if (fallbackVariant === variantToTry) continue;
-        if (columns === 2 && fallbackVariant === "big") continue;
-        if (columns < 3 && fallbackVariant === "big") continue;
+        if (fallbackVariant === variantToTry) continue
+        if (columns === 2 && fallbackVariant === 'big') continue
+        if (columns < 3 && fallbackVariant === 'big') continue
 
-        const fallbackFootprint = getVariantFootprint(
-          fallbackVariant
-        );
+        const fallbackFootprint = getVariantFootprint(fallbackVariant)
         placement = findPlacement(
           grid,
           fallbackFootprint.colSpan,
           fallbackFootprint.rowSpan,
-          columns
-        );
+          columns,
+        )
 
         if (placement) {
           placeItem(
@@ -200,29 +216,29 @@ function computeLayout(
             placement.col,
             fallbackFootprint.colSpan,
             fallbackFootprint.rowSpan,
-            columns
-          );
+            columns,
+          )
           layout.push({
             ...item,
             effectiveVariant: fallbackVariant,
             colSpan: fallbackFootprint.colSpan,
             rowSpan: fallbackFootprint.rowSpan,
-          });
-          placed = true;
-          break;
+          })
+          placed = true
+          break
         }
       }
     }
 
     // If still not placed, force square (shouldn't happen, but safety)
     if (!placed) {
-      const squareFootprint = getVariantFootprint("square");
+      const squareFootprint = getVariantFootprint('square')
       placement = findPlacement(
         grid,
         squareFootprint.colSpan,
         squareFootprint.rowSpan,
-        columns
-      );
+        columns,
+      )
       if (placement) {
         placeItem(
           grid,
@@ -230,19 +246,19 @@ function computeLayout(
           placement.col,
           squareFootprint.colSpan,
           squareFootprint.rowSpan,
-          columns
-        );
+          columns,
+        )
         layout.push({
           ...item,
-          effectiveVariant: "square",
+          effectiveVariant: 'square',
           colSpan: 1,
           rowSpan: 1,
-        });
+        })
       }
     }
   }
 
-  return layout;
+  return layout
 }
 
 /**
@@ -250,16 +266,16 @@ function computeLayout(
  * On mobile (base), force all to square (1x1)
  */
 function getSpanClasses(colSpan: number, rowSpan: number): string {
-  const classes: string[] = [
-    "col-span-1 row-span-1", // Force square on mobile
-  ];
+  const classes: Array<string> = [
+    'col-span-1 row-span-1', // Force square on mobile
+  ]
   if (colSpan === 2) {
-    classes.push("md:col-span-2");
+    classes.push('md:col-span-2')
   }
   if (rowSpan === 2) {
-    classes.push("md:row-span-2");
+    classes.push('md:row-span-2')
   }
-  return classes.join(" ");
+  return classes.join(' ')
 }
 
 export function BentoGalleryGrid({
@@ -267,20 +283,17 @@ export function BentoGalleryGrid({
   onItemClick,
   className,
 }: BentoGalleryGridProps) {
-  const layout = useMemo(
-    () => computeLayout(items, 3),
-    [items]
-  );
+  const layout = useMemo(() => computeLayout(items, 3), [items])
   return (
     <div
       className={cn(
-        "grid grid-flow-row-dense gap-4 grid-cols-1 md:grid-cols-2 lg:grid-cols-3 auto-rows-[350px] sm:auto-rows-[500px] md:auto-rows-[300px] lg:auto-rows-[350px] xl:auto-rows-[400px]",
-        className
+        'grid grid-flow-row-dense gap-4 grid-cols-1 md:grid-cols-2 lg:grid-cols-3 auto-rows-[350px] sm:auto-rows-[500px] md:auto-rows-[300px] lg:auto-rows-[350px] xl:auto-rows-[400px]',
+        className,
       )}
     >
       {layout.map((item, index) => {
-        const spanClasses = getSpanClasses(item.colSpan, item.rowSpan);
-        const ariaLabel = item.title ?? item.alt;
+        const spanClasses = getSpanClasses(item.colSpan, item.rowSpan)
+        const ariaLabel = item.title ?? item.alt
 
         return (
           <button
@@ -290,13 +303,13 @@ export function BentoGalleryGrid({
             onClick={() => onItemClick?.(item, index)}
             aria-label={ariaLabel}
             className={cn(
-              "group relative w-full h-full min-w-0 cursor-pointer overflow-hidden rounded-xl border border-border bg-card ring-1 ring-border transition-colors hover:bg-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background",
-              spanClasses
+              'group relative w-full h-full min-w-0 cursor-pointer overflow-hidden rounded-xl border border-border bg-card ring-1 ring-border transition-colors hover:bg-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background',
+              spanClasses,
             )}
           >
             <div className="relative w-full h-full">
               <img
-                src={item.thumbUrl}
+                src={item.thumb_url}
                 alt={item.alt}
                 className="absolute inset-0 h-full w-full object-cover"
                 loading="lazy"
@@ -313,8 +326,8 @@ export function BentoGalleryGrid({
               )}
             </div>
           </button>
-        );
+        )
       })}
     </div>
-  );
+  )
 }

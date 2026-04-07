@@ -1,11 +1,3 @@
-import Lightbox, { type SlideImage } from 'yet-another-react-lightbox'
-import Captions from 'yet-another-react-lightbox/plugins/captions'
-import Slideshow from 'yet-another-react-lightbox/plugins/slideshow'
-import Thumbnails from 'yet-another-react-lightbox/plugins/thumbnails'
-import Zoom from 'yet-another-react-lightbox/plugins/zoom'
-import { useEffect, useMemo } from 'react'
-
-import type { BentoItem } from './BentoGalleryGrid'
 import { HugeiconsIcon } from '@hugeicons/react'
 import {
   ArrowLeft01Icon,
@@ -16,9 +8,17 @@ import {
   SearchAddIcon,
   SearchMinusIcon,
 } from '@hugeicons/core-free-icons'
+import { useEffect, useMemo } from 'react'
+import Lightbox from 'yet-another-react-lightbox'
+import Captions from 'yet-another-react-lightbox/plugins/captions'
+import Slideshow from 'yet-another-react-lightbox/plugins/slideshow'
+import Thumbnails from 'yet-another-react-lightbox/plugins/thumbnails'
+import Zoom from 'yet-another-react-lightbox/plugins/zoom'
+import type { SlideImage } from 'yet-another-react-lightbox'
+import type { BentoItem } from './BentoGalleryGrid'
 
 export type GalleryLightboxProps = {
-  items: BentoItem[]
+  items: Array<BentoItem>
   open: boolean
   index: number
   onIndexChange: (nextIndex: number) => void
@@ -26,7 +26,7 @@ export type GalleryLightboxProps = {
 }
 
 function getSlideSrc(item: BentoItem): string {
-  return item.fullUrl?.trim() ? item.fullUrl : item.thumbUrl
+  return item.full_url?.trim() ? item.full_url : item.thumb_url
 }
 
 function getCaption(item: BentoItem): string | undefined {
@@ -50,7 +50,7 @@ export function GalleryLightbox({
   onIndexChange,
   onOpenChange,
 }: GalleryLightboxProps) {
-  const slides = useMemo<SlideImage[]>(
+  const slides = useMemo<Array<SlideImage>>(
     () =>
       items.map((item) => ({
         src: getSlideSrc(item),

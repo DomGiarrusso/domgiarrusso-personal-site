@@ -1,7 +1,6 @@
 import { createFileRoute } from '@tanstack/react-router'
 import { BentoGalleryWithLightbox } from '@/components/gallery/BentoGalleryWithLightbox'
 import { supabase } from '@/lib/supabase'
-import { imageRowToBentoItem } from '@/lib/utils'
 
 type ArtSearch = {
   item?: string
@@ -23,7 +22,7 @@ export const Route = createFileRoute('/_main-layout/gallery/art')({
     if (error) {
       console.error('Error fetching art images', error)
     }
-    const artImages = (data ?? []).map(imageRowToBentoItem)
+    const artImages = data ?? []
     return { artImages }
   },
   component: ArtPage,
