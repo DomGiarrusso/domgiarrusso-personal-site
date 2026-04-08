@@ -24,7 +24,7 @@ import { ThemeToggle } from '@/components/ui/theme-toggle'
 export default function NavMenu() {
   return (
     <NavigationMenu>
-      <NavigationMenuList>
+      <NavigationMenuList className="gap-1">
         <NavigationMenuItem>
           <NavigationMenuLink
             href="/#"

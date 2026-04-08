@@ -34,9 +34,9 @@ export default function Navbar({}: Props) {
 
   return (
     <nav
-      className={`flex justify-center bg-background ring ring-foreground/10 h-16 transition-all text-lg ${isScrolled ? 'bg-background/80 backdrop-blur-md shadow-md' : 'bg-background ring-transparent'}`}
+      className={`flex justify-center bg-background border-b ring ring-foreground/10 h-16 transition-all text-lg ${isScrolled ? 'bg-background/80 backdrop-blur-md shadow-md' : 'bg-background border-transparent ring-transparent'}`}
     >
-      <div className="w-full max-w-[1600px]  flex justify-between py-5 text-md">
+      <div className="w-full max-w-7xl  flex justify-between py-5 text-md">
         <div className="flex gap-3 w-full items-center">
           {/*Add Image here*/}
           <a href="/" className="font-bold text-lg md:text-2xl">
