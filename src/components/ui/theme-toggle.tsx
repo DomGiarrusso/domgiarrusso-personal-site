@@ -23,39 +23,41 @@ export function ThemeToggle() {
 
   return (
     <DropdownMenu>
-      <DropdownMenuTrigger render={<Button variant="outline" size="icon" className="relative" />}>
-          <HugeiconsIcon
-            icon={ComputerIcon}
-            strokeWidth={2}
-            className={` h-[1.2rem] w-[1.2rem] transition-all ${
-              !mounted || theme === 'system'
-                ? 'scale-100 rotate-0 opacity-100'
-                : 'scale-0 rotate-90 opacity-0'
-            }`}
-            suppressHydrationWarning
-          />
-          <HugeiconsIcon
-            icon={SunIcon}
-            strokeWidth={2}
-            className={`absolute h-[1.2rem] w-[1.2rem] transition-all ${
-              mounted && theme === 'light'
-                ? 'scale-100 rotate-0 opacity-100'
-                : 'scale-0 -rotate-90 opacity-0'
-            }`}
-            suppressHydrationWarning
-          />
-          {/* Overlay icons - absolutely positioned */}
-          <HugeiconsIcon
-            icon={MoonIcon}
-            strokeWidth={2}
-            className={`absolute h-[1.2rem] w-[1.2rem] transition-all ${
-              mounted && theme === 'dark'
-                ? 'scale-100 rotate-0 opacity-100'
-                : 'scale-0 rotate-90 opacity-0'
-            }`}
-            suppressHydrationWarning
-          />
-          <span className="sr-only">Toggle theme</span>
+      <DropdownMenuTrigger
+        render={<Button variant="outline" size="icon" className="relative" />}
+      >
+        <HugeiconsIcon
+          icon={ComputerIcon}
+          strokeWidth={2}
+          className={` h-[1.2rem] w-[1.2rem] transition-[transform,opacity] ${
+            !mounted || theme === 'system'
+              ? 'scale-100 rotate-0 opacity-100'
+              : 'scale-0 rotate-90 opacity-0'
+          }`}
+          suppressHydrationWarning
+        />
+        <HugeiconsIcon
+          icon={SunIcon}
+          strokeWidth={2}
+          className={`absolute h-[1.2rem] w-[1.2rem] transition-[transform,opacity] ${
+            mounted && theme === 'light'
+              ? 'scale-100 rotate-0 opacity-100'
+              : 'scale-0 -rotate-90 opacity-0'
+          }`}
+          suppressHydrationWarning
+        />
+        {/* Overlay icons - absolutely positioned */}
+        <HugeiconsIcon
+          icon={MoonIcon}
+          strokeWidth={2}
+          className={`absolute h-[1.2rem] w-[1.2rem] transition-[transform,opacity] ${
+            mounted && theme === 'dark'
+              ? 'scale-100 rotate-0 opacity-100'
+              : 'scale-0 rotate-90 opacity-0'
+          }`}
+          suppressHydrationWarning
+        />
+        <span className="sr-only">Toggle theme</span>
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end">
         <DropdownMenuRadioGroup value={theme} onValueChange={setTheme}>

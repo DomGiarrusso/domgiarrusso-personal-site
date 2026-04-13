@@ -18,13 +18,16 @@ export default function SkillBadge({
 }: SkillBadgeProps) {
   const sizeStyle: string = 'h-7 px-3 py-1 text-sm'
   const badgeEffects: string = ' hover:bg-secondary/80'
-  const transitionControls: string = 'transition-all duration-200'
+  const transitionControls: string =
+    'transition-[color,background-color,border-color,box-shadow] duration-200'
   return (
-    <Badge variant={variant} className={cn(sizeStyle, badgeEffects, transitionControls, className)} {...props}>
-      <span>
-        {icon && icon}
-      </span>
-        {skill}
+    <Badge
+      variant={variant}
+      className={cn(sizeStyle, badgeEffects, transitionControls, className)}
+      {...props}
+    >
+      <span>{icon && icon}</span>
+      {skill}
     </Badge>
   )
 }

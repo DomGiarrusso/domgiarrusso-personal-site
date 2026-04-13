@@ -8,6 +8,10 @@ export default function Navbar({}: Props) {
   const [isHidden, setIsHidden] = useState(false)
   const [prevScrollPosition, setPrevScrollPosition] = useState(0)
 
+  const navSurfaceClass = isScrolled
+    ? 'bg-background/80 backdrop-blur-md shadow-md'
+    : 'bg-transparent border-transparent ring-transparent'
+
   const handleScroll = useCallback(() => {
     const scrollPosition = window.scrollY
     const isScrollingDown = scrollPosition > prevScrollPosition
@@ -34,7 +38,7 @@ export default function Navbar({}: Props) {
 
   return (
     <nav
-      className={`flex justify-center bg-background border-b ring ring-foreground/10 h-16 transition-all text-lg ${isScrolled ? 'bg-background/80 backdrop-blur-md shadow-md' : 'bg-background border-transparent ring-transparent'}`}
+      className={`flex justify-center border-b ring ring-foreground/10 h-16 transition-[background-color,border-color,box-shadow,backdrop-filter] duration-300 text-lg ${navSurfaceClass}`}
     >
       <div className="w-full max-w-7xl  flex justify-between py-5 text-md">
         <div className="flex gap-3 w-full items-center">
