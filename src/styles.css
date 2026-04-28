@@ -4,6 +4,7 @@
 @import '@fontsource-variable/inter';
 @import '@fontsource-variable/source-sans-3';
 @import './styles/lightbox.css';
+@import './styles/drawer.css';
 @plugin "@tailwindcss/typography";
 @custom-variant dark (&:is(.dark *));
 

@@ -11,6 +11,7 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as MainLayoutRouteImport } from './routes/_main-layout'
 import { Route as MainLayoutIndexRouteImport } from './routes/_main-layout/index'
+import { Route as MainLayoutStyleTestRouteImport } from './routes/_main-layout/style-test'
 import { Route as MainLayoutGalleryRouteImport } from './routes/_main-layout/gallery'
 import { Route as MainLayoutAboutRouteImport } from './routes/_main-layout/about'
 import { Route as MainLayoutGalleryIndexRouteImport } from './routes/_main-layout/gallery/index'
@@ -27,6 +28,11 @@ const MainLayoutRoute = MainLayoutRouteImport.update({
 const MainLayoutIndexRoute = MainLayoutIndexRouteImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => MainLayoutRoute,
+} as any)
+const MainLayoutStyleTestRoute = MainLayoutStyleTestRouteImport.update({
+  id: '/style-test',
+  path: '/style-test',
   getParentRoute: () => MainLayoutRoute,
 } as any)
 const MainLayoutGalleryRoute = MainLayoutGalleryRouteImport.update({
@@ -75,6 +81,7 @@ const MainLayoutGalleryArtRoute = MainLayoutGalleryArtRouteImport.update({
 export interface FileRoutesByFullPath {
   '/about': typeof MainLayoutAboutRoute
   '/gallery': typeof MainLayoutGalleryRouteWithChildren
+  '/style-test': typeof MainLayoutStyleTestRoute
   '/': typeof MainLayoutIndexRoute
   '/gallery/art': typeof MainLayoutGalleryArtRoute
   '/gallery/bento-demo': typeof MainLayoutGalleryBentoDemoRoute
@@ -85,6 +92,7 @@ export interface FileRoutesByFullPath {
 }
 export interface FileRoutesByTo {
   '/about': typeof MainLayoutAboutRoute
+  '/style-test': typeof MainLayoutStyleTestRoute
   '/': typeof MainLayoutIndexRoute
   '/gallery/art': typeof MainLayoutGalleryArtRoute
   '/gallery/bento-demo': typeof MainLayoutGalleryBentoDemoRoute
@@ -98,6 +106,7 @@ export interface FileRoutesById {
   '/_main-layout': typeof MainLayoutRouteWithChildren
   '/_main-layout/about': typeof MainLayoutAboutRoute
   '/_main-layout/gallery': typeof MainLayoutGalleryRouteWithChildren
+  '/_main-layout/style-test': typeof MainLayoutStyleTestRoute
   '/_main-layout/': typeof MainLayoutIndexRoute
   '/_main-layout/gallery/art': typeof MainLayoutGalleryArtRoute
   '/_main-layout/gallery/bento-demo': typeof MainLayoutGalleryBentoDemoRoute
@@ -111,6 +120,7 @@ export interface FileRouteTypes {
   fullPaths:
     | '/about'
     | '/gallery'
+    | '/style-test'
     | '/'
     | '/gallery/art'
     | '/gallery/bento-demo'
@@ -121,6 +131,7 @@ export interface FileRouteTypes {
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/about'
+    | '/style-test'
     | '/'
     | '/gallery/art'
     | '/gallery/bento-demo'
@@ -133,6 +144,7 @@ export interface FileRouteTypes {
     | '/_main-layout'
     | '/_main-layout/about'
     | '/_main-layout/gallery'
+    | '/_main-layout/style-test'
     | '/_main-layout/'
     | '/_main-layout/gallery/art'
     | '/_main-layout/gallery/bento-demo'
@@ -160,6 +172,13 @@ declare module '@tanstack/react-router' {
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof MainLayoutIndexRouteImport
+      parentRoute: typeof MainLayoutRoute
+    }
+    '/_main-layout/style-test': {
+      id: '/_main-layout/style-test'
+      path: '/style-test'
+      fullPath: '/style-test'
+      preLoaderRoute: typeof MainLayoutStyleTestRouteImport
       parentRoute: typeof MainLayoutRoute
     }
     '/_main-layout/gallery': {
@@ -243,6 +262,7 @@ const MainLayoutGalleryRouteWithChildren =
 interface MainLayoutRouteChildren {
   MainLayoutAboutRoute: typeof MainLayoutAboutRoute
   MainLayoutGalleryRoute: typeof MainLayoutGalleryRouteWithChildren
+  MainLayoutStyleTestRoute: typeof MainLayoutStyleTestRoute
   MainLayoutIndexRoute: typeof MainLayoutIndexRoute
   MainLayoutProjectsProjectnameRoute: typeof MainLayoutProjectsProjectnameRoute
 }
@@ -250,6 +270,7 @@ interface MainLayoutRouteChildren {
 const MainLayoutRouteChildren: MainLayoutRouteChildren = {
   MainLayoutAboutRoute: MainLayoutAboutRoute,
   MainLayoutGalleryRoute: MainLayoutGalleryRouteWithChildren,
+  MainLayoutStyleTestRoute: MainLayoutStyleTestRoute,
   MainLayoutIndexRoute: MainLayoutIndexRoute,
   MainLayoutProjectsProjectnameRoute: MainLayoutProjectsProjectnameRoute,
 }
