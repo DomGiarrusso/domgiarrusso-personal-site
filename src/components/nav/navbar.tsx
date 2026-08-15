@@ -1,53 +1,37 @@
-import { useCallback, useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
+
 import NavMenu from '@/components/nav/nav-menu'
 
-type Props = {}
-
-export default function Navbar({}: Props) {
+export default function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false)
-  const [isHidden, setIsHidden] = useState(false)
-  const [prevScrollPosition, setPrevScrollPosition] = useState(0)
 
   const navSurfaceClass = isScrolled
-    ? 'bg-background/80 backdrop-blur-md shadow-md'
-    : 'bg-transparent border-transparent ring-transparent'
-
-  const handleScroll = useCallback(() => {
-    const scrollPosition = window.scrollY
-    const isScrollingDown = scrollPosition > prevScrollPosition
-    const isScrollingUp = scrollPosition < prevScrollPosition
-
-    if (isScrollingDown && scrollPosition > 50) {
-      setIsScrolled(true)
-      setIsHidden(true)
-    } else if (isScrollingUp && isHidden) {
-      setIsHidden(false)
-    } else if (isScrollingUp && scrollPosition < 50) {
-      setIsScrolled(false)
-    }
-    setPrevScrollPosition(scrollPosition)
-  }, [prevScrollPosition, isHidden])
+    ? 'md:bg-background/80 md:backdrop-blur-md md:shadow-md md:ring-foreground/10'
+    : 'md:bg-transparent md:border-transparent md:shadow-none md:ring-transparent md:backdrop-blur-none'
 
   useEffect(() => {
-    window.addEventListener('scroll', handleScroll)
+    const handleScroll = () => setIsScrolled(window.scrollY > 50)
+
+    handleScroll()
+    window.addEventListener('scroll', handleScroll, { passive: true })
 
     return () => {
       window.removeEventListener('scroll', handleScroll)
     }
-  }, [handleScroll])
+  }, [])
 
   return (
     <nav
-      className={`flex justify-center border-b ring ring-foreground/10 h-16 transition-[background-color,border-color,box-shadow,backdrop-filter] duration-300 text-lg ${navSurfaceClass}`}
+      className={`flex h-16 justify-center border-t bg-background/90 text-lg shadow-[0_-8px_24px_-20px_rgb(0_0_0_/_0.7)] ring ring-foreground/10 backdrop-blur-md transition-[background-color,border-color,box-shadow,backdrop-filter] duration-300 md:border-t-0 md:border-b ${navSurfaceClass}`}
     >
-      <div className="w-full max-w-7xl  flex justify-between py-5 text-md">
-        <div className="flex gap-3 w-full items-center">
-          {/*Add Image here*/}
-          <a href="/" className="font-bold text-lg md:text-2xl">
+      <div className="flex w-full max-w-7xl items-center justify-between px-4 py-3 text-md sm:px-6 lg:px-8">
+        <div className="flex w-full items-center gap-3">
+          {/* Add image here */}
+          <a href="/" className="text-base font-bold sm:text-lg md:text-2xl">
             Dominic Giarrusso
           </a>
         </div>
-        <div className="flex flex-row-reverse gap-3 w-full items-center">
+        <div className="flex w-full flex-row-reverse items-center gap-3">
           <NavMenu />
         </div>
       </div>
