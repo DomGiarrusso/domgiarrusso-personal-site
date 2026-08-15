@@ -1,5 +1,6 @@
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import DynamicSkillBadgeList from '@/components/ui/dynamic-skill-badge-list'
+import { cn } from '@/lib/utils'
 
 export type SkillConfig = {
   name: string
@@ -9,7 +10,7 @@ type SkillsCardProps = {
   title: string
   titleIcon?: React.ReactNode
   className?: string
-  skills: SkillConfig[]
+  skills: Array<SkillConfig>
 }
 
 export default function SkillsCard({
@@ -19,9 +20,9 @@ export default function SkillsCard({
   skills,
 }: SkillsCardProps) {
   return (
-    <Card className={className}>
+    <Card className={cn('h-full', className)}>
       <CardHeader>
-        <CardTitle className="flex items-center gap-2 justify-center text-2xl font-bold">
+        <CardTitle className="flex items-center justify-center gap-2 text-center text-xl font-bold sm:text-2xl">
           {titleIcon && titleIcon}
           {title}
         </CardTitle>
