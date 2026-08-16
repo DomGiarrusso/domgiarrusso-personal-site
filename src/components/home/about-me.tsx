@@ -16,7 +16,7 @@ export default function AboutMe() {
     >
       <h3 className="text-center text-4xl font-bold sm:text-5xl">About Me</h3>
       <div className="mt-8 grid w-full grid-cols-1 gap-6 xl:grid-cols-[minmax(0,1.2fr)_minmax(0,0.8fr)]">
-        <Card className="w-full max-w-3xl justify-self-center xl:max-w-none">
+        <Card className="order-2 w-full max-w-3xl justify-self-center xl:order-1 xl:max-w-none">
           <CardHeader>
             <CardTitle className="text-center text-xl font-semibold">
               A little more about myself
@@ -37,7 +37,7 @@ export default function AboutMe() {
           </CardContent>
         </Card>
 
-        <Timeline className="w-full max-w-xl justify-self-center">
+        <Timeline className="order-1 w-full max-w-xl justify-self-center xl:order-2">
           <TimelineItem>
             <TimelineHeading>Fullstack Developer</TimelineHeading>
             <TimelineDot status="custom" />
