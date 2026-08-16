@@ -10,7 +10,7 @@ function MainLayout() {
       <header className="fixed inset-x-0 bottom-0 z-50 md:sticky md:top-0 md:bottom-auto">
         <Navbar />
       </header>
-      <main className="mx-auto w-full max-w-7xl px-4 pb-20 sm:px-6 md:pb-0 lg:px-8">
+      <main className="mx-auto w-full max-w-6xl px-4 pb-20 sm:px-6 md:pb-0 lg:px-8">
         <Outlet />
       </main>
     </div>
