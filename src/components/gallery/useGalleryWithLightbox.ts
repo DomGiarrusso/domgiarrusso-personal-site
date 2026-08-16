@@ -79,8 +79,9 @@ export function useGalleryWithLightbox(
   useEffect(() => {
     if (!open || !items.length) return
     const item = items[index]
+    if (item.id === openItemId) return
     onOpenItemIdChangeStable(item.id)
-  }, [index, open, items, onOpenItemIdChangeStable])
+  }, [index, open, items, onOpenItemIdChangeStable, openItemId])
 
   const onOpenChange = (nextOpen: boolean) => {
     if (!nextOpen && restoreScrollOnClose) {

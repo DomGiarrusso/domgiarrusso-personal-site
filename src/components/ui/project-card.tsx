@@ -1,5 +1,5 @@
 import { AspectRatio } from './aspect-ratio'
-import type { ProjectsRow } from '@/types/database'
+import type { ProjectSummary } from '@/content/types'
 import {
   Card,
   CardContent,
@@ -8,11 +8,11 @@ import {
   CardTitle,
 } from '@/components/ui/card'
 
-type Props = Pick<ProjectsRow, 'title' | 'thumbnail_url' | 'blurb' | 'slug'>
+type Props = Omit<ProjectSummary, 'id'>
 
 export default function ProjectCard({
   title,
-  thumbnail_url,
+  thumbnailUrl,
   blurb,
   slug,
 }: Props) {
@@ -21,9 +21,9 @@ export default function ProjectCard({
       <Card className="h-full gap-3 pt-4 transition-all duration-300 hover:text-red-500">
         <CardHeader className="px-4">
           <AspectRatio ratio={16 / 9}>
-            {thumbnail_url ? (
+            {thumbnailUrl ? (
               <img
-                src={thumbnail_url}
+                src={thumbnailUrl}
                 alt={title + ' thumbnail'}
                 className="h-full w-full rounded-lg object-cover ring-1 ring-foreground/10"
               />

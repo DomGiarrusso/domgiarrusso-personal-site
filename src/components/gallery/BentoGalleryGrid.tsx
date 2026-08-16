@@ -7,8 +7,8 @@ export type BentoItem = {
   id: string
   title?: string | null
   alt: string
-  thumb_url: string
-  full_url?: string | null
+  thumbnailUrl: string
+  fullUrl?: string | null
   width?: number | null
   height?: number | null
   variant?: BentoVariant | string | null
@@ -309,7 +309,7 @@ export function BentoGalleryGrid({
           >
             <div className="relative w-full h-full">
               <img
-                src={item.thumb_url}
+                src={item.thumbnailUrl}
                 alt={item.alt}
                 className="absolute inset-0 h-full w-full object-cover"
                 loading="lazy"

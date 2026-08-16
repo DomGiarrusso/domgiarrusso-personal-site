@@ -26,7 +26,7 @@ export type GalleryLightboxProps = {
 }
 
 function getSlideSrc(item: BentoItem): string {
-  return item.full_url?.trim() ? item.full_url : item.thumb_url
+  return item.fullUrl?.trim() ? item.fullUrl : item.thumbnailUrl
 }
 
 function getCaption(item: BentoItem): string | undefined {

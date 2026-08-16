@@ -1,13 +1,8 @@
 import ProjectCard from '../ui/project-card'
-import type { ProjectsRow } from '@/types/database'
-
-type ProjectCardData = Pick<
-  ProjectsRow,
-  'id' | 'title' | 'slug' | 'blurb' | 'thumbnail_url'
->
+import type { ProjectSummary } from '@/content/types'
 
 type Props = {
-  projects: Array<ProjectCardData>
+  projects: Array<ProjectSummary>
 }
 
 export default function Projects({ projects }: Props) {
@@ -24,7 +19,7 @@ export default function Projects({ projects }: Props) {
             title={project.title}
             slug={project.slug}
             blurb={project.blurb}
-            thumbnail_url={project.thumbnail_url}
+            thumbnailUrl={project.thumbnailUrl}
           />
         ))}
       </div>

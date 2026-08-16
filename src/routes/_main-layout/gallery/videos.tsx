@@ -1,33 +1,20 @@
 import { createFileRoute } from '@tanstack/react-router'
-import type { VideosRow } from '@/types/database'
+import type { Video } from '@/content/types'
 import VideoCard from '@/components/ui/video-card'
-import { supabase } from '@/lib/supabase'
+import { getVideos } from '@/content/videos'
 
 export const Route = createFileRoute('/_main-layout/gallery/videos')({
-  loader: async () => {
-    const { data, error } = await supabase
-      .from('videos')
-      .select('*')
-      .eq('is_published', true)
-      .order('sort_order', { ascending: true })
-      .order('created_at', { ascending: false })
-
-    if (error) {
-      console.error('Error fetching videos', error)
-    }
-
-    return { videos: data ?? [] }
-  },
+  loader: () => ({ videos: getVideos() }),
   component: VideosPage,
 })
 
-function videoRowToCardProps(video: VideosRow) {
+function videoToCardProps(video: Video) {
   return {
     title: video.title,
     duration: video.duration ?? undefined,
-    thumbnailUrl: video.thumbnail_url ?? undefined,
-    href: video.video_url,
-    description: video.description ?? undefined,
+    thumbnailUrl: video.thumbnailUrl,
+    href: video.videoUrl,
+    description: video.description,
   }
 }
 
@@ -45,7 +32,7 @@ function VideosPage() {
 
       <div className="grid gap-6 sm:grid-cols-2 xl:grid-cols-3">
         {videos.map((video) => (
-          <VideoCard key={video.id} {...videoRowToCardProps(video)} />
+          <VideoCard key={video.id} {...videoToCardProps(video)} />
         ))}
       </div>
     </div>

@@ -1,6 +1,6 @@
 import { createFileRoute } from '@tanstack/react-router'
 import { BentoGalleryWithLightbox } from '@/components/gallery/BentoGalleryWithLightbox'
-import { supabase } from '@/lib/supabase'
+import { getGalleryImages } from '@/content/gallery-images'
 
 type ArtSearch = {
   item?: string
@@ -10,21 +10,7 @@ export const Route = createFileRoute('/_main-layout/gallery/art')({
   validateSearch: (search: Record<string, unknown>): ArtSearch => ({
     item: typeof search.item === 'string' ? search.item : undefined,
   }),
-  loader: async () => {
-    const { data, error } = await supabase
-      .from('images')
-      .select('*')
-      .eq('page', 'art')
-      .eq('is_published', true)
-      .order('sort_order', { ascending: true })
-      .order('created_at', { ascending: false })
-
-    if (error) {
-      console.error('Error fetching art images', error)
-    }
-    const artImages = data ?? []
-    return { artImages }
-  },
+  loader: () => ({ artImages: getGalleryImages('art') }),
   component: ArtPage,
 })
 
