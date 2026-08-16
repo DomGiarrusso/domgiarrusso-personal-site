@@ -4,6 +4,7 @@ import { cn } from '@/lib/utils'
 type Props = {
   className?: string
   title: string
+  icon?: React.ReactNode
   children: React.ReactNode
   href: string
 }
@@ -11,6 +12,7 @@ type Props = {
 export default function NavListItem({
   className,
   title,
+  icon,
   children,
   href,
   ...props
@@ -25,7 +27,10 @@ export default function NavListItem({
         )}
         {...props}
       >
-        <div className="text-medium font-semibold leading-none">{title}</div>
+        <div className="flex items-center gap-2 text-medium font-semibold leading-none">
+          {icon}
+          {title}
+        </div>
         <p className="line-clamp-2 text-sm leading-snug text-muted-foreground">
           {children}
         </p>

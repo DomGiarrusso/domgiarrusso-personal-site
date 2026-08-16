@@ -1,9 +1,12 @@
 import { HugeiconsIcon } from '@hugeicons/react'
 import {
+  Camera01Icon,
+  CanvasIcon,
   ContactIcon,
   DashboardSquare02Icon,
   Home07Icon,
   SourceCodeSquareIcon,
+  Video01Icon,
 } from '@hugeicons/core-free-icons'
 
 import NavListItem from './nav-list-item'
@@ -67,13 +70,43 @@ export default function NavMenu() {
             </NavigationMenuTrigger>
             <NavigationMenuContent className="justify-center md:flex">
               <ul className="grid gap-3 p-2 md:w-[250px] lg:w-[320px]">
-                <NavListItem href="/gallery/art" title="Art">
+                <NavListItem
+                  href="/gallery/art"
+                  title="Art"
+                  icon={
+                    <HugeiconsIcon
+                      icon={CanvasIcon}
+                      strokeWidth={2}
+                      className="size-4"
+                    />
+                  }
+                >
                   Testing out some art
                 </NavListItem>
-                <NavListItem href="/gallery/photos" title="Photography">
+                <NavListItem
+                  href="/gallery/photos"
+                  title="Photography"
+                  icon={
+                    <HugeiconsIcon
+                      icon={Camera01Icon}
+                      strokeWidth={2}
+                      className="size-4"
+                    />
+                  }
+                >
                   Testing out some photos
                 </NavListItem>
-                <NavListItem href="/gallery/videos" title="Videos">
+                <NavListItem
+                  href="/gallery/videos"
+                  title="Videos"
+                  icon={
+                    <HugeiconsIcon
+                      icon={Video01Icon}
+                      strokeWidth={2}
+                      className="size-4"
+                    />
+                  }
+                >
                   Testing out some videos
                 </NavListItem>
               </ul>
