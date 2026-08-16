@@ -40,6 +40,8 @@ export default function SkillBadge({
   return href ? (
     <a
       href={href}
+      target="_blank"
+      rel="noopener noreferrer"
       className="inline-flex rounded-4xl focus-visible:outline-none focus-visible:ring-3 focus-visible:ring-ring/50"
     >
       {badge}
