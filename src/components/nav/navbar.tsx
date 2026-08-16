@@ -26,9 +26,21 @@ export default function Navbar() {
     >
       <div className="flex w-full max-w-7xl items-center justify-between px-4 py-3 text-md sm:px-6 lg:px-8">
         <div className="flex w-full items-center gap-3">
-          {/* Add image here */}
-          <a href="/" className="text-base font-bold sm:text-lg md:text-2xl">
-            Dominic Giarrusso
+          <a
+            href="/"
+            className="flex items-center gap-2 text-base font-bold sm:text-lg md:text-2xl"
+          >
+            <img
+              src="/images/monogram/Monogram_DG_Blue.svg"
+              alt=""
+              className="size-9 shrink-0 dark:hidden"
+            />
+            <img
+              src="/images/monogram/Monogram_DG_Red.svg"
+              alt=""
+              className="hidden size-9 shrink-0 dark:block"
+            />
+            <span>Dominic Giarrusso</span>
           </a>
         </div>
         <div className="flex w-full flex-row-reverse items-center gap-3">

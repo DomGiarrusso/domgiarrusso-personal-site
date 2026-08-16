@@ -24,6 +24,11 @@ export const Route = createRootRoute({
         rel: 'stylesheet',
         href: appCss,
       },
+      {
+        rel: 'icon',
+        type: 'image/x-icon',
+        href: '/favicon.ico',
+      },
     ],
     scripts: [
       {
@@ -49,7 +54,11 @@ export const Route = createRootRoute({
 
 function RootDocument({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className="scroll-smooth scroll-pt-24" suppressHydrationWarning>
+    <html
+      lang="en"
+      className="scroll-smooth scroll-pt-24"
+      suppressHydrationWarning
+    >
       <head>
         <HeadContent />
       </head>
