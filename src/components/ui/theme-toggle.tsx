@@ -6,8 +6,8 @@ import { Button } from '@/components/ui/button'
 import {
   DropdownMenu,
   DropdownMenuContent,
-  DropdownMenuRadioItem,
   DropdownMenuRadioGroup,
+  DropdownMenuRadioItem,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu'
 import { useTheme } from '@/components/theme-provider'
@@ -24,7 +24,13 @@ export function ThemeToggle() {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger
-        render={<Button variant="outline" size="icon" className="relative" />}
+        render={
+          <Button
+            variant="outline"
+            size="icon"
+            className="relative bg-input/30 hover:bg-input/50"
+          />
+        }
       >
         <HugeiconsIcon
           icon={ComputerIcon}

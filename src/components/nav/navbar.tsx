@@ -6,7 +6,7 @@ export default function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false)
 
   const navSurfaceClass = isScrolled
-    ? 'md:bg-background/80 md:backdrop-blur-md md:shadow-md md:ring-foreground/10'
+    ? 'md:bg-background/70 md:backdrop-blur-md md:shadow-md md:ring-foreground/10 dark:md:bg-background/80'
     : 'md:bg-transparent md:border-transparent md:shadow-none md:ring-transparent md:backdrop-blur-none'
 
   useEffect(() => {
@@ -22,7 +22,7 @@ export default function Navbar() {
 
   return (
     <nav
-      className={`flex h-16 justify-center border-t bg-background/90 text-lg shadow-[0_-8px_24px_-20px_rgb(0_0_0_/_0.7)] ring ring-foreground/10 backdrop-blur-md transition-[background-color,border-color,box-shadow,backdrop-filter] duration-300 md:border-t-0 md:border-b ${navSurfaceClass}`}
+      className={`flex h-16 justify-center border-t bg-background/80 text-lg ring ring-foreground/10 backdrop-blur-md transition-[background-color,border-color,box-shadow,backdrop-filter] duration-300 md:border-t-0 md:border-b dark:bg-background/90 ${navSurfaceClass}`}
     >
       <div className="flex w-full max-w-6xl items-center justify-between px-4 py-3 text-md sm:px-6 lg:px-8">
         <div className="flex w-full items-center gap-3">
@@ -44,7 +44,7 @@ export default function Navbar() {
           </a>
         </div>
         <div className="flex w-full flex-row-reverse items-center gap-3">
-          <NavMenu />
+          <NavMenu isScrolled={isScrolled} />
         </div>
       </div>
     </nav>

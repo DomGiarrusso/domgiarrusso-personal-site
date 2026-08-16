@@ -5,7 +5,7 @@ export default function Hero() {
   return (
     <section className="mt-16 flex flex-col items-center justify-center sm:mt-20 md:mt-24">
       <div className="flex w-full max-w-5xl flex-col items-center justify-center gap-6 text-center md:flex-row md:gap-10 md:text-left">
-        <div className="size-[12.5rem] shrink-0 overflow-hidden rounded-full border-2 border-border sm:size-[16.25rem] lg:size-80">
+        <div className="size-[12.5rem] shrink-0 overflow-hidden rounded-full border border-transparent bg-linear-to-br from-primary-alt to-primary-alt-700 sm:size-[16.25rem] lg:size-80">
           <img
             src="/images/profile.webp"
             alt="Dominic Giarrusso"
@@ -19,7 +19,7 @@ export default function Hero() {
         </h1>
       </div>
       <div className="flex w-full flex-col items-center justify-center gap-4">
-        <div className="my-6 w-full max-w-4xl bg-linear-to-r from-transparent via-foreground/10 to-transparent p-px sm:my-8" />
+        <div className="my-6 w-full max-w-4xl bg-linear-to-r from-transparent via-primary-alt to-transparent p-px sm:my-8" />
         <div className="max-w-5xl text-center text-2xl font-bold text-balance sm:text-4xl md:flex md:flex-col md:gap-2 lg:text-5xl">
           <h2>
             <span className="text-muted-foreground">Hello there,</span> I'm

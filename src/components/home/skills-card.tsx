@@ -11,6 +11,7 @@ import { cn } from '@/lib/utils'
 export type SkillConfig = {
   name: string
   icon: React.ReactNode
+  href?: string
 }
 
 type SkillsCardProps = {

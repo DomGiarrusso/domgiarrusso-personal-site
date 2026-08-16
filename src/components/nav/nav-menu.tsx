@@ -26,7 +26,15 @@ import {
 } from '@/components/ui/navigation-menu'
 import { cn } from '@/lib/utils'
 
-export default function NavMenu() {
+type NavMenuProps = {
+  isScrolled: boolean
+}
+
+export default function NavMenu({ isScrolled }: NavMenuProps) {
+  const navItemOutlineClass = isScrolled
+    ? 'border-border bg-background hover:bg-muted focus:bg-muted data-[active=true]:bg-muted data-open:bg-muted data-popup-open:bg-muted aria-expanded:bg-muted dark:border-input'
+    : 'border-transparent'
+
   return (
     <>
       <NavigationMenu className="hidden md:flex">
@@ -34,7 +42,11 @@ export default function NavMenu() {
           <NavigationMenuItem>
             <NavigationMenuLink
               href="/#"
-              className={cn(navigationMenuTriggerStyle(), '')}
+              className={cn(
+                navigationMenuTriggerStyle(),
+                'border',
+                navItemOutlineClass,
+              )}
             >
               <HugeiconsIcon
                 icon={Home07Icon}
@@ -47,7 +59,11 @@ export default function NavMenu() {
           <NavigationMenuItem>
             <NavigationMenuLink
               href="/#projects"
-              className={cn(navigationMenuTriggerStyle(), '')}
+              className={cn(
+                navigationMenuTriggerStyle(),
+                'border',
+                navItemOutlineClass,
+              )}
             >
               <HugeiconsIcon
                 icon={SourceCodeSquareIcon}
@@ -58,7 +74,9 @@ export default function NavMenu() {
             </NavigationMenuLink>
           </NavigationMenuItem>
           <NavigationMenuItem>
-            <NavigationMenuTrigger>
+            <NavigationMenuTrigger
+              className={cn('border', navItemOutlineClass)}
+            >
               <span className="flex gap-1">
                 <HugeiconsIcon
                   icon={DashboardSquare02Icon}
@@ -115,7 +133,11 @@ export default function NavMenu() {
           <NavigationMenuItem>
             <Dialog>
               <DialogTrigger
-                className={cn(navigationMenuTriggerStyle(), 'cursor-pointer')}
+                className={cn(
+                  navigationMenuTriggerStyle(),
+                  'cursor-pointer border',
+                  navItemOutlineClass,
+                )}
               >
                 <span className="flex gap-1">
                   <HugeiconsIcon
@@ -129,7 +151,7 @@ export default function NavMenu() {
               <ContactDialog />
             </Dialog>
           </NavigationMenuItem>
-          <Separator orientation="vertical" className="mx-3" />
+          <Separator orientation="vertical" className="mx-3 bg-primary-alt" />
           <NavigationMenuItem>
             <ThemeToggle />
           </NavigationMenuItem>
