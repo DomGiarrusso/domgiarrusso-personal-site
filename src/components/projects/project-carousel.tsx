@@ -1,3 +1,7 @@
+import Autoplay from 'embla-carousel-autoplay'
+import { useEffect, useRef, useState } from 'react'
+import type { ProjectMedia } from '@/content/types'
+import type { CarouselApi } from '@/components/ui/carousel'
 import {
   Carousel,
   CarouselContent,
@@ -6,36 +10,96 @@ import {
   CarouselPrevious,
 } from '@/components/ui/carousel'
 import { AspectRatio } from '@/components/ui/aspect-ratio'
-type Props = {}
 
-export default function ProjectCarousel({}: Props) {
-  const images: string[] = [
-    'https://wallpapermural.com/cdn/shop/files/KanagawaPano_Artwork_533x.png?v=1750700592',
-    'https://images.unsplash.com/photo-1768185595109-18aded979f9d?q=80&w=928&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
-    'https://images.unsplash.com/photo-1768879051946-4984246ed043?q=80&w=1548&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
-  ]
+type Props = {
+  media: Array<ProjectMedia>
+}
+
+export default function ProjectCarousel({ media }: Props) {
+  const autoplay = useRef(
+    Autoplay({
+      delay: 5000,
+      stopOnInteraction: false,
+      stopOnMouseEnter: true,
+    }),
+  )
+  const [api, setApi] = useState<CarouselApi>()
+  const [currentSlide, setCurrentSlide] = useState(0)
+
+  useEffect(() => {
+    if (!api) return
+
+    const updateCurrentSlide = () => setCurrentSlide(api.selectedScrollSnap())
+    updateCurrentSlide()
+    api.on('select', updateCurrentSlide)
+
+    return () => {
+      api.off('select', updateCurrentSlide)
+    }
+  }, [api])
+
+  if (media.length === 0) return null
+
+  const renderMedia = (item: ProjectMedia, index: number) => (
+    <figure className="relative overflow-hidden rounded-xl">
+      <AspectRatio
+        className="overflow-hidden rounded-xl border border-border bg-muted shadow-sm ring-1 ring-foreground/10"
+        ratio={16 / 9}
+      >
+        <img
+          src={item.src}
+          alt={item.alt}
+          className="size-full object-cover"
+          loading={index === 0 ? 'eager' : 'lazy'}
+          decoding="async"
+        />
+      </AspectRatio>
+    </figure>
+  )
+
   return (
-    <Carousel opts={{ loop: true }}>
-      <CarouselContent>
-        {images.map((image) => (
-          <CarouselItem key={image}>
-            <AspectRatio
-              className="rounded-xl border-2 ring-1 ring-foreground/10"
-              ratio={16 / 9}
-            >
-              <img
-                src={image}
-                alt="Project Image"
-                className="w-full h-full object-cover rounded-xl"
+    <>
+      {media.length === 1 ? (
+        renderMedia(media[0], 0)
+      ) : (
+        <Carousel
+          opts={{ loop: true }}
+          plugins={[autoplay.current]}
+          setApi={setApi}
+        >
+          <CarouselContent>
+            {media.map((item, index) => (
+              <CarouselItem key={item.id} className="relative">
+                {renderMedia(item, index)}
+              </CarouselItem>
+            ))}
+          </CarouselContent>
+          <CarouselPrevious
+            className="left-2 rounded-md text-foreground shadow-md disabled:hidden sm:-left-12"
+            size="icon-lg"
+          />
+          <CarouselNext
+            className="right-2 rounded-md text-foreground shadow-md disabled:hidden sm:-right-12"
+            size="icon-lg"
+          />
+          <div
+            className="mt-4 flex items-center justify-center gap-2"
+            role="group"
+            aria-label="Choose project image"
+          >
+            {media.map((item, index) => (
+              <button
+                key={item.id}
+                type="button"
+                onClick={() => api?.scrollTo(index)}
+                className="size-2.5 rounded-full bg-muted-foreground/35 transition-colors hover:bg-muted-foreground aria-[current=true]:bg-primary-alt"
+                aria-label={`Show image ${index + 1} of ${media.length}`}
+                aria-current={currentSlide === index}
               />
-            </AspectRatio>
-          </CarouselItem>
-        ))}
-      </CarouselContent>
-      <div className="flex justify-center gap-2">
-        <CarouselPrevious variant="ghost" size="icon-lg" />
-        <CarouselNext variant="ghost" size="icon-lg" />
-      </div>
-    </Carousel>
+            ))}
+          </div>
+        </Carousel>
+      )}
+    </>
   )
 }

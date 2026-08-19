@@ -4,11 +4,18 @@ export type Project = {
   slug: string
   blurb: string
   thumbnailUrl?: string
-  content: string
   techStack: Array<string>
+  media: Array<ProjectMedia>
   repositoryUrl?: string
   externalUrl?: string
   sortOrder: number
+}
+
+export type ProjectMedia = {
+  id: string
+  src: string
+  alt: string
+  caption?: string
 }
 
 export type ProjectSummary = Pick<

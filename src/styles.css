@@ -2,6 +2,7 @@
 @import 'tw-animate-css';
 @import 'shadcn/tailwind.css';
 @import '@fontsource-variable/inter';
+@import '@fontsource-variable/jetbrains-mono';
 @import '@fontsource-variable/source-sans-3';
 @import './styles/lightbox.css';
 @import './styles/drawer.css';
@@ -132,6 +133,7 @@
 
 @theme inline {
   --font-sans: 'Source Sans 3 Variable', 'Inter Variable', sans-serif;
+  --font-mono: 'JetBrains Mono Variable', monospace;
   --font-size-base: 1.125rem;
   --font-weight-base: 600;
   --color-dg-blue-50: oklch(0.9658 0.0161 262.75);
@@ -339,13 +341,86 @@
   *::-webkit-scrollbar-thumb:hover {
     background-color: var(--primary);
   }
+}
 
-  /* Prose Styles Modifications */
-  .prose :where(code):not(:where(pre code)) {
-    @apply rounded ring ring-foreground/10 bg-gray-200 px-1.5 py-0.5 text-[0.875em] text-secondary-foreground before:content-none! after:content-none!;
-  }
+/* Prose Styles Modifications */
+.prose :where(code):not(:where(pre code)) {
+  @apply rounded ring ring-foreground/10 bg-gray-200 px-1.5 py-0.5 text-[0.8em] text-secondary-foreground before:content-none after:content-none;
+}
 
-  .dark .prose :where(code):not(:where(pre code)) {
-    @apply bg-gray-700 text-secondary-foreground;
-  }
+.dark .prose :where(code):not(:where(pre code)) {
+  @apply bg-gray-700 text-secondary-foreground;
+}
+
+.article-content > :first-child {
+  margin-top: 0;
+}
+
+.article-content > :last-child {
+  margin-bottom: 0;
+}
+
+.article-content [data-rehype-pretty-code-figure] {
+  margin-block: 1.5rem;
+}
+
+.article-content [data-rehype-pretty-code-figure] pre code {
+  min-width: max-content;
+}
+
+.article-content [data-theme*=' '],
+.article-content [data-theme*=' '] span {
+  color: var(--shiki-light);
+}
+
+.dark .article-content [data-theme*=' '],
+.dark .article-content [data-theme*=' '] span {
+  color: var(--shiki-dark);
+}
+
+.prose :where(table):not(:where(.not-prose, .not-prose *)) {
+  @apply w-auto max-w-full border-collapse border border-foreground/15 text-base;
+}
+
+.prose :where(thead):not(:where(.not-prose, .not-prose *)) {
+  @apply bg-muted/60;
+}
+
+.prose :where(th, td):not(:where(.not-prose, .not-prose *)) {
+  @apply border border-foreground/15 px-[13px] pt-[6px] pb-[5px] align-middle;
+}
+
+.prose :where(ul.contains-task-list):not(:where(.not-prose, .not-prose *)) {
+  @apply list-none pl-0;
+}
+
+.prose :where(li.task-list-item):not(:where(.not-prose, .not-prose *)) {
+  @apply list-none pl-0;
+}
+
+.prose
+  :where(.task-list-item > input[type='checkbox']):not(
+    :where(.not-prose, .not-prose *)
+  ) {
+  appearance: none;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: 0.75rem;
+  @apply m-0 mr-2 size-4 rounded-[2px] border border-foreground/40 bg-background align-[-0.125rem] opacity-100;
+}
+
+.prose
+  :where(.task-list-item > input[type='checkbox']:checked):not(
+    :where(.not-prose, .not-prose *)
+  ) {
+  border-color: var(--foreground);
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath d='m3.5 8.5 3 3 6-7' fill='none' stroke='black' stroke-linecap='round' stroke-linejoin='round' stroke-width='2'/%3E%3C/svg%3E");
+}
+
+.dark
+  .prose
+  :where(.task-list-item > input[type='checkbox']:checked):not(
+    :where(.not-prose, .not-prose *)
+  ) {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath d='m3.5 8.5 3 3 6-7' fill='none' stroke='white' stroke-linecap='round' stroke-linejoin='round' stroke-width='2'/%3E%3C/svg%3E");
 }
