@@ -3,6 +3,7 @@ import { useState } from 'react'
 import {
   ArrowDown01Icon,
   Camera01Icon,
+  Cancel01Icon,
   CanvasIcon,
   ContactIcon,
   DashboardSquare02Icon,
@@ -18,6 +19,7 @@ import { Button } from '@/components/ui/button'
 import { Dialog, DialogTrigger } from '@/components/ui/dialog'
 import {
   Drawer,
+  DrawerClose,
   DrawerContent,
   DrawerHeader,
   DrawerTitle,
@@ -39,7 +41,7 @@ export default function MobileMenu() {
   }
 
   return (
-    <div className="md:hidden">
+    <div className="lg:hidden">
       <Drawer
         open={isMobileMenuOpen}
         onOpenChange={handleMobileMenuOpenChange}
@@ -51,7 +53,19 @@ export default function MobileMenu() {
         </DrawerTrigger>
         <DrawerContent>
           <DrawerHeader className="flex-row items-center justify-between border-b pb-4 text-left">
-            <DrawerTitle>Dominic Giarrusso</DrawerTitle>
+            <DrawerTitle className="flex items-center gap-2">
+              <img
+                src="/images/monogram/Monogram_DG_Blue.svg"
+                alt=""
+                className="size-8 shrink-0 dark:hidden"
+              />
+              <img
+                src="/images/monogram/Monogram_DG_Red.svg"
+                alt=""
+                className="hidden size-8 shrink-0 dark:block"
+              />
+              <span>Dominic Giarrusso</span>
+            </DrawerTitle>
             <ThemeToggle />
           </DrawerHeader>
           <div className="flex flex-col gap-2 p-4">
@@ -80,36 +94,26 @@ export default function MobileMenu() {
               Projects
             </Button>
             <div>
-              <div className="flex">
-                <Button
-                  variant="outline"
-                  className="flex-1 rounded-r-none"
-                  render={<a href="/gallery" onClick={handleMobileLinkClick} />}
-                >
-                  <HugeiconsIcon
-                    icon={DashboardSquare02Icon}
-                    strokeWidth={2}
-                    className="size-4"
-                  />
-                  Gallery
-                </Button>
-                <Button
-                  type="button"
-                  variant="outline"
-                  size="icon"
-                  className="shrink-0 rounded-l-none border-l-0"
-                  aria-expanded={isGalleryOpen}
-                  aria-controls="mobile-gallery-links"
-                  aria-label="Toggle gallery links"
-                  onClick={() => setIsGalleryOpen((isOpen) => !isOpen)}
-                >
-                  <HugeiconsIcon
-                    icon={ArrowDown01Icon}
-                    strokeWidth={2}
-                    className={`size-4 transition-transform ${isGalleryOpen ? 'rotate-180' : ''}`}
-                  />
-                </Button>
-              </div>
+              <Button
+                type="button"
+                variant="outline"
+                className="relative w-full"
+                aria-expanded={isGalleryOpen}
+                aria-controls="mobile-gallery-links"
+                onClick={() => setIsGalleryOpen((isOpen) => !isOpen)}
+              >
+                <HugeiconsIcon
+                  icon={DashboardSquare02Icon}
+                  strokeWidth={2}
+                  className="size-4"
+                />
+                Gallery
+                <HugeiconsIcon
+                  icon={ArrowDown01Icon}
+                  strokeWidth={2}
+                  className={`absolute right-3 size-4 transition-transform ${isGalleryOpen ? 'rotate-180' : ''}`}
+                />
+              </Button>
               <div
                 id="mobile-gallery-links"
                 aria-hidden={!isGalleryOpen}
@@ -194,6 +198,14 @@ export default function MobileMenu() {
               </DialogTrigger>
               <ContactDialog />
             </Dialog>
+            <DrawerClose render={<Button variant="destructive" className="w-full" />}>
+              <HugeiconsIcon
+                icon={Cancel01Icon}
+                strokeWidth={2}
+                className="size-4"
+              />
+              Close menu
+            </DrawerClose>
           </div>
         </DrawerContent>
       </Drawer>

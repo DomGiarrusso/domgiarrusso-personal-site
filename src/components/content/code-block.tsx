@@ -64,7 +64,10 @@ export default function CodeBlock({
           <span aria-live="polite">{copied ? 'Copied' : 'Copy'}</span>
         </button>
       </div>
-      <pre className="overflow-x-auto p-4 text-sm leading-6" {...props}>
+      <pre
+        className="overflow-x-auto p-4 text-xs leading-5 sm:text-sm sm:leading-6"
+        {...props}
+      >
         {children}
       </pre>
     </div>

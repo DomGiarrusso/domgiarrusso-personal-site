@@ -3,10 +3,10 @@
 import * as React from 'react'
 import { Dialog as DialogPrimitive } from '@base-ui/react/dialog'
 
-import { cn } from '@/lib/utils'
-import { Button } from '@/components/ui/button'
 import { HugeiconsIcon } from '@hugeicons/react'
 import { Cancel01Icon } from '@hugeicons/core-free-icons'
+import { cn } from '@/lib/utils'
+import { Button } from '@/components/ui/button'
 
 function Dialog({ ...props }: DialogPrimitive.Root.Props) {
   return <DialogPrimitive.Root data-slot="dialog" {...props} />
@@ -32,7 +32,7 @@ function DialogOverlay({
     <DialogPrimitive.Backdrop
       data-slot="dialog-overlay"
       className={cn(
-        'data-open:animate-in data-closed:animate-out data-closed:fade-out-0 data-open:fade-in-0 bg-black/10 duration-100 supports-backdrop-filter:backdrop-blur-xs fixed inset-0 isolate z-50',
+        'data-open:animate-in data-closed:animate-out data-closed:fade-out-0 data-open:fade-in-0 bg-black/20 duration-100 fixed inset-0 isolate z-50',
         className,
       )}
       {...props}

@@ -46,13 +46,13 @@ function ProjectPage() {
       <div className="mx-auto mt-8 max-w-5xl">
         <nav
           aria-label="Project navigation"
-          className="flex flex-wrap items-center justify-between gap-3 border-b border-primary-alt pb-3"
+          className="flex flex-col gap-2 border-b border-primary-alt pb-3 sm:flex-row sm:flex-wrap sm:items-center sm:justify-between sm:gap-3"
         >
           <a
             href="/#projects"
             className={cn(
               buttonVariants({ variant: 'outline' }),
-              'cursor-pointer',
+              'w-full cursor-pointer sm:w-auto',
             )}
           >
             <HugeiconsIcon
@@ -64,7 +64,14 @@ function ProjectPage() {
           </a>
 
           {(project.repositoryUrl || project.externalUrl) && (
-            <div className="ml-auto flex flex-wrap items-center justify-end gap-2">
+            <div
+              className={cn(
+                'grid w-full gap-2 sm:ml-auto sm:flex sm:w-auto sm:flex-wrap sm:items-center sm:justify-end',
+                project.repositoryUrl && project.externalUrl
+                  ? 'grid-cols-2'
+                  : 'grid-cols-1',
+              )}
+            >
               {project.repositoryUrl && (
                 <a
                   href={project.repositoryUrl}
@@ -72,7 +79,7 @@ function ProjectPage() {
                   rel="noopener noreferrer"
                   className={cn(
                     buttonVariants({ variant: 'outline' }),
-                    'cursor-pointer',
+                    'w-full cursor-pointer sm:w-auto',
                   )}
                 >
                   <GitHubIcon className="size-4" />
@@ -91,7 +98,7 @@ function ProjectPage() {
                   rel="noopener noreferrer"
                   className={cn(
                     buttonVariants({ variant: 'default' }),
-                    'cursor-pointer',
+                    'w-full cursor-pointer sm:w-auto',
                   )}
                 >
                   View project

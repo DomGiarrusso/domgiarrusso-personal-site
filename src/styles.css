@@ -257,7 +257,7 @@
   .yarl__button {
     transition-duration: var(--theme-transition-duration);
     transition-timing-function: var(--theme-transition-easing);
-    transition-property: color, background-color, border-color, box-shadow;
+    transition-property: color, background-color, border-color;
   }
 
   body {
@@ -379,7 +379,7 @@
 }
 
 .prose :where(table):not(:where(.not-prose, .not-prose *)) {
-  @apply w-auto max-w-full border-collapse border border-foreground/15 text-base;
+  @apply w-auto max-w-full border-collapse border border-foreground/15 text-[1em];
 }
 
 .prose :where(thead):not(:where(.not-prose, .not-prose *)) {

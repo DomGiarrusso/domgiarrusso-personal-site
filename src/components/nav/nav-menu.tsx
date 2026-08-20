@@ -37,7 +37,7 @@ export default function NavMenu({ isScrolled }: NavMenuProps) {
 
   return (
     <>
-      <NavigationMenu className="hidden md:flex">
+      <NavigationMenu className="hidden lg:flex">
         <NavigationMenuList className="gap-1">
           <NavigationMenuItem>
             <NavigationMenuLink
@@ -86,8 +86,8 @@ export default function NavMenu({ isScrolled }: NavMenuProps) {
                 Gallery
               </span>
             </NavigationMenuTrigger>
-            <NavigationMenuContent className="justify-center md:flex">
-              <ul className="grid gap-3 p-2 md:w-[250px] lg:w-[320px]">
+            <NavigationMenuContent className="justify-center lg:flex">
+              <ul className="grid gap-3 p-2 lg:w-[250px] xl:w-[320px]">
                 <NavListItem
                   href="/gallery/art"
                   title="Art"

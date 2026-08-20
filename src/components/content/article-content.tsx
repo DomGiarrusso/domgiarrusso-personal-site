@@ -38,7 +38,7 @@ export default function ArticleContent({
   content: Content,
 }: ArticleContentProps) {
   return (
-    <article className="article-content prose prose-slate dark:prose-invert max-w-none">
+    <article className="article-content prose prose-sm prose-slate dark:prose-invert max-w-none text-[0.8125rem] sm:prose-base sm:text-base">
       <Content components={components} />
     </article>
   )
