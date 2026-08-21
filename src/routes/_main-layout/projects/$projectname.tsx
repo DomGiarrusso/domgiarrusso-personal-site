@@ -97,7 +97,7 @@ function ProjectPage() {
                   target="_blank"
                   rel="noopener noreferrer"
                   className={cn(
-                    buttonVariants({ variant: 'default' }),
+                    buttonVariants({ variant: 'default-alt' }),
                     'w-full cursor-pointer sm:w-auto',
                   )}
                 >

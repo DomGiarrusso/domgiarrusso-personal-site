@@ -28,7 +28,6 @@ export function ThemeToggle() {
           <Button
             variant="outline"
             size="icon"
-            className="relative bg-input/30 hover:bg-input/50"
           />
         }
       >

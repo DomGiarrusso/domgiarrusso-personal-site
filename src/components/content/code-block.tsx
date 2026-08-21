@@ -3,6 +3,8 @@ import { HugeiconsIcon } from '@hugeicons/react'
 import { Children, isValidElement, useEffect, useState } from 'react'
 import type { ComponentProps, ReactNode } from 'react'
 
+import { Button } from '@/components/ui/button'
+
 type CodeBlockProps = ComponentProps<'pre'> & {
   'data-language'?: string
 }
@@ -50,10 +52,12 @@ export default function CodeBlock({
         <span className="text-xs font-medium text-muted-foreground">
           {language ?? 'Code'}
         </span>
-        <button
+        <Button
+          variant="ghost"
+          size="sm"
           type="button"
           onClick={copyCode}
-          className="inline-flex min-h-8 items-center gap-1.5 rounded-md px-2 text-xs font-medium text-muted-foreground transition-colors hover:bg-muted hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+          className="text-xs text-muted-foreground"
           aria-label={copied ? 'Code copied' : 'Copy code'}
         >
           <HugeiconsIcon
@@ -62,7 +66,7 @@ export default function CodeBlock({
             strokeWidth={2}
           />
           <span aria-live="polite">{copied ? 'Copied' : 'Copy'}</span>
-        </button>
+        </Button>
       </div>
       <pre
         className="overflow-x-auto p-4 text-xs leading-5 sm:text-sm sm:leading-6"
