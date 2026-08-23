@@ -24,31 +24,37 @@ export default function VideoCard({
 }: VideoCardProps) {
   return (
     <a href={href} className="group block h-full">
-      <Card className="h-full gap-3 pt-4 transition-all duration-300 group-hover:text-red-500">
-        <CardHeader className="px-4">
-          <AspectRatio ratio={16 / 9}>
+      <Card className="relative h-full gap-3 pt-4 transition-[color,background-color,border-color,box-shadow] duration-300 group-hover:border-primary-alt/60 group-hover:text-primary-alt group-hover:ring-primary-alt/40 group-hover:shadow-[0_0_24px_color-mix(in_oklab,var(--primary-alt)_40%,transparent)] group-focus-visible:border-primary-alt/60 group-focus-visible:text-primary-alt group-focus-visible:ring-primary-alt/40 group-focus-visible:shadow-[0_0_24px_color-mix(in_oklab,var(--primary-alt)_40%,transparent)]">
+        <div
+          aria-hidden="true"
+          className="pointer-events-none absolute inset-0 z-0 bg-[radial-gradient(ellipse_100%_120%_at_50%_-30%,var(--card)_0%,var(--card)_95%,var(--primary-alt)_140%)] opacity-0 transition-opacity duration-500 ease-out group-hover:opacity-100 group-focus-visible:opacity-100"
+        />
+        <CardHeader className="relative z-10 px-4">
+          <AspectRatio
+            ratio={16 / 9}
+            className="overflow-hidden rounded-lg bg-card ring-1 ring-foreground/10"
+          >
             {thumbnailUrl ? (
-              <>
-                <img
-                  src={thumbnailUrl}
-                  alt={`${title} thumbnail`}
-                  className="h-full w-full rounded-lg ring-1 ring-foreground/10 object-cover"
-                />
-                {duration ? (
-                  <span className="absolute right-3 bottom-3 rounded bg-black/85 px-2 py-1 text-xs font-medium text-white">
-                    {duration}
-                  </span>
-                ) : null}
-              </>
-            ) : (
-              <div
-                className="h-full w-full rounded-lg ring-1 ring-foreground/10 bg-muted"
-                aria-hidden="true"
+              <img
+                src={thumbnailUrl}
+                alt={`${title} thumbnail`}
+                className="h-full w-full object-cover"
               />
+            ) : (
+              <div className="h-full w-full bg-muted" aria-hidden="true" />
             )}
+            <div
+              aria-hidden="true"
+              className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_100%_120%_at_50%_-30%,transparent_0%,transparent_95%,color-mix(in_oklab,var(--primary-alt)_80%,transparent)_108%)] opacity-0 transition-opacity duration-500 ease-out group-hover:opacity-100 group-focus-visible:opacity-100"
+            />
+            {thumbnailUrl && duration ? (
+              <span className="absolute right-3 bottom-3 z-10 rounded bg-black/85 px-2 py-1 text-xs font-medium text-white">
+                {duration}
+              </span>
+            ) : null}
           </AspectRatio>
         </CardHeader>
-        <CardContent className="space-y-2">
+        <CardContent className="relative z-10 space-y-2">
           <CardTitle className="line-clamp-2 text-lg font-semibold leading-snug">
             {title}
           </CardTitle>

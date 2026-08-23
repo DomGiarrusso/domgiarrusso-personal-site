@@ -37,6 +37,18 @@ const galleryImages: Array<GalleryImage> = [
     variant: 'big',
     sortOrder: 3,
   },
+  {
+    id: '4',
+    page: 'art',
+    title: 'Testing',
+    alt: 'Test alt',
+    thumbnailUrl:
+      'https://6kmjrjw570.ufs.sh/f/AtjECMYdGJy3FNOrNZBtnSRmu2qdv7IBxDTWlea0EpUz9Qr8',
+    fullUrl:
+      'https://6kmjrjw570.ufs.sh/f/AtjECMYdGJy3FNOrNZBtnSRmu2qdv7IBxDTWlea0EpUz9Qr8',
+    variant: 'square',
+    sortOrder: 4,
+  },
 ]
 
 export function getGalleryImages(page: GalleryPage): Array<GalleryImage> {

@@ -285,49 +285,51 @@ export function BentoGalleryGrid({
 }: BentoGalleryGridProps) {
   const layout = useMemo(() => computeLayout(items, 3), [items])
   return (
-    <div
-      className={cn(
-        'grid grid-flow-row-dense gap-4 grid-cols-1 md:grid-cols-2 lg:grid-cols-3 auto-rows-[350px] sm:auto-rows-[500px] md:auto-rows-[300px] lg:auto-rows-[350px] xl:auto-rows-[400px]',
-        className,
-      )}
-    >
-      {layout.map((item, index) => {
-        const spanClasses = getSpanClasses(item.colSpan, item.rowSpan)
-        const ariaLabel = item.title ?? item.alt
+    <div className="@container">
+      <div
+        className={cn(
+          'grid auto-rows-[100cqw] grid-flow-row-dense grid-cols-1 gap-4 md:auto-rows-[calc((100cqw-1rem)/2)] md:grid-cols-2 lg:auto-rows-[calc((100cqw-2rem)/3)] lg:grid-cols-3',
+          className,
+        )}
+      >
+        {layout.map((item, index) => {
+          const spanClasses = getSpanClasses(item.colSpan, item.rowSpan)
+          const ariaLabel = item.title ?? item.alt
 
-        return (
-          <button
-            key={item.id}
-            id={`bento-item-${item.id}`}
-            type="button"
-            onClick={() => onItemClick?.(item, index)}
-            aria-label={ariaLabel}
-            className={cn(
-              'group relative w-full h-full min-w-0 cursor-pointer overflow-hidden rounded-xl border border-border bg-card ring-1 ring-border transition-colors hover:bg-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background',
-              spanClasses,
-            )}
-          >
-            <div className="relative w-full h-full">
-              <img
-                src={item.thumbnailUrl}
-                alt={item.alt}
-                className="absolute inset-0 h-full w-full object-cover"
-                loading="lazy"
-                decoding="async"
-              />
-              {item.title && (
-                <div className="absolute inset-0 bg-linear-to-t from-black/60 via-black/0 to-black/0 opacity-0 transition-opacity group-hover:opacity-100">
-                  <div className="absolute bottom-0 left-0 right-0 p-4">
-                    <p className="text-sm font-medium text-white">
-                      {item.title}
-                    </p>
-                  </div>
-                </div>
+          return (
+            <button
+              key={item.id}
+              id={`bento-item-${item.id}`}
+              type="button"
+              onClick={() => onItemClick?.(item, index)}
+              aria-label={ariaLabel}
+              className={cn(
+                'group relative h-full w-full min-w-0 cursor-pointer overflow-hidden rounded-xl border border-border bg-card ring-1 ring-border transition-[color,background-color,border-color,box-shadow] duration-300 hover:border-primary-alt/60 hover:bg-accent hover:ring-primary-alt/40 hover:shadow-[0_0_24px_color-mix(in_oklab,var(--primary-alt)_40%,transparent)] focus-visible:border-primary-alt/60 focus-visible:ring-2 focus-visible:ring-primary-alt/40 focus-visible:ring-offset-2 focus-visible:ring-offset-background focus-visible:shadow-[0_0_24px_color-mix(in_oklab,var(--primary-alt)_40%,transparent)] focus-visible:outline-none',
+                spanClasses,
               )}
-            </div>
-          </button>
-        )
-      })}
+            >
+              <div className="relative h-full w-full">
+                <img
+                  src={item.thumbnailUrl}
+                  alt={item.alt}
+                  className="absolute inset-0 h-full w-full object-cover"
+                  loading="lazy"
+                  decoding="async"
+                />
+                {item.title && (
+                  <div className="absolute inset-0 bg-[radial-gradient(ellipse_100%_120%_at_50%_-30%,transparent_0%,transparent_95%,color-mix(in_oklab,var(--primary-alt)_80%,transparent)_108%)] opacity-0 transition-opacity duration-500 ease-out group-hover:opacity-100 group-focus-visible:opacity-100">
+                    <div className="absolute right-0 bottom-0 left-0 p-4">
+                      <p className="text-sm font-medium text-primary-alt-foreground">
+                        {item.title}
+                      </p>
+                    </div>
+                  </div>
+                )}
+              </div>
+            </button>
+          )
+        })}
+      </div>
     </div>
   )
 }
