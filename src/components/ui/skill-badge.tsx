@@ -21,7 +21,7 @@ export default function SkillBadge({
 }: SkillBadgeProps) {
   const sizeStyle = 'h-7 px-3 py-1 text-sm'
   const badgeEffects =
-    'relative hover:scale-105 after:pointer-events-none after:absolute after:inset-0 after:bg-[radial-gradient(ellipse_90%_150%_at_50%_-20%,transparent_0%,transparent_65%,color-mix(in_oklab,var(--primary-alt)_60%,transparent)_100%)] after:opacity-0 after:transition-opacity after:duration-300 after:ease-in-out hover:after:opacity-100'
+    'relative hover:scale-105 hover:shadow-[0_0_18px_color-mix(in_oklab,var(--primary-alt)_40%,transparent)] after:pointer-events-none after:absolute after:inset-0 after:bg-[radial-gradient(ellipse_90%_150%_at_50%_-20%,transparent_0%,transparent_65%,color-mix(in_oklab,var(--primary-alt)_60%,transparent)_100%)] after:opacity-0 after:transition-opacity after:duration-300 after:ease-in-out hover:after:opacity-100'
   const transitionControls =
     'transition-[color,background-color,border-color,box-shadow,transform] duration-300 ease-in-out'
   const badge = (

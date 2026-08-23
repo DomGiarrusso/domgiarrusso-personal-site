@@ -304,7 +304,7 @@ export function BentoGalleryGrid({
               onClick={() => onItemClick?.(item, index)}
               aria-label={ariaLabel}
               className={cn(
-                'group relative h-full w-full min-w-0 cursor-pointer overflow-hidden rounded-xl border border-border bg-card ring-1 ring-border transition-[color,background-color,border-color,box-shadow] duration-300 hover:border-primary-alt/60 hover:bg-accent hover:ring-primary-alt/40 hover:shadow-[0_0_24px_color-mix(in_oklab,var(--primary-alt)_40%,transparent)] focus-visible:border-primary-alt/60 focus-visible:ring-2 focus-visible:ring-primary-alt/40 focus-visible:ring-offset-2 focus-visible:ring-offset-background focus-visible:shadow-[0_0_24px_color-mix(in_oklab,var(--primary-alt)_40%,transparent)] focus-visible:outline-none',
+                'group relative h-full w-full min-w-0 cursor-pointer overflow-hidden rounded-xl border border-border bg-card shadow-xs ring-1 ring-foreground/10 transition-[color,background-color,border-color,box-shadow] duration-300 hover:border-primary-alt/60 hover:bg-accent hover:ring-primary-alt/40 hover:shadow-[0_0_24px_color-mix(in_oklab,var(--primary-alt)_40%,transparent)] focus-visible:border-primary-alt/60 focus-visible:ring-2 focus-visible:ring-primary-alt/40 focus-visible:ring-offset-2 focus-visible:ring-offset-background focus-visible:shadow-[0_0_24px_color-mix(in_oklab,var(--primary-alt)_40%,transparent)] focus-visible:outline-none',
                 spanClasses,
               )}
             >
