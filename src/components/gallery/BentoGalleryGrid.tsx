@@ -317,7 +317,7 @@ export function BentoGalleryGrid({
                   decoding="async"
                 />
                 {item.title && (
-                  <div className="absolute inset-0 bg-[radial-gradient(ellipse_100%_120%_at_50%_-30%,transparent_0%,transparent_95%,color-mix(in_oklab,var(--primary-alt)_80%,transparent)_108%)] opacity-0 transition-opacity duration-500 ease-out group-hover:opacity-100 group-focus-visible:opacity-100">
+                  <div className="absolute inset-0 bg-[radial-gradient(ellipse_100%_120%_at_50%_-30%,transparent_0%,transparent_95%,var(--primary-alt)_108%)] opacity-0 transition-opacity duration-500 ease-out group-hover:opacity-100 group-focus-visible:opacity-100">
                     <div className="absolute right-0 bottom-0 left-0 p-4">
                       <p className="text-sm font-medium text-primary-alt-foreground">
                         {item.title}
