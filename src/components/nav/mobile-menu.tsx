@@ -14,9 +14,7 @@ import {
 } from '@hugeicons/core-free-icons'
 import { HugeiconsIcon } from '@hugeicons/react'
 
-import ContactDialog from '@/components/ui/contact-dialog'
 import { Button } from '@/components/ui/button'
-import { Dialog, DialogTrigger } from '@/components/ui/dialog'
 import {
   Drawer,
   DrawerClose,
@@ -28,7 +26,11 @@ import {
 import { Separator } from '@/components/ui/separator'
 import { ThemeToggle } from '@/components/ui/theme-toggle'
 
-export default function MobileMenu() {
+type MobileMenuProps = {
+  onContactOpen: () => void
+}
+
+export default function MobileMenu({ onContactOpen }: MobileMenuProps) {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
   const [isGalleryOpen, setIsGalleryOpen] = useState(false)
   const handleMobileLinkClick = () => {
@@ -38,6 +40,10 @@ export default function MobileMenu() {
   const handleMobileMenuOpenChange = (isOpen: boolean) => {
     setIsMobileMenuOpen(isOpen)
     if (!isOpen) setIsGalleryOpen(false)
+  }
+  const handleContactClick = () => {
+    handleMobileLinkClick()
+    onContactOpen()
   }
 
   return (
@@ -71,8 +77,11 @@ export default function MobileMenu() {
           <div className="flex flex-col gap-2 p-4">
             <Button
               variant="outline"
+              nativeButton={false}
               className="w-full"
-              render={<a href="/#" onClick={handleMobileLinkClick} />}
+              render={
+                <a href="/#" role="link" onClick={handleMobileLinkClick} />
+              }
             >
               <HugeiconsIcon
                 icon={Home07Icon}
@@ -83,8 +92,15 @@ export default function MobileMenu() {
             </Button>
             <Button
               variant="outline"
+              nativeButton={false}
               className="w-full"
-              render={<a href="/#projects" onClick={handleMobileLinkClick} />}
+              render={
+                <a
+                  href="/#projects"
+                  role="link"
+                  onClick={handleMobileLinkClick}
+                />
+              }
             >
               <HugeiconsIcon
                 icon={SourceCodeSquareIcon}
@@ -129,10 +145,12 @@ export default function MobileMenu() {
                     <Button
                       variant="secondary"
                       size="sm"
+                      nativeButton={false}
                       className="w-full justify-center px-1"
                       render={
                         <a
                           href="/gallery/art"
+                          role="link"
                           onClick={handleMobileLinkClick}
                         />
                       }
@@ -147,10 +165,12 @@ export default function MobileMenu() {
                     <Button
                       variant="secondary"
                       size="sm"
+                      nativeButton={false}
                       className="w-full justify-center px-1"
                       render={
                         <a
                           href="/gallery/photos"
+                          role="link"
                           onClick={handleMobileLinkClick}
                         />
                       }
@@ -165,10 +185,12 @@ export default function MobileMenu() {
                     <Button
                       variant="secondary"
                       size="sm"
+                      nativeButton={false}
                       className="w-full justify-center px-1"
                       render={
                         <a
                           href="/gallery/videos"
+                          role="link"
                           onClick={handleMobileLinkClick}
                         />
                       }
@@ -185,20 +207,22 @@ export default function MobileMenu() {
               </div>
             </div>
             <Separator className="my-2" />
-            <Dialog>
-              <DialogTrigger
-                render={<Button variant="outline" className="w-full" />}
-              >
-                <HugeiconsIcon
-                  icon={ContactIcon}
-                  strokeWidth={2}
-                  className="size-4"
-                />
-                Contact
-              </DialogTrigger>
-              <ContactDialog />
-            </Dialog>
-            <DrawerClose render={<Button variant="destructive" className="w-full" />}>
+            <Button
+              type="button"
+              variant="outline"
+              className="w-full"
+              onClick={handleContactClick}
+            >
+              <HugeiconsIcon
+                icon={ContactIcon}
+                strokeWidth={2}
+                className="size-4"
+              />
+              Contact
+            </Button>
+            <DrawerClose
+              render={<Button variant="destructive" className="w-full" />}
+            >
               <HugeiconsIcon
                 icon={Cancel01Icon}
                 strokeWidth={2}
