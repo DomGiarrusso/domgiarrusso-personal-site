@@ -1,9 +1,11 @@
 import { HeadContent, Scripts, createRootRoute } from '@tanstack/react-router'
 import { TanStackRouterDevtoolsPanel } from '@tanstack/react-router-devtools'
 import { TanStackDevtools } from '@tanstack/react-devtools'
-import { ThemeProvider } from '@/components/theme-provider'
 
 import appCss from '../styles.css?url'
+
+import { NotFound } from '@/components/not-found'
+import { ThemeProvider } from '@/components/theme-provider'
 
 export const Route = createRootRoute({
   head: () => ({
@@ -49,7 +51,7 @@ export const Route = createRootRoute({
   }),
 
   shellComponent: RootDocument,
-  notFoundComponent: () => <div>404 - Page Not Found</div>,
+  notFoundComponent: NotFound,
 })
 
 function RootDocument({ children }: { children: React.ReactNode }) {
