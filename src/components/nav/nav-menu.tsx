@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import { HugeiconsIcon } from '@hugeicons/react'
 import {
   Camera01Icon,
@@ -31,12 +32,13 @@ type NavMenuProps = {
 }
 
 export default function NavMenu({ isScrolled }: NavMenuProps) {
+  const [isContactOpen, setIsContactOpen] = useState(false)
   const navItemOutlineClass = isScrolled
     ? 'border-border bg-background hover:bg-muted focus:bg-muted data-[active=true]:bg-muted data-open:bg-muted data-popup-open:bg-muted aria-expanded:bg-muted dark:border-input'
     : 'border-transparent'
 
   return (
-    <>
+    <Dialog open={isContactOpen} onOpenChange={setIsContactOpen}>
       <NavigationMenu className="hidden lg:flex">
         <NavigationMenuList className="gap-1">
           <NavigationMenuItem>
@@ -131,25 +133,22 @@ export default function NavMenu({ isScrolled }: NavMenuProps) {
             </NavigationMenuContent>
           </NavigationMenuItem>
           <NavigationMenuItem>
-            <Dialog>
-              <DialogTrigger
-                className={cn(
-                  navigationMenuTriggerStyle(),
-                  'cursor-pointer border',
-                  navItemOutlineClass,
-                )}
-              >
-                <span className="flex gap-1">
-                  <HugeiconsIcon
-                    icon={ContactIcon}
-                    strokeWidth={2}
-                    className="mb-0.5 size-4.5"
-                  />
-                  Contact
-                </span>
-              </DialogTrigger>
-              <ContactDialog />
-            </Dialog>
+            <DialogTrigger
+              className={cn(
+                navigationMenuTriggerStyle(),
+                'cursor-pointer border',
+                navItemOutlineClass,
+              )}
+            >
+              <span className="flex gap-1">
+                <HugeiconsIcon
+                  icon={ContactIcon}
+                  strokeWidth={2}
+                  className="mb-0.5 size-4.5"
+                />
+                Contact
+              </span>
+            </DialogTrigger>
           </NavigationMenuItem>
           <Separator orientation="vertical" className="mx-3 bg-primary-alt" />
           <NavigationMenuItem>
@@ -157,7 +156,8 @@ export default function NavMenu({ isScrolled }: NavMenuProps) {
           </NavigationMenuItem>
         </NavigationMenuList>
       </NavigationMenu>
-      <MobileMenu />
-    </>
+      <MobileMenu onContactOpen={() => setIsContactOpen(true)} />
+      <ContactDialog />
+    </Dialog>
   )
 }
