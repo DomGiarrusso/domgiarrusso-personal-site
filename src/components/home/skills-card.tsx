@@ -1,3 +1,5 @@
+import { HugeiconsIcon } from '@hugeicons/react'
+import type { IconSvgElement } from '@hugeicons/react'
 import {
   Card,
   CardContent,
@@ -16,6 +18,7 @@ export type SkillConfig = {
 
 type SkillsCardProps = {
   title: string
+  icon: IconSvgElement
   description: string
   className?: string
   emptyMessage?: string
@@ -24,6 +27,7 @@ type SkillsCardProps = {
 
 export default function SkillsCard({
   title,
+  icon,
   description,
   className,
   emptyMessage,
@@ -32,7 +36,10 @@ export default function SkillsCard({
   return (
     <Card className={cn('h-full', className)}>
       <CardHeader className="gap-2">
-        <CardTitle className="text-xl font-bold sm:text-2xl">{title}</CardTitle>
+        <CardTitle className="flex items-center gap-2 text-xl font-bold sm:text-2xl">
+          <HugeiconsIcon icon={icon} strokeWidth={2} aria-hidden="true" />
+          {title}
+        </CardTitle>
         <CardDescription className="leading-6">{description}</CardDescription>
       </CardHeader>
       <CardContent>
