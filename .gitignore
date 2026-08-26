@@ -12,3 +12,12 @@ count.txt
 .vinxi
 .env.local
 todos.json
+
+
+*.test.*
+*.spec.*
+vitest.config.*
+coverage/
+
+.agents/skills/
+skills-lock.json
