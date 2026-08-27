@@ -15,7 +15,7 @@ export default function Projects({ projects }: Props) {
       <div className="mt-8 grid min-h-[400px] w-full grid-cols-1 gap-6 md:grid-cols-2 xl:grid-cols-3">
         {projects.map((project) => (
           <ProjectCard
-            key={project.id}
+            key={project.slug}
             title={project.title}
             slug={project.slug}
             blurb={project.blurb}

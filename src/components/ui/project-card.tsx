@@ -8,7 +8,7 @@ import {
   CardTitle,
 } from '@/components/ui/card'
 
-type Props = Omit<ProjectSummary, 'id'>
+type Props = ProjectSummary
 
 export default function ProjectCard({
   title,

@@ -1,5 +1,4 @@
 export type Project = {
-  id: string
   title: string
   slug: string
   blurb: string
@@ -20,7 +19,7 @@ export type ProjectMedia = {
 
 export type ProjectSummary = Pick<
   Project,
-  'id' | 'title' | 'slug' | 'blurb' | 'thumbnailUrl'
+  'title' | 'slug' | 'blurb' | 'thumbnailUrl'
 >
 
 export type GalleryPage = 'art' | 'photos'

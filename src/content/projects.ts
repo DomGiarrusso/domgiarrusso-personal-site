@@ -30,7 +30,6 @@ const sampleProjectMedia = [
 
 const projects: Array<Project> = [
   {
-    id: '1',
     title: 'Remote Project Test',
     slug: 'test-demo',
     blurb: 'Short text',
@@ -40,7 +39,6 @@ const projects: Array<Project> = [
     sortOrder: 1,
   },
   {
-    id: '2',
     title: 'Super Test',
     slug: 'super-test',
     blurb: 'Super amazing project text',
@@ -51,7 +49,6 @@ const projects: Array<Project> = [
     sortOrder: 2,
   },
   {
-    id: '3',
     title: 'Test Content 2',
     slug: 'test-2',
     blurb: 'short text blurb',
@@ -73,8 +70,7 @@ const projectContentBySlug: Record<string, MDXContent> = {
 export function getProjectSummaries(): Array<ProjectSummary> {
   return [...projects]
     .sort((first, second) => first.sortOrder - second.sortOrder)
-    .map(({ id, title, slug, blurb, thumbnailUrl }) => ({
-      id,
+    .map(({ title, slug, blurb, thumbnailUrl }) => ({
       title,
       slug,
       blurb,
