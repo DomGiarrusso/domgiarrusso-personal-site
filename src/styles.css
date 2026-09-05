@@ -227,6 +227,11 @@
     @apply border-border outline-ring/50;
   }
 
+  ::selection {
+    background-color: var(--primary-alt);
+    color: var(--primary-alt-foreground);
+  }
+
   html,
   body,
   body::before,
