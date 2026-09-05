@@ -101,7 +101,7 @@ export default function NavMenu({ isScrolled }: NavMenuProps) {
                     />
                   }
                 >
-                  Testing out some art
+                  My illustrations, sketches, and other artwork.
                 </NavListItem>
                 <NavListItem
                   href="/gallery/photos"
@@ -114,7 +114,7 @@ export default function NavMenu({ isScrolled }: NavMenuProps) {
                     />
                   }
                 >
-                  Testing out some photos
+                  A collection of photos I've taken.
                 </NavListItem>
                 <NavListItem
                   href="/gallery/videos"
@@ -127,7 +127,7 @@ export default function NavMenu({ isScrolled }: NavMenuProps) {
                     />
                   }
                 >
-                  Testing out some videos
+                  Dev logs, video essays, tutorials, and short films.
                 </NavListItem>
               </ul>
             </NavigationMenuContent>
