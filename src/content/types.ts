@@ -15,6 +15,8 @@ export type ProjectMedia = {
   src: string
   alt: string
   caption?: string
+  aspectRatio?: number
+  fit?: 'contain' | 'cover'
 }
 
 export type ProjectSummary = Pick<

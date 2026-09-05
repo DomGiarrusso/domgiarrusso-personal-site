@@ -10,6 +10,7 @@ import {
   CarouselPrevious,
 } from '@/components/ui/carousel'
 import { AspectRatio } from '@/components/ui/aspect-ratio'
+import { cn } from '@/lib/utils'
 
 type Props = {
   media: Array<ProjectMedia>
@@ -40,16 +41,27 @@ export default function ProjectCarousel({ media }: Props) {
 
   if (media.length === 0) return null
 
+  const landscapeAspectRatios = media.flatMap((item) =>
+    item.aspectRatio && item.aspectRatio >= 1 ? [item.aspectRatio] : [],
+  )
+  const frameAspectRatio =
+    landscapeAspectRatios.length > 0
+      ? Math.min(...landscapeAspectRatios)
+      : 16 / 9
+
   const renderMedia = (item: ProjectMedia, index: number) => (
     <figure className="relative overflow-hidden rounded-xl">
       <AspectRatio
         className="overflow-hidden rounded-xl border border-border bg-muted shadow-sm ring-1 ring-foreground/10"
-        ratio={16 / 9}
+        ratio={frameAspectRatio}
       >
         <img
           src={item.src}
           alt={item.alt}
-          className="size-full object-cover"
+          className={cn(
+            'size-full',
+            item.fit === 'contain' ? 'object-contain' : 'object-cover',
+          )}
           loading={index === 0 ? 'eager' : 'lazy'}
           decoding="async"
         />
