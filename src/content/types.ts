@@ -24,13 +24,10 @@ export type ProjectSummary = Pick<
   'title' | 'slug' | 'blurb' | 'thumbnailUrl'
 >
 
-export type GalleryPage = 'art' | 'photos'
-
 export type GalleryImageVariant = 'square' | 'wide' | 'tall' | 'big'
 
 export type GalleryImage = {
   id: string
-  page: GalleryPage
   title: string
   alt: string
   thumbnailUrl: string
@@ -38,7 +35,6 @@ export type GalleryImage = {
   variant?: GalleryImageVariant
   width?: number
   height?: number
-  sortOrder: number
 }
 
 export type Video = {

@@ -1,6 +1,6 @@
 import { createFileRoute } from '@tanstack/react-router'
 import { BentoGalleryWithLightbox } from '@/components/gallery/BentoGalleryWithLightbox'
-import { getGalleryImages } from '@/content/gallery-images'
+import { getPhotoImages } from '@/content/gallery-images'
 
 type PhotosSearch = {
   item?: string
@@ -10,7 +10,7 @@ export const Route = createFileRoute('/_main-layout/gallery/photos')({
   validateSearch: (search: Record<string, unknown>): PhotosSearch => ({
     item: typeof search.item === 'string' ? search.item : undefined,
   }),
-  loader: () => ({ photosImages: getGalleryImages('photos') }),
+  loader: () => ({ photosImages: getPhotoImages() }),
   component: RouteComponent,
 })
 

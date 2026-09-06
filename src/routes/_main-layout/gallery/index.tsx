@@ -1,13 +1,13 @@
 import { createFileRoute } from '@tanstack/react-router'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
-import { getGalleryPreviews } from '@/content/gallery-images'
+import { getArtImages, getPhotoImages } from '@/content/gallery-images'
 import { getVideoPreviews } from '@/content/videos'
 import { cn } from '@/lib/utils'
 
 export const Route = createFileRoute('/_main-layout/gallery/')({
   loader: () => ({
-    artPreviews: getGalleryPreviews('art'),
-    photoPreviews: getGalleryPreviews('photos'),
+    artPreviews: getArtImages().slice(0, 3),
+    photoPreviews: getPhotoImages().slice(0, 3),
     videoPreviews: getVideoPreviews(),
   }),
   component: GalleryPage,
