@@ -103,6 +103,7 @@ export default function ProjectCarousel({ media }: Props) {
               <button
                 key={item.id}
                 type="button"
+                data-haptic="selection"
                 onClick={() => api?.scrollTo(index)}
                 className="size-2.5 rounded-full bg-muted-foreground/35 transition-colors hover:bg-muted-foreground aria-[current=true]:bg-primary-alt"
                 aria-label={`Show image ${index + 1} of ${media.length}`}

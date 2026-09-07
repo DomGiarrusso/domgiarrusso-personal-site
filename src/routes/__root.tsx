@@ -4,6 +4,7 @@ import { TanStackDevtools } from '@tanstack/react-devtools'
 
 import appCss from '../styles.css?url'
 
+import { HapticsProvider } from '@/components/haptics-provider'
 import { NotFound } from '@/components/not-found'
 import { ThemeProvider } from '@/components/theme-provider'
 
@@ -65,9 +66,11 @@ function RootDocument({ children }: { children: React.ReactNode }) {
         <HeadContent />
       </head>
       <body className="min-h-screen flex flex-col items-center">
-        <ThemeProvider defaultTheme="system" storageKey="vite-ui-theme">
-          {children}
-        </ThemeProvider>
+        <HapticsProvider>
+          <ThemeProvider defaultTheme="system" storageKey="vite-ui-theme">
+            {children}
+          </ThemeProvider>
+        </HapticsProvider>
         <TanStackDevtools
           config={{
             position: 'bottom-right',

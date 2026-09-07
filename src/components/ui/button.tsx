@@ -1,7 +1,9 @@
 import { Button as ButtonPrimitive } from '@base-ui/react/button'
 import { cva } from 'class-variance-authority'
 import type { VariantProps } from 'class-variance-authority'
+import type { HapticInput } from 'web-haptics'
 
+import { useHaptics } from '@/components/haptics-provider'
 import { cn } from '@/lib/utils'
 
 const buttonVariants = cva(
@@ -9,8 +11,7 @@ const buttonVariants = cva(
   {
     variants: {
       variant: {
-        default:
-          'bg-primary  text-primary-foreground hover:bg-primary/80',
+        default: 'bg-primary  text-primary-foreground hover:bg-primary/80',
         'default-alt':
           'bg-primary-alt dark:bg-primary-alt-700 text-primary-foreground hover:bg-primary-alt/80 dark:hover:bg-primary-alt-700/80 border border-primary-alt-700 dark:border-primary-alt',
         outline:
@@ -44,19 +45,49 @@ const buttonVariants = cva(
   },
 )
 
+type ButtonVariant = NonNullable<VariantProps<typeof buttonVariants>['variant']>
+
+const hapticByVariant: Record<ButtonVariant, HapticInput> = {
+  default: 'medium',
+  'default-alt': 'medium',
+  outline: 'light',
+  secondary: 'light',
+  ghost: 'light',
+  destructive: 'warning',
+  link: 'light',
+}
+
+type ButtonProps = ButtonPrimitive.Props &
+  VariantProps<typeof buttonVariants> & {
+    haptic?: HapticInput | false
+  }
+
 function Button({
   className,
   variant = 'default-alt',
   size = 'default',
+  haptic,
+  onClick,
   ...props
-}: ButtonPrimitive.Props & VariantProps<typeof buttonVariants>) {
+}: ButtonProps) {
+  const { trigger } = useHaptics()
+
   return (
     <ButtonPrimitive
       data-slot="button"
+      data-haptic-managed
       className={cn(buttonVariants({ variant, size, className }))}
+      onClick={(event) => {
+        onClick?.(event)
+
+        if (!event.defaultPrevented && haptic !== false) {
+          void trigger(haptic ?? hapticByVariant[variant ?? 'default-alt'])
+        }
+      }}
       {...props}
     />
   )
 }
 
 export { Button, buttonVariants }
+export type { ButtonProps }
