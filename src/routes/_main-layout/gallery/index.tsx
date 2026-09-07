@@ -101,7 +101,7 @@ function ShowcaseCard({
             {eyebrow}
           </div>
           <div className="space-y-2">
-            <CardTitle className="text-xl leading-tight transition-colors group-hover:text-red-500">
+            <CardTitle className="text-xl leading-tight transition-colors group-hover:text-primary-alt-600 group-focus-visible:text-primary-alt-600">
               {title}
             </CardTitle>
             <p className="text-sm leading-6 text-muted-foreground">
