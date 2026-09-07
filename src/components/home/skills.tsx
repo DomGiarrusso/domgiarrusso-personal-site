@@ -12,6 +12,7 @@ const coreSkills: Array<SkillConfig> = getSkills([
   'csharp',
   'typescript',
   'javascript',
+  'jquery',
   'html',
   'css',
   'sql',
@@ -19,6 +20,7 @@ const coreSkills: Array<SkillConfig> = getSkills([
   'react',
   'next',
   'tailwind',
+  'vite',
   'postgres',
   'sqlserver',
   'node',
@@ -27,7 +29,6 @@ const coreSkills: Array<SkillConfig> = getSkills([
   'sqlite',
   'sass',
   'docker',
-  'xml',
   'json',
   'bootstrap',
 ])
@@ -38,14 +39,22 @@ const additionalExperienceSkills: Array<SkillConfig> = getSkills([
   'cpp',
   'flask',
   'firebase',
+  'xml',
 ])
 
 const toolsAndPlatformsSkills: Array<SkillConfig> = getSkills([
   'vscode',
   'visualstudio',
+  'zed',
+  'codex',
+  't3code',
+  'opencode',
   'windows',
   'git',
   'github',
+  'ssms',
+  'dbeaver',
+  'pgadmin',
   'office',
   'adobe',
   'affinity',
@@ -56,7 +65,7 @@ const toolsAndPlatformsSkills: Array<SkillConfig> = getSkills([
   'godot',
 ])
 
-const learningSkills: Array<SkillConfig> = getSkills([])
+const learningSkills: Array<SkillConfig> = getSkills(['agenticCoding'])
 
 export default function Skills() {
   return (
