@@ -1,3 +1,4 @@
+import { Link } from '@tanstack/react-router'
 import { useState } from 'react'
 
 import {
@@ -80,7 +81,7 @@ export default function MobileMenu({ onContactOpen }: MobileMenuProps) {
               nativeButton={false}
               className="w-full"
               render={
-                <a href="/#" role="link" onClick={handleMobileLinkClick} />
+                <Link to="/" role="link" onClick={handleMobileLinkClick} />
               }
             >
               <HugeiconsIcon
@@ -95,8 +96,9 @@ export default function MobileMenu({ onContactOpen }: MobileMenuProps) {
               nativeButton={false}
               className="w-full"
               render={
-                <a
-                  href="/#projects"
+                <Link
+                  to="/"
+                  hash="projects"
                   role="link"
                   onClick={handleMobileLinkClick}
                 />
@@ -148,8 +150,8 @@ export default function MobileMenu({ onContactOpen }: MobileMenuProps) {
                       nativeButton={false}
                       className="w-full justify-center px-1"
                       render={
-                        <a
-                          href="/gallery/art"
+                        <Link
+                          to="/gallery/art"
                           role="link"
                           onClick={handleMobileLinkClick}
                         />
@@ -168,8 +170,8 @@ export default function MobileMenu({ onContactOpen }: MobileMenuProps) {
                       nativeButton={false}
                       className="w-full justify-center px-1"
                       render={
-                        <a
-                          href="/gallery/photos"
+                        <Link
+                          to="/gallery/photos"
                           role="link"
                           onClick={handleMobileLinkClick}
                         />
@@ -188,8 +190,8 @@ export default function MobileMenu({ onContactOpen }: MobileMenuProps) {
                       nativeButton={false}
                       className="w-full justify-center px-1"
                       render={
-                        <a
-                          href="/gallery/videos"
+                        <Link
+                          to="/gallery/videos"
                           role="link"
                           onClick={handleMobileLinkClick}
                         />

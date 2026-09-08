@@ -11,5 +11,15 @@ export const getRouter = () => {
     defaultPreloadStaleTime: 0,
   })
 
+  // Recheck on each navigation so anchor jumps and reduced motion stay instant.
+  router.subscribe('onBeforeLoad', ({ pathChanged }) => {
+    router.update({
+      defaultViewTransition:
+        pathChanged &&
+        typeof window !== 'undefined' &&
+        !window.matchMedia('(prefers-reduced-motion: reduce)').matches,
+    })
+  })
+
   return router
 }

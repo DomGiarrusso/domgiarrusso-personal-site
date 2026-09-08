@@ -1,3 +1,4 @@
+import { Link } from '@tanstack/react-router'
 import { useState } from 'react'
 import { HugeiconsIcon } from '@hugeicons/react'
 import {
@@ -43,7 +44,7 @@ export default function NavMenu({ isScrolled }: NavMenuProps) {
         <NavigationMenuList className="gap-1">
           <NavigationMenuItem>
             <NavigationMenuLink
-              href="/#"
+              render={<Link to="/" />}
               className={cn(
                 navigationMenuTriggerStyle(),
                 'border',
@@ -60,7 +61,7 @@ export default function NavMenu({ isScrolled }: NavMenuProps) {
           </NavigationMenuItem>
           <NavigationMenuItem>
             <NavigationMenuLink
-              href="/#projects"
+              render={<Link to="/" hash="projects" />}
               className={cn(
                 navigationMenuTriggerStyle(),
                 'border',

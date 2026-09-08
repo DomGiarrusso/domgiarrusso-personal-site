@@ -1,6 +1,6 @@
 import { ArrowLeft01Icon, LinkSquare02Icon } from '@hugeicons/core-free-icons'
 import { HugeiconsIcon } from '@hugeicons/react'
-import { createFileRoute, notFound } from '@tanstack/react-router'
+import { Link, createFileRoute, notFound } from '@tanstack/react-router'
 import type { SkillConfig } from '@/components/home/skills-card'
 import { GitHubIcon } from '@/components/icons/tools-icons'
 import ArticleContent from '@/components/content/article-content'
@@ -48,8 +48,9 @@ function ProjectPage() {
           aria-label="Project navigation"
           className="flex flex-col gap-2 border-b border-primary-alt pb-3 sm:flex-row sm:flex-wrap sm:items-center sm:justify-between sm:gap-3"
         >
-          <a
-            href="/#projects"
+          <Link
+            to="/"
+            hash="projects"
             className={cn(
               buttonVariants({ variant: 'outline' }),
               'w-full cursor-pointer sm:w-auto',
@@ -61,7 +62,7 @@ function ProjectPage() {
               className="size-4"
             />
             Back to projects
-          </a>
+          </Link>
 
           {(project.repositoryUrl || project.externalUrl) && (
             <div

@@ -1,3 +1,4 @@
+import { Link } from '@tanstack/react-router'
 import { useEffect, useState } from 'react'
 
 import NavMenu from '@/components/nav/nav-menu'
@@ -26,8 +27,8 @@ export default function Navbar() {
     >
       <div className="flex w-full max-w-6xl items-center justify-between px-4 py-3 text-md sm:px-6 lg:px-8">
         <div className="flex w-full items-center gap-3">
-          <a
-            href="/"
+          <Link
+            to="/"
             className="flex items-center gap-2 text-base font-bold sm:text-lg md:text-2xl"
           >
             <img
@@ -41,7 +42,7 @@ export default function Navbar() {
               className="hidden size-9 shrink-0 dark:block"
             />
             <span>Dominic Giarrusso</span>
-          </a>
+          </Link>
         </div>
         <div className="flex w-full flex-row-reverse items-center gap-3">
           <NavMenu isScrolled={isScrolled} />

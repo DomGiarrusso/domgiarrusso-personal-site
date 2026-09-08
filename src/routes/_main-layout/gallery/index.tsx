@@ -1,4 +1,4 @@
-import { createFileRoute } from '@tanstack/react-router'
+import { Link, createFileRoute } from '@tanstack/react-router'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { getArtImages, getPhotoImages } from '@/content/gallery-images'
 import { getVideoPreviews } from '@/content/videos'
@@ -88,7 +88,7 @@ function ShowcaseCard({
   imageLabel,
 }: ShowcaseCardProps) {
   return (
-    <a href={href} className="group block h-full">
+    <Link to={href} className="group block h-full">
       <Card className="h-full gap-5 border-border/70 bg-card/80 pt-4 transition-all duration-300 hover:-translate-y-1 hover:shadow-lg">
         <CardHeader className="space-y-3 px-4">
           <PreviewTile
@@ -115,7 +115,7 @@ function ShowcaseCard({
           </p>
         </CardContent>
       </Card>
-    </a>
+    </Link>
   )
 }
 
