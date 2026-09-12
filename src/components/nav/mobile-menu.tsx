@@ -54,9 +54,11 @@ export default function MobileMenu({ onContactOpen }: MobileMenuProps) {
         onOpenChange={handleMobileMenuOpenChange}
         direction="bottom"
       >
-        <DrawerTrigger render={<Button variant="outline" size="sm" />}>
-          <HugeiconsIcon icon={Menu01Icon} strokeWidth={2} className="size-4" />
-          Menu
+        <DrawerTrigger
+          aria-label="Open menu"
+          render={<Button variant="outline" size="icon-lg" />}
+        >
+          <HugeiconsIcon icon={Menu01Icon} className="size-5" strokeWidth={2} />
         </DrawerTrigger>
         <DrawerContent>
           <DrawerHeader className="flex-row items-center justify-between border-b pb-4 text-left">
@@ -71,7 +73,7 @@ export default function MobileMenu({ onContactOpen }: MobileMenuProps) {
                 alt=""
                 className="hidden size-8 shrink-0 dark:block"
               />
-              <span>Dominic Giarrusso</span>
+              <span className="whitespace-nowrap">Dominic Giarrusso</span>
             </DrawerTitle>
             <ThemeToggle />
           </DrawerHeader>
@@ -223,12 +225,12 @@ export default function MobileMenu({ onContactOpen }: MobileMenuProps) {
               Contact
             </Button>
             <DrawerClose
-              render={<Button variant="destructive" className="w-full" />}
+              render={<Button variant="outline" className="w-full" />}
             >
               <HugeiconsIcon
                 icon={Cancel01Icon}
                 strokeWidth={2}
-                className="size-4"
+                data-icon="inline-start"
               />
               Close menu
             </DrawerClose>

@@ -26,7 +26,7 @@ export default function Navbar() {
       className={`flex h-16 justify-center border-t bg-background/80 text-lg ring ring-foreground/10 backdrop-blur-md transition-[background-color,border-color,box-shadow] duration-300 md:border-t-0 md:border-b dark:bg-background/90 ${navSurfaceClass}`}
     >
       <div className="flex w-full max-w-6xl items-center justify-between px-4 py-3 text-md sm:px-6 lg:px-8">
-        <div className="flex w-full items-center gap-3">
+        <div className="flex min-w-0 flex-1 items-center gap-3">
           <Link
             to="/"
             className="flex items-center gap-2 text-base font-bold sm:text-lg md:text-2xl"
@@ -41,10 +41,10 @@ export default function Navbar() {
               alt=""
               className="hidden size-9 shrink-0 dark:block"
             />
-            <span>Dominic Giarrusso</span>
+            <span className="whitespace-nowrap">Dominic Giarrusso</span>
           </Link>
         </div>
-        <div className="flex w-full flex-row-reverse items-center gap-3">
+        <div className="flex shrink-0 flex-row-reverse items-center gap-3">
           <NavMenu isScrolled={isScrolled} />
         </div>
       </div>
