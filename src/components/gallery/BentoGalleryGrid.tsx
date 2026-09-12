@@ -1,3 +1,4 @@
+import { Reveal } from '@/components/motion/reveal'
 import { cn } from '@/lib/utils'
 
 export type BentoVariant = 'square' | 'wide' | 'tall' | 'big'
@@ -23,6 +24,8 @@ type LayoutItem = BentoItem & {
   colSpan: number
   rowSpan: number
 }
+
+type HorizontalOrigin = 'left' | 'bottom' | 'right'
 
 /**
  * Gets the footprint of a variant (colSpan, rowSpan)
@@ -81,12 +84,75 @@ function getSpanClasses(colSpan: number, rowSpan: number): string {
   return classes.join(' ')
 }
 
+function getHorizontalOrigins(
+  items: Array<LayoutItem>,
+  columnCount: number,
+): Array<HorizontalOrigin> {
+  const occupiedCells = new Set<string>()
+  let cursorRow = 0
+  let cursorColumn = 0
+
+  return items.map(({ colSpan, rowSpan }) => {
+    const responsiveColSpan = Math.min(colSpan, columnCount)
+
+    const canPlaceAtCursor = () => {
+      if (cursorColumn + responsiveColSpan > columnCount) return false
+
+      for (let row = cursorRow; row < cursorRow + rowSpan; row += 1) {
+        for (
+          let column = cursorColumn;
+          column < cursorColumn + responsiveColSpan;
+          column += 1
+        ) {
+          if (occupiedCells.has(`${row}:${column}`)) return false
+        }
+      }
+
+      return true
+    }
+
+    while (!canPlaceAtCursor()) {
+      cursorColumn += 1
+      if (cursorColumn >= columnCount) {
+        cursorRow += 1
+        cursorColumn = 0
+      }
+    }
+
+    for (let row = cursorRow; row < cursorRow + rowSpan; row += 1) {
+      for (
+        let column = cursorColumn;
+        column < cursorColumn + responsiveColSpan;
+        column += 1
+      ) {
+        occupiedCells.add(`${row}:${column}`)
+      }
+    }
+
+    const touchesLeftEdge = cursorColumn === 0
+    const touchesRightEdge = cursorColumn + responsiveColSpan === columnCount
+
+    if (touchesLeftEdge && !touchesRightEdge) return 'left'
+    if (touchesRightEdge && !touchesLeftEdge) return 'right'
+    return 'bottom'
+  })
+}
+
+function getResponsiveOrigins(layout: Array<LayoutItem>) {
+  return {
+    medium: getHorizontalOrigins(layout, 2),
+    large: getHorizontalOrigins(layout, 3),
+  }
+}
+
 export function BentoGalleryGrid({
   items,
   onItemClick,
   className,
 }: BentoGalleryGridProps) {
   const layout = getLayoutItems(items)
+  const origins = getResponsiveOrigins(layout)
+
   return (
     <div className="@container">
       <div
@@ -100,36 +166,40 @@ export function BentoGalleryGrid({
           const ariaLabel = item.title ?? item.alt
 
           return (
-            <button
+            <Reveal
               key={item.id}
-              id={`bento-item-${item.id}`}
-              type="button"
-              onClick={() => onItemClick?.(item, index)}
-              aria-label={ariaLabel}
-              className={cn(
-                'group relative h-full w-full min-w-0 cursor-pointer overflow-hidden rounded-xl border border-border bg-card shadow-xs ring-1 ring-foreground/10 transition-[color,background-color,border-color,box-shadow] duration-300 hover:border-primary-alt/60 hover:bg-accent hover:ring-primary-alt/40 hover:shadow-[0_0_24px_color-mix(in_oklab,var(--primary-alt)_40%,transparent)] focus-visible:border-primary-alt/60 focus-visible:ring-2 focus-visible:ring-primary-alt/40 focus-visible:ring-offset-2 focus-visible:ring-offset-background focus-visible:shadow-[0_0_24px_color-mix(in_oklab,var(--primary-alt)_40%,transparent)] focus-visible:outline-none',
-                spanClasses,
-              )}
+              className={cn('gallery-reveal h-full min-w-0', spanClasses)}
+              data-md-origin={origins.medium[index] ?? 'bottom'}
+              data-lg-origin={origins.large[index] ?? 'bottom'}
+              origin="bottom"
             >
-              <div className="relative h-full w-full">
-                <img
-                  src={item.thumbnailUrl}
-                  alt={item.alt}
-                  className="absolute inset-0 h-full w-full object-cover"
-                  loading="lazy"
-                  decoding="async"
-                />
-                {item.title && (
-                  <div className="absolute inset-0 bg-[radial-gradient(ellipse_100%_120%_at_50%_-30%,transparent_0%,transparent_95%,var(--primary-alt-600)_108%),linear-gradient(to_top,rgb(0_0_0/85%)_0%,rgb(0_0_0/45%)_30%,transparent_65%)] opacity-0 transition-opacity duration-500 ease-out group-hover:opacity-100 group-focus-visible:opacity-100">
-                    <div className="absolute right-0 bottom-0 left-0 p-4">
-                      <p className="text-sm font-medium text-white drop-shadow-md">
-                        {item.title}
-                      </p>
+              <button
+                id={`bento-item-${item.id}`}
+                type="button"
+                onClick={() => onItemClick?.(item, index)}
+                aria-label={ariaLabel}
+                className="group relative h-full w-full min-w-0 cursor-pointer overflow-hidden rounded-xl border border-border bg-card shadow-xs ring-1 ring-foreground/10 transition-[color,background-color,border-color,box-shadow] duration-300 hover:border-primary-alt/60 hover:bg-accent hover:ring-primary-alt/40 hover:shadow-[0_0_24px_color-mix(in_oklab,var(--primary-alt)_40%,transparent)] focus-visible:border-primary-alt/60 focus-visible:ring-2 focus-visible:ring-primary-alt/40 focus-visible:ring-offset-2 focus-visible:ring-offset-background focus-visible:shadow-[0_0_24px_color-mix(in_oklab,var(--primary-alt)_40%,transparent)] focus-visible:outline-none"
+              >
+                <div className="relative h-full w-full">
+                  <img
+                    src={item.thumbnailUrl}
+                    alt={item.alt}
+                    className="absolute inset-0 h-full w-full object-cover"
+                    loading="lazy"
+                    decoding="async"
+                  />
+                  {item.title && (
+                    <div className="absolute inset-0 bg-[radial-gradient(ellipse_100%_120%_at_50%_-30%,transparent_0%,transparent_95%,var(--primary-alt-600)_108%),linear-gradient(to_top,rgb(0_0_0/85%)_0%,rgb(0_0_0/45%)_30%,transparent_65%)] opacity-0 transition-opacity duration-500 ease-out group-hover:opacity-100 group-focus-visible:opacity-100">
+                      <div className="absolute right-0 bottom-0 left-0 p-4">
+                        <p className="text-sm font-medium text-white drop-shadow-md">
+                          {item.title}
+                        </p>
+                      </div>
                     </div>
-                  </div>
-                )}
-              </div>
-            </button>
+                  )}
+                </div>
+              </button>
+            </Reveal>
           )
         })}
       </div>

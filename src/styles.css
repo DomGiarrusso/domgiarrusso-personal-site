@@ -465,6 +465,35 @@
   filter: blur(0);
 }
 
+@media (min-width: 48rem) {
+  .gallery-reveal[data-md-origin='left'] {
+    --reveal-x: -1.5rem;
+    --reveal-y: 0;
+  }
+
+  .gallery-reveal[data-md-origin='right'] {
+    --reveal-x: 1.5rem;
+    --reveal-y: 0;
+  }
+}
+
+@media (min-width: 64rem) {
+  .gallery-reveal[data-lg-origin='left'] {
+    --reveal-x: -1.5rem;
+    --reveal-y: 0;
+  }
+
+  .gallery-reveal[data-lg-origin='bottom'] {
+    --reveal-x: 0;
+    --reveal-y: 1.5rem;
+  }
+
+  .gallery-reveal[data-lg-origin='right'] {
+    --reveal-x: 1.5rem;
+    --reveal-y: 0;
+  }
+}
+
 .hero-intro {
   animation: hero-enter 750ms cubic-bezier(0.22, 1, 0.36, 1) both;
 }
