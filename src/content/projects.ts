@@ -5,7 +5,7 @@ import LegacyPortfolioContent from '../../content/projects/legacy-portfolio.mdx'
 import TaskTimerContent from '../../content/projects/task-timer.mdx'
 import YetiMouthGamesWebsiteContent from '../../content/projects/yeti-mouth-games-website.mdx'
 import type { MDXContent } from 'mdx/types'
-import type { Project, ProjectSummary } from './types'
+import type { Project, ProjectSummary } from '@/content/types'
 
 const projects: Array<Project> = [
   {

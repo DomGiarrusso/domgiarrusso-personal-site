@@ -3,7 +3,7 @@
 import { afterEach, describe, expect, it, vi } from 'vitest'
 import { cleanup, render, waitFor } from '@testing-library/react'
 
-import { TurnstileWidget } from './contact-dialog'
+import { TurnstileWidget } from '@/components/ui/contact-dialog'
 
 afterEach(() => {
   cleanup()

@@ -1,4 +1,4 @@
-import type { Video } from './types'
+import type { Video } from '@/content/types'
 
 const videos: Array<Video> = [
   {

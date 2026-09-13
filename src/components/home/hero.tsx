@@ -6,7 +6,7 @@ export default function Hero() {
     <section className="relative isolate mt-16 flex flex-col items-center justify-center sm:mt-20 md:mt-24">
       <div className="relative flex w-full max-w-5xl flex-col items-center justify-center gap-6 text-center md:flex-row md:gap-10 md:text-left">
         <div className="hero-portrait-wrap hero-intro hero-intro-portrait relative shrink-0">
-          <div className="hero-portrait size-[12.5rem] overflow-hidden rounded-full bg-linear-to-br from-primary-alt to-primary-alt-700 p-px sm:size-[16.25rem] lg:size-80">
+          <div className="hero-portrait size-50 overflow-hidden rounded-full bg-linear-to-br from-primary-alt to-primary-alt-700 p-px sm:size-65 lg:size-80">
             <div className="size-full overflow-hidden rounded-full bg-background">
               <img
                 src="/images/profile.webp"

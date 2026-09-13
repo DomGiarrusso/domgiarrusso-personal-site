@@ -9,8 +9,8 @@ import {
   waitFor,
 } from '@testing-library/react'
 
-import ContactDialog from './contact-dialog'
-import { Dialog } from './dialog'
+import ContactDialog from '@/components/ui/contact-dialog'
+import { Dialog } from '@/components/ui/dialog'
 
 function renderContactDialog() {
   render(

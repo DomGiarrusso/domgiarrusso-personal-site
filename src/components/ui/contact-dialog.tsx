@@ -10,22 +10,27 @@ import {
 } from '@hugeicons/core-free-icons'
 import { HugeiconsIcon } from '@hugeicons/react'
 
-import { Button } from './button'
+import type { FormEvent } from 'react'
+import type { ContactLink } from '@/content/contact'
+import { Button } from '@/components/ui/button'
 import {
   DialogContent,
   DialogDescription,
   DialogHeader,
   DialogTitle,
-} from './dialog'
-import { Field, FieldError, FieldGroup, FieldLabel } from './field'
+} from '@/components/ui/dialog'
+import {
+  Field,
+  FieldError,
+  FieldGroup,
+  FieldLabel,
+} from '@/components/ui/field'
 import {
   InputGroup,
   InputGroupAddon,
   InputGroupInput,
   InputGroupTextarea,
-} from './input-group'
-import type { FormEvent } from 'react'
-import type { ContactLink } from '@/content/contact'
+} from '@/components/ui/input-group'
 import { GitHubIcon, LinkedInIcon } from '@/components/icons/tools-icons'
 import { contactConfig } from '@/content/contact'
 
@@ -283,7 +288,7 @@ export default function ContactDialog() {
   return (
     <DialogContent className="max-h-[calc(100dvh-2rem)] gap-0 overflow-y-auto p-0 sm:max-w-3xl">
       <div className="grid md:grid-cols-[minmax(0,0.8fr)_minmax(0,1.2fr)]">
-        <aside className="relative flex flex-col overflow-hidden border-b border-primary-alt bg-card p-6 md:min-h-[36rem] md:border-r md:border-b-0 md:p-8">
+        <aside className="relative flex flex-col overflow-hidden border-b border-primary-alt bg-card p-6 md:min-h-144 md:border-r md:border-b-0 md:p-8">
           <div className="flex flex-1 flex-col">
             <div className="text-center">
               <div className="relative mx-auto w-fit">

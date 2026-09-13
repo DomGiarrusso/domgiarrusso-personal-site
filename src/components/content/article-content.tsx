@@ -1,7 +1,7 @@
-import Callout from './callout'
-import CodeBlock from './code-block'
 import type { ComponentProps } from 'react'
 import type { MDXComponents, MDXContent } from 'mdx/types'
+import Callout from '@/components/content/callout'
+import CodeBlock from '@/components/content/code-block'
 
 type ArticleContentProps = {
   content: MDXContent

@@ -1,5 +1,5 @@
-import ProjectCard from '../ui/project-card'
 import type { ProjectSummary } from '@/content/types'
+import ProjectCard from '@/components/ui/project-card'
 import { Reveal } from '@/components/motion/reveal'
 
 type Props = {
@@ -15,7 +15,7 @@ export default function Projects({ projects }: Props) {
       <Reveal>
         <h3 className="text-center text-4xl font-bold sm:text-5xl">Projects</h3>
       </Reveal>
-      <div className="mt-8 grid min-h-[400px] w-full grid-cols-1 gap-6 md:grid-cols-2 xl:grid-cols-3">
+      <div className="mt-8 grid min-h-100 w-full grid-cols-1 gap-6 md:grid-cols-2 xl:grid-cols-3">
         {projects.map((project, index) => (
           <Reveal
             key={project.slug}

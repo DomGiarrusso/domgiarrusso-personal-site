@@ -9,7 +9,7 @@ import {
   createRouter,
 } from '@tanstack/react-router'
 
-import NavMenu from './nav-menu'
+import NavMenu from '@/components/nav/nav-menu'
 
 afterEach(cleanup)
 

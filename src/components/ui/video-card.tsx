@@ -1,4 +1,4 @@
-import { AspectRatio } from './aspect-ratio'
+import { AspectRatio } from '@/components/ui/aspect-ratio'
 import {
   Card,
   CardContent,

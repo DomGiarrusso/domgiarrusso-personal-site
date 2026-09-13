@@ -15,7 +15,7 @@ import Slideshow from 'yet-another-react-lightbox/plugins/slideshow'
 import Thumbnails from 'yet-another-react-lightbox/plugins/thumbnails'
 import Zoom from 'yet-another-react-lightbox/plugins/zoom'
 import type { SlideImage } from 'yet-another-react-lightbox'
-import type { BentoItem } from './BentoGalleryGrid'
+import type { BentoItem } from '@/components/gallery/bento-gallery-grid'
 
 export type GalleryLightboxProps = {
   items: Array<BentoItem>
@@ -148,7 +148,6 @@ export function GalleryLightbox({
             strokeWidth={2}
           />
         ),
-        // optional: iconSlideshowPlay, iconSlideshowPause, iconThumbnailsVisible, etc.
       }}
       on={{
         view: ({ index: nextIndex }) => onIndexChange(nextIndex),

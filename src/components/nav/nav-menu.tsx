@@ -11,8 +11,8 @@ import {
   Video01Icon,
 } from '@hugeicons/core-free-icons'
 
-import NavListItem from './nav-list-item'
-import MobileMenu from './mobile-menu'
+import MobileMenu from '@/components/nav/mobile-menu'
+import NavListItem from '@/components/nav/nav-list-item'
 import ContactDialog from '@/components/ui/contact-dialog'
 import { Dialog, DialogTrigger } from '@/components/ui/dialog'
 import { Separator } from '@/components/ui/separator'
@@ -90,7 +90,7 @@ export default function NavMenu({ isScrolled }: NavMenuProps) {
               </span>
             </NavigationMenuTrigger>
             <NavigationMenuContent className="justify-center lg:flex">
-              <ul className="grid gap-3 p-2 lg:w-[250px] xl:w-[320px]">
+              <ul className="grid gap-3 p-2 lg:w-62.5 xl:w-[320px]">
                 <NavListItem
                   href="/gallery/art"
                   title="Art"

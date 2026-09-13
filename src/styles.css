@@ -722,7 +722,7 @@
 }
 
 .prose :where(th, td):not(:where(.not-prose, .not-prose *)) {
-  @apply border border-foreground/15 px-[13px] pt-[6px] pb-[5px] align-middle;
+  @apply border border-foreground/15 px-3.25 pt-1.5 pb-1.25 align-middle;
 }
 
 .prose :where(ul.contains-task-list):not(:where(.not-prose, .not-prose *)) {

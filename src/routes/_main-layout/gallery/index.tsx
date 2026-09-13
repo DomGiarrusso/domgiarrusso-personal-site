@@ -94,7 +94,7 @@ function ShowcaseCard({
           <PreviewTile
             src={imageSrc}
             alt={imageAlt}
-            className="aspect-[16/10]"
+            className="aspect-16/10"
             label={imageLabel}
           />
           <div className="text-xs font-medium uppercase tracking-[0.18em] text-muted-foreground">

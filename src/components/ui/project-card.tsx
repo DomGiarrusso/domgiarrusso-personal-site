@@ -1,6 +1,6 @@
 import { Link } from '@tanstack/react-router'
-import { AspectRatio } from './aspect-ratio'
 import type { ProjectSummary } from '@/content/types'
+import { AspectRatio } from '@/components/ui/aspect-ratio'
 import {
   Card,
   CardContent,

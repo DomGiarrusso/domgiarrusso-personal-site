@@ -23,7 +23,7 @@ function VideosPage() {
   const { videos } = Route.useLoaderData()
 
   return (
-    <div className="container mx-auto px-4 py-12 space-y-8">
+    <div className="container mx-auto space-y-8 px-4 py-12">
       <Reveal>
         <div className="space-y-4 text-center">
           <h1 className="text-4xl font-bold">Videos</h1>

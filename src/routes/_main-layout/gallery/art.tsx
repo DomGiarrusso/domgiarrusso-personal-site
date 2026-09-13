@@ -1,5 +1,5 @@
 import { createFileRoute } from '@tanstack/react-router'
-import { BentoGalleryWithLightbox } from '@/components/gallery/BentoGalleryWithLightbox'
+import { BentoGalleryWithLightbox } from '@/components/gallery/bento-gallery-with-lightbox'
 import { getArtImages } from '@/content/gallery-images'
 
 type ArtSearch = {
@@ -20,15 +20,15 @@ function ArtPage() {
   const navigate = Route.useNavigate()
 
   return (
-    <div className="container mx-auto px-4 py-12 space-y-8">
-      <div className="space-y-4 text-center ">
+    <div className="container mx-auto space-y-8 px-4 py-12">
+      <div className="space-y-4 text-center">
         <h1 className="text-4xl font-bold">Art</h1>
         <p className="text-muted-foreground">
           A selection of work. Click any piece to view in the lightbox.
         </p>
       </div>
 
-      <div className="max-w-7xl mx-auto">
+      <div className="mx-auto max-w-7xl">
         <BentoGalleryWithLightbox
           items={artImages}
           openItemId={search.item ?? undefined}

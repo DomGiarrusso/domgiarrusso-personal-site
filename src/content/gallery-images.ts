@@ -1,4 +1,4 @@
-import type { GalleryImage } from './types'
+import type { GalleryImage } from '@/content/types'
 
 const galleryImageOrigin = 'https://images.dominicgiarrusso.com'
 

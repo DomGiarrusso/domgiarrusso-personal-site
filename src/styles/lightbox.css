@@ -1,8 +1,8 @@
 @import 'yet-another-react-lightbox/styles.css';
 @import 'yet-another-react-lightbox/plugins/captions.css';
 @import 'yet-another-react-lightbox/plugins/counter.css';
-@import 'yet-another-react-lightbox/styles.css';
 @import 'yet-another-react-lightbox/plugins/thumbnails.css';
+
 /* Pragmatic shadcn-ish overrides for yet-another-react-lightbox (YARL) */
 .yarl__root {
   --yarl__color_backdrop: hsl(var(--background) / 0.1);

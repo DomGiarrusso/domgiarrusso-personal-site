@@ -104,7 +104,7 @@ function DrawerOverlay({
       data-slot="drawer-overlay"
       data-overlay-visible={visible ? 'true' : 'false'}
       className={cn(
-        'fixed inset-0 z-50 bg-black/20 transition-[opacity,backdrop-filter] duration-200 ease-[var(--theme-transition-easing)] supports-backdrop-filter:backdrop-blur-xs',
+        'fixed inset-0 z-50 bg-black/20 transition-[opacity,backdrop-filter] duration-200 ease-(--theme-transition-easing) supports-backdrop-filter:backdrop-blur-xs',
         className,
       )}
       {...props}
@@ -153,7 +153,7 @@ function DrawerContent({
           data-slot="drawer-content"
           data-direction={resolvedDirection}
           className={cn(
-            'pointer-events-none fixed inset-0 z-50 flex transition-[transform] duration-200 ease-[var(--theme-transition-easing)] outline-none',
+            'pointer-events-none fixed inset-0 z-50 flex transition-[transform] duration-200 ease-(--theme-transition-easing) outline-none',
             resolvedDirection === 'bottom' && 'items-end justify-center',
             resolvedDirection === 'top' && 'items-start justify-center',
             resolvedDirection === 'right' && 'items-stretch justify-end',
@@ -171,9 +171,9 @@ function DrawerContent({
               resolvedDirection === 'top' &&
                 "max-h-[calc(100vh-1rem)] rounded-b-2xl border-t-0 before:absolute before:-left-px before:-right-px before:bottom-[calc(100%-1px)] before:h-dvh before:bg-background before:content-['']",
               resolvedDirection === 'right' &&
-                "h-full max-w-md border-r-0 sm:max-w-lg after:absolute after:bottom-[-1px] after:left-[calc(100%-1px)] after:top-[-1px] after:w-dvw after:bg-background after:content-['']",
+                "h-full max-w-md border-r-0 sm:max-w-lg after:absolute after:-bottom-px after:left-[calc(100%-1px)] after:-top-px after:w-dvw after:bg-background after:content-['']",
               resolvedDirection === 'left' &&
-                "h-full max-w-md border-l-0 sm:max-w-lg before:absolute before:bottom-[-1px] before:right-[calc(100%-1px)] before:top-[-1px] before:w-dvw before:bg-background before:content-['']",
+                "h-full max-w-md border-l-0 sm:max-w-lg before:absolute before:-bottom-px before:right-[calc(100%-1px)] before:-top-px before:w-dvw before:bg-background before:content-['']",
               className,
             )}
           >

@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react'
-import type { BentoItem } from '@/components/gallery/BentoGalleryGrid'
+import type { BentoItem } from '@/components/gallery/bento-gallery-grid'
 
 function useStableCallback<T extends (...args: Array<any>) => void>(fn: T): T {
   const ref = useRef(fn)

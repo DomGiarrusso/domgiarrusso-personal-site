@@ -47,7 +47,8 @@ export default function Footer() {
                 <span>Dominic Giarrusso</span>
               </Link>
               <p className="text-sm text-muted-foreground">
-                Fullstack developer based in Northern Virginia. I build stuff, tinker with stuff, and learn stuff.
+                Fullstack developer based in Northern Virginia. I build stuff,
+                tinker with stuff, and learn stuff.
               </p>
               <DialogTrigger render={<Button size="sm" />}>
                 <HugeiconsIcon
