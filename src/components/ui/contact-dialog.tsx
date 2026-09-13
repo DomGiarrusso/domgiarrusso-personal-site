@@ -38,7 +38,7 @@ type TurnstileApi = {
       appearance: 'interaction-only'
       callback: (token: string) => void
       'expired-callback': () => void
-      'error-callback': () => void
+      'error-callback': (errorCode: string) => boolean
     },
   ) => string
   remove: (widgetId: string) => void
@@ -112,7 +112,7 @@ function loadTurnstile() {
   return turnstileLoader
 }
 
-function TurnstileWidget({
+export function TurnstileWidget({
   siteKey,
   resetKey,
   onTokenChange,
@@ -152,6 +152,7 @@ function TurnstileWidget({
           'error-callback': () => {
             onTokenChangeEvent(null)
             onErrorEvent('Verification failed to load. Please try again.')
+            return true
           },
         })
       })
