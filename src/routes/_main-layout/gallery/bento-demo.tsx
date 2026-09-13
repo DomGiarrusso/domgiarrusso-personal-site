@@ -225,5 +225,3 @@ function BentoDemoPage() {
     </div>
   )
 }
-
-export default BentoDemoPage

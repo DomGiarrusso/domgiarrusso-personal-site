@@ -14,7 +14,7 @@ export const Route = createFileRoute('/_main-layout/gallery/art')({
   component: ArtPage,
 })
 
-export default function ArtPage() {
+function ArtPage() {
   const { artImages } = Route.useLoaderData()
   const search = Route.useSearch()
   const navigate = Route.useNavigate()
