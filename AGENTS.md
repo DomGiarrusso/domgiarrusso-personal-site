@@ -32,7 +32,6 @@ Guidelines:
 - CSS: TailwindCSS
 - UI: shadcn/ui, Yet Another React Lightbox
 - Frontend/Edge: TanStack Start, React, TypeScript
-- Backend/DB: Supabase
 - Hosting: Cloudflare Workers
 
 ## General Working Rules
@@ -63,14 +62,6 @@ If unsure of what to pattern to follow. Prompt user back with options.
 - Keep the UI clean, responsive, and accessible
 - Preserve visual consistency across pages and sections
 
-## Data and Backend Rules
-
-- Use Supabase through shared utilities or service layers where practical
-- Avoid scattering direct database access across unrelated files
-- Keep secrets and sensitive values out of source files
-- Do not change database structure, policies, or auth-related logic unless
-  explicitly requested
-
 ## Cloudflare Workers Compatibility
 
 - Keep Cloudflare Workers runtime constraints in mind
@@ -97,7 +88,6 @@ Before finishing work:
 
 ## Safe Change Policy
 
-- Do not modify database schema, RLS policies, or auth logic unless explicitly requested
 - Do not change Cloudflare deployment or infrastructure configuration unless explicitly requested
 - Do not introduce new dependencies unless necessary
 - Do not refactor unrelated code
