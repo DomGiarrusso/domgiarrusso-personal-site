@@ -19,6 +19,7 @@ const coreSkills: Array<SkillConfig> = getSkills([
   'sql',
   'dotnet',
   'react',
+  'tanstackStart',
   'next',
   'tailwind',
   'vite',
@@ -66,7 +67,7 @@ const toolsAndPlatformsSkills: Array<SkillConfig> = getSkills([
   'godot',
 ])
 
-const learningSkills: Array<SkillConfig> = getSkills(['agenticCoding'])
+const learningSkills: Array<SkillConfig> = getSkills(['agenticCoding', 'figma'])
 
 export default function Skills() {
   return (

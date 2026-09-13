@@ -23,14 +23,7 @@ export function ThemeToggle() {
 
   return (
     <DropdownMenu>
-      <DropdownMenuTrigger
-        render={
-          <Button
-            variant="outline"
-            size="icon"
-          />
-        }
-      >
+      <DropdownMenuTrigger render={<Button variant="outline" size="icon" />}>
         <HugeiconsIcon
           icon={ComputerIcon}
           strokeWidth={2}
@@ -64,7 +57,7 @@ export function ThemeToggle() {
         />
         <span className="sr-only">Toggle theme</span>
       </DropdownMenuTrigger>
-      <DropdownMenuContent align="end">
+      <DropdownMenuContent align="end" className="min-w-40">
         <DropdownMenuRadioGroup value={theme} onValueChange={setTheme}>
           <DropdownMenuRadioItem value="system">
             <HugeiconsIcon icon={ComputerIcon} strokeWidth={2} />
@@ -76,7 +69,10 @@ export function ThemeToggle() {
           </DropdownMenuRadioItem>
           <DropdownMenuRadioItem value="dark">
             <HugeiconsIcon icon={MoonIcon} strokeWidth={2} />
-            Dark
+            <span className="flex flex-col items-start leading-tight">
+              <span>Dark</span>
+              <span className="text-muted-foreground text-xs">Recommended</span>
+            </span>
           </DropdownMenuRadioItem>
         </DropdownMenuRadioGroup>
       </DropdownMenuContent>

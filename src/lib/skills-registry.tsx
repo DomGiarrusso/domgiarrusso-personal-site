@@ -20,6 +20,7 @@ import {
   SQLServerIcon,
   SQLiteIcon,
   TailwindIcon,
+  TanStackStartIcon,
   ViteIcon,
 } from '@/components/icons/frameworks-icons'
 import {
@@ -41,6 +42,7 @@ import {
   CodexIcon,
   DBeaverIcon,
   DockerIcon,
+  FigmaIcon,
   GitHubIcon,
   GitIcon,
   GodotIcon,
@@ -77,6 +79,11 @@ export const skillsRegistry: Partial<Record<string, SkillConfig>> = {
     name: 'React',
     icon: <ReactIcon className="size-4" />,
     href: 'https://react.dev/',
+  },
+  tanstackStart: {
+    name: 'TanStack Start',
+    icon: <TanStackStartIcon className="size-4" />,
+    href: 'https://tanstack.com/start/latest',
   },
   next: {
     name: 'Next.js',
@@ -277,6 +284,11 @@ export const skillsRegistry: Partial<Record<string, SkillConfig>> = {
     name: 'Adobe',
     icon: <AdobeIcon className="size-4" />,
     href: 'https://www.adobe.com/',
+  },
+  figma: {
+    name: 'Figma',
+    icon: <FigmaIcon className="size-4" />,
+    href: 'https://www.figma.com/',
   },
   office: {
     name: 'Microsoft Office',
