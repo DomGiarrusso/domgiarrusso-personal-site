@@ -9,17 +9,54 @@ import type { Project, ProjectSummary } from '@/content/types'
 
 const projects: Array<Project> = [
   {
-    title: 'Current Portfolio Website',
+    title: 'My Personal Site',
     slug: 'current-portfolio',
     blurb:
-      'The current iteration of my portfolio, built with TanStack Start, React, TypeScript, and Tailwind CSS.',
-    thumbnailUrl: '/images/monogram/Monogram_DG_Blue.svg',
-    techStack: ['typescript', 'react', 'tailwind'],
+      'A personal site for sharing my projects, experience, and creative work, with room to grow as I add more.',
+    thumbnailUrl:
+      '/images/projects/current-portfolio/Personal_Site_Thumbnail.png',
+    techStack: [
+      'typescript',
+      'react',
+      'tanstackStart',
+      'tailwind',
+      'vite',
+      'markdown',
+    ],
     media: [
       {
-        id: 'current-portfolio-monogram',
-        src: '/images/monogram/Monogram_DG_Blue.svg',
-        alt: 'Dominic Giarrusso monogram',
+        id: 'current-portfolio-thumbnail',
+        src: '/images/projects/current-portfolio/Personal_Site_Thumbnail.png',
+        alt: 'Dominic Giarrusso portfolio wordmark on a dark blue background',
+        aspectRatio: 16 / 9,
+        fit: 'cover',
+      },
+      {
+        id: 'current-portfolio-home-light',
+        src: '/images/projects/current-portfolio/current-portfolio-home-light.webp',
+        alt: 'Home page of the current portfolio website in light mode',
+        aspectRatio: 16 / 9,
+        fit: 'contain',
+      },
+      {
+        id: 'current-portfolio-home-dark',
+        src: '/images/projects/current-portfolio/current-portfolio-home-dark.webp',
+        alt: 'Home page of the current portfolio website in dark mode',
+        aspectRatio: 16 / 9,
+        fit: 'contain',
+      },
+      {
+        id: 'current-portfolio-projects-light',
+        src: '/images/projects/current-portfolio/current-portfolio-projects-light.webp',
+        alt: 'Projects section of the current portfolio website in light mode',
+        aspectRatio: 16 / 9,
+        fit: 'contain',
+      },
+      {
+        id: 'current-portfolio-projects-dark',
+        src: '/images/projects/current-portfolio/current-portfolio-projects-dark.webp',
+        alt: 'Projects section of the current portfolio website in dark mode',
+        aspectRatio: 16 / 9,
         fit: 'contain',
       },
     ],

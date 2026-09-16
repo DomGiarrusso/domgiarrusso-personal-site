@@ -1,25 +1,30 @@
-## Case study in progress
+## Description
 
-This site is the current version of my portfolio. I am building it as a
-long-lived home for my work, with project content kept separate from the page
-components so both can change without turning every update into a redesign.
+My personal site is a home for my projects, experience, and creative work. Each
+project has its own page, with content kept separate from the shared page
+components. That makes it easier to add new work without rebuilding the same
+layout each time.
 
-## What is already here
+The site includes responsive layouts, light and dark themes, reusable UI
+components, syntax-highlighted code blocks, and media galleries.
 
-The project uses file-based routes and a shared project registry. Individual
-case studies live in MDX, while React components handle their common layout,
-technology badges, links, and media galleries.
+## Motivation
 
-The site also has responsive gallery pages, light and dark themes, reusable UI
-components, syntax-highlighted code blocks, and a Cloudflare Workers build.
+My previous portfolio was built with plain HTML, CSS, and JavaScript. It worked
+well for the time and gave me a valuable learning experience. I was proud of
+what I made. As the site grew, though, updating it became a pain. I was working
+from a single HTML file that had become quite long, and many sections repeated
+the same markup. Adding a project often meant copying and pasting HTML, then
+updating the related links and images by hand.
 
-## Built with
+I wanted to keep the control and lessons from that earlier site while making
+future changes easier. With project content separated from shared components, I
+can add another project or section without copying a whole block of markup. The
+site can keep growing over time instead of becoming harder to update.
 
-The application uses TanStack Start, React, TypeScript, Tailwind CSS, and
-shadcn/ui. Vite builds the client and server bundles for Cloudflare Workers.
+## Development
 
-<Callout title="More details to come">
-  This page is a placeholder while the site is still being built. The finished
-  case study will cover the design decisions, testing, deployment, and what I
-  learned while replacing the previous portfolio.
-</Callout>
+I built the site with TypeScript, React, TanStack Start, Tailwind CSS, Vite, and
+shadcn/ui. Project content lives in MDX, while shared React components handle
+layouts, links, technology badges, and media galleries. The site builds for
+Cloudflare Workers.
