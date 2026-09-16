@@ -33,7 +33,7 @@ export default function Navbar() {
         <div className="flex min-w-0 flex-1 items-center gap-3">
           <Link
             to="/"
-            className="flex items-center gap-2 text-base font-bold sm:text-lg md:text-2xl"
+            className="flex items-center gap-2 rounded-md text-base font-bold outline-none focus-visible:ring-[3px] focus-visible:ring-ring/50 sm:text-lg md:text-2xl"
           >
             <img
               src="/images/monogram/Monogram_DG_Blue.svg"

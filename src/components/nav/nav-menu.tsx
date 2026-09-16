@@ -151,7 +151,9 @@ export default function NavMenu({ isScrolled }: NavMenuProps) {
               </span>
             </DialogTrigger>
           </NavigationMenuItem>
-          <Separator orientation="vertical" className="mx-3 bg-primary-alt" />
+          <NavigationMenuItem aria-hidden="true" className="mx-3 flex">
+            <Separator orientation="vertical" className="bg-primary-alt" />
+          </NavigationMenuItem>
           <NavigationMenuItem>
             <ThemeToggle />
           </NavigationMenuItem>

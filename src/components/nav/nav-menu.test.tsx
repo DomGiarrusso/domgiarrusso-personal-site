@@ -14,6 +14,27 @@ import NavMenu from '@/components/nav/nav-menu'
 afterEach(cleanup)
 
 describe('NavMenu', () => {
+  it('uses list items for every desktop navigation list child', async () => {
+    const router = createRouter({
+      routeTree: createRootRoute({
+        component: () => <NavMenu isScrolled={false} />,
+      }),
+      history: createMemoryHistory({ initialEntries: ['/'] }),
+    })
+    await router.load()
+    const { container } = render(<RouterProvider router={router} />)
+    const navigationList = container.querySelector(
+      '[data-slot="navigation-menu-list"]',
+    )
+
+    expect(navigationList).not.toBeNull()
+    expect(
+      Array.from(navigationList!.children).every(
+        (child) => child.tagName === 'LI',
+      ),
+    ).toBe(true)
+  })
+
   it('opens the contact dialog from the mobile drawer', async () => {
     const router = createRouter({
       routeTree: createRootRoute({

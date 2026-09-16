@@ -88,8 +88,11 @@ function ShowcaseCard({
   imageLabel,
 }: ShowcaseCardProps) {
   return (
-    <Link to={href} className="group block h-full">
-      <Card className="h-full gap-5 border-border/70 bg-card/80 pt-4 transition-all duration-300 hover:-translate-y-1 hover:shadow-lg">
+    <Link
+      to={href}
+      className="group block h-full rounded-xl outline-none focus-visible:ring-[3px] focus-visible:ring-ring/50"
+    >
+      <Card className="h-full gap-5 border-border/70 bg-card/80 pt-4 transition-all duration-300 hover:-translate-y-1 hover:shadow-lg group-focus-visible:border-ring group-focus-visible:ring-ring/50">
         <CardHeader className="space-y-3 px-4">
           <PreviewTile
             src={imageSrc}

@@ -21,13 +21,14 @@ export default function DynamicSkillBadgeList({
   return (
     <ul className={cn('flex flex-wrap gap-1 gap-y-2', justifyClass, className)}>
       {skills.map((skill) => (
-        <SkillBadge
-          variant="secondary"
-          key={skill.name}
-          icon={skill.icon}
-          skill={skill.name}
-          href={skill.href}
-        />
+        <li key={skill.name} className="flex">
+          <SkillBadge
+            variant="secondary"
+            icon={skill.icon}
+            skill={skill.name}
+            href={skill.href}
+          />
+        </li>
       ))}
     </ul>
   )

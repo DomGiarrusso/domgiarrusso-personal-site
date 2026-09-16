@@ -32,7 +32,7 @@ export default function Footer() {
             <div className="flex max-w-md flex-col items-start gap-3">
               <Link
                 to="/"
-                className="flex items-center gap-2 text-xl font-bold"
+                className="flex items-center gap-2 rounded-md text-xl font-bold outline-none focus-visible:ring-[3px] focus-visible:ring-ring/50"
               >
                 <img
                   src="/images/monogram/Monogram_DG_Blue.svg"
