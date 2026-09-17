@@ -2,6 +2,7 @@ import { Link, createFileRoute } from '@tanstack/react-router'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { getArtImages, getPhotoImages } from '@/content/gallery-images'
 import { getVideoPreviews } from '@/content/videos'
+import { createPageMetadata } from '@/lib/metadata'
 import { cn } from '@/lib/utils'
 
 export const Route = createFileRoute('/_main-layout/gallery/')({
@@ -10,6 +11,13 @@ export const Route = createFileRoute('/_main-layout/gallery/')({
     photoPreviews: getPhotoImages().slice(0, 3),
     videoPreviews: getVideoPreviews(),
   }),
+  head: () =>
+    createPageMetadata({
+      title: 'Gallery',
+      description:
+        'Browse art, photography, and video work by Dominic Giarrusso.',
+      path: '/gallery',
+    }),
   component: GalleryPage,
 })
 

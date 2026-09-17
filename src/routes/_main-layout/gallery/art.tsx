@@ -1,6 +1,7 @@
 import { createFileRoute } from '@tanstack/react-router'
 import { BentoGalleryWithLightbox } from '@/components/gallery/bento-gallery-with-lightbox'
 import { getArtImages } from '@/content/gallery-images'
+import { createPageMetadata } from '@/lib/metadata'
 
 type ArtSearch = {
   item?: string
@@ -11,6 +12,13 @@ export const Route = createFileRoute('/_main-layout/gallery/art')({
     item: typeof search.item === 'string' ? search.item : undefined,
   }),
   loader: () => ({ artImages: getArtImages() }),
+  head: () =>
+    createPageMetadata({
+      title: 'Art',
+      description:
+        'Browse illustrations, sketches, 3D renders, and other artwork by Dominic Giarrusso.',
+      path: '/gallery/art',
+    }),
   component: ArtPage,
 })
 

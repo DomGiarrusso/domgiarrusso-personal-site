@@ -3,9 +3,17 @@ import type { Video } from '@/content/types'
 import { Reveal } from '@/components/motion/reveal'
 import VideoCard from '@/components/ui/video-card'
 import { getVideos } from '@/content/videos'
+import { createPageMetadata } from '@/lib/metadata'
 
 export const Route = createFileRoute('/_main-layout/gallery/videos')({
   loader: () => ({ videos: getVideos() }),
+  head: () =>
+    createPageMetadata({
+      title: 'Videos',
+      description:
+        'Watch video projects by Dominic Giarrusso about game development, design, and documentary subjects.',
+      path: '/gallery/videos',
+    }),
   component: VideosPage,
 })
 

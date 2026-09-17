@@ -9,6 +9,7 @@ import { buttonVariants } from '@/components/ui/button'
 import { Card, CardContent } from '@/components/ui/card'
 import DynamicSkillBadgeList from '@/components/ui/dynamic-skill-badge-list'
 import { getProjectBySlug, getProjectContentBySlug } from '@/content/projects'
+import { createPageMetadata } from '@/lib/metadata'
 import { getSkills } from '@/lib/skills-registry'
 import { cn } from '@/lib/utils'
 
@@ -19,6 +20,16 @@ export const Route = createFileRoute('/_main-layout/projects/$projectname')({
     if (!project || !content) throw notFound()
     return { project }
   },
+  head: ({ loaderData }) =>
+    loaderData
+      ? createPageMetadata({
+          title: loaderData.project.title,
+          description: loaderData.project.blurb,
+          path: `/projects/${loaderData.project.slug}`,
+          imagePath: loaderData.project.thumbnailUrl,
+          imageAlt: `${loaderData.project.title} project thumbnail`,
+        })
+      : {},
   component: ProjectPage,
 })
 
