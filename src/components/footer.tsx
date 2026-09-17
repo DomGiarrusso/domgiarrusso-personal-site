@@ -120,7 +120,13 @@ export default function Footer() {
         <div className="mx-auto w-full max-w-6xl px-4 sm:px-6 lg:px-8">
           <div className="flex flex-wrap items-center justify-between gap-x-4 gap-y-1 py-3 text-sm text-muted-foreground">
             <p>&copy; {new Date().getFullYear()} Dominic Giarrusso</p>
-            <p>Built with TanStack Start.</p>
+            <Link
+              to="/projects/$projectname"
+              params={{ projectname: 'current-portfolio' }}
+              className="underline-offset-4 hover:text-foreground hover:underline"
+            >
+              Built with ...
+            </Link>
           </div>
         </div>
       </footer>
