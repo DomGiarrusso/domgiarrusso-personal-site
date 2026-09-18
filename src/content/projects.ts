@@ -60,6 +60,8 @@ const projects: Array<Project> = [
         fit: 'contain',
       },
     ],
+    repositoryUrl:
+      'https://github.com/DomGiarrusso/domgiarrusso-personal-site',
     sortOrder: 1,
   },
   {
