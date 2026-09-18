@@ -1,0 +1,30 @@
+## Description
+
+My personal site is a home for my projects, experience, and creative work. Each
+project has its own page, with content kept separate from the shared page
+components. That makes it easier to add new work without rebuilding the same
+layout each time.
+
+The site includes responsive layouts, light and dark themes, reusable UI
+components, syntax-highlighted code blocks, and media galleries.
+
+## Motivation
+
+My previous portfolio was built with plain HTML, CSS, and JavaScript. It worked
+well for the time and gave me a valuable learning experience. I was proud of
+what I made. As the site grew, though, updating it became a pain. I was working
+from a single HTML file that had become quite long, and many sections repeated
+the same markup. Adding a project often meant copying and pasting HTML, then
+updating the related links and images by hand.
+
+I wanted to keep the control and lessons from that earlier site while making
+future changes easier. With project content separated from shared components, I
+can add another project or section without copying a whole block of markup. The
+site can keep growing over time instead of becoming harder to update.
+
+## Development
+
+I built the site with TypeScript, React, TanStack Start, Tailwind CSS, Vite, and
+shadcn/ui. Project content lives in MDX, while shared React components handle
+layouts, links, technology badges, and media galleries. The site builds for
+Cloudflare Workers.

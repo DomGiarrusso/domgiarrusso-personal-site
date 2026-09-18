@@ -1,0 +1,72 @@
+@layer base {
+  [data-slot='drawer-overlay'] {
+    opacity: 1;
+    backdrop-filter: blur(4px);
+  }
+
+  [data-slot='drawer-overlay'][data-starting-style],
+  [data-slot='drawer-overlay'][data-ending-style] {
+    opacity: 0;
+    backdrop-filter: blur(0px);
+  }
+
+  [data-slot='drawer-overlay'][data-overlay-visible='false'] {
+    opacity: 0;
+    backdrop-filter: blur(0px);
+  }
+
+  [data-slot='drawer-content'][data-swiping],
+  [data-slot='drawer-overlay'][data-swiping] {
+    transition-duration: 0ms;
+  }
+
+  [data-slot='drawer-overlay'][data-swiping] {
+    opacity: calc(1 - var(--drawer-swipe-progress, 0));
+  }
+
+  [data-slot='drawer-content'][data-ending-style],
+  [data-slot='drawer-overlay'][data-ending-style] {
+    transition-duration: calc(var(--drawer-swipe-strength, 1) * 200ms);
+  }
+
+  [data-slot='drawer-content'][data-direction='bottom'] {
+    transform: translateY(
+      calc(
+        var(--drawer-snap-point-offset, 0px) +
+          var(--drawer-swipe-movement-y, 0px)
+      )
+    );
+  }
+
+  [data-slot='drawer-content'][data-direction='top'] {
+    transform: translateY(var(--drawer-swipe-movement-y, 0px));
+  }
+
+  [data-slot='drawer-content'][data-direction='right'] {
+    transform: translateX(var(--drawer-swipe-movement-x, 0px));
+  }
+
+  [data-slot='drawer-content'][data-direction='left'] {
+    transform: translateX(var(--drawer-swipe-movement-x, 0px));
+  }
+
+  [data-slot='drawer-content'][data-direction='bottom'][data-starting-style],
+  [data-slot='drawer-content'][data-direction='bottom'][data-ending-style] {
+    transform: translateY(100%);
+  }
+
+  [data-slot='drawer-content'][data-direction='top'][data-starting-style],
+  [data-slot='drawer-content'][data-direction='top'][data-ending-style] {
+    transform: translateY(-100%);
+  }
+
+  [data-slot='drawer-content'][data-direction='right'][data-starting-style],
+  [data-slot='drawer-content'][data-direction='right'][data-ending-style] {
+    transform: translateX(100%);
+  }
+
+  [data-slot='drawer-content'][data-direction='left'][data-starting-style],
+  [data-slot='drawer-content'][data-direction='left'][data-ending-style] {
+    transform: translateX(-100%);
+  }
+}

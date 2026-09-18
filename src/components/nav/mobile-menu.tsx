@@ -1,0 +1,242 @@
+import { Link } from '@tanstack/react-router'
+import { useState } from 'react'
+
+import {
+  ArrowDown01Icon,
+  Camera01Icon,
+  Cancel01Icon,
+  CanvasIcon,
+  ContactIcon,
+  DashboardSquare02Icon,
+  Home07Icon,
+  Menu01Icon,
+  SourceCodeSquareIcon,
+  Video01Icon,
+} from '@hugeicons/core-free-icons'
+import { HugeiconsIcon } from '@hugeicons/react'
+
+import { Button } from '@/components/ui/button'
+import {
+  Drawer,
+  DrawerClose,
+  DrawerContent,
+  DrawerHeader,
+  DrawerTitle,
+  DrawerTrigger,
+} from '@/components/ui/drawer'
+import { Separator } from '@/components/ui/separator'
+import { ThemeToggle } from '@/components/ui/theme-toggle'
+
+type MobileMenuProps = {
+  onContactOpen: () => void
+}
+
+export default function MobileMenu({ onContactOpen }: MobileMenuProps) {
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
+  const [isGalleryOpen, setIsGalleryOpen] = useState(false)
+  const handleMobileLinkClick = () => {
+    setIsMobileMenuOpen(false)
+    setIsGalleryOpen(false)
+  }
+  const handleMobileMenuOpenChange = (isOpen: boolean) => {
+    setIsMobileMenuOpen(isOpen)
+    if (!isOpen) setIsGalleryOpen(false)
+  }
+  const handleContactClick = () => {
+    handleMobileLinkClick()
+    onContactOpen()
+  }
+
+  return (
+    <div className="lg:hidden">
+      <Drawer
+        open={isMobileMenuOpen}
+        onOpenChange={handleMobileMenuOpenChange}
+        direction="bottom"
+      >
+        <DrawerTrigger
+          aria-label="Open menu"
+          render={<Button variant="outline" size="icon-lg" />}
+        >
+          <HugeiconsIcon icon={Menu01Icon} className="size-5" strokeWidth={2} />
+        </DrawerTrigger>
+        <DrawerContent>
+          <DrawerHeader className="flex-row items-center justify-between border-b pb-4 text-left">
+            <DrawerTitle className="flex items-center gap-2">
+              <img
+                src="/images/monogram/Monogram_DG_Blue.svg"
+                alt=""
+                className="size-8 shrink-0 dark:hidden"
+              />
+              <img
+                src="/images/monogram/Monogram_DG_Red.svg"
+                alt=""
+                className="hidden size-8 shrink-0 dark:block"
+              />
+              <span className="whitespace-nowrap">Dominic Giarrusso</span>
+            </DrawerTitle>
+            <ThemeToggle />
+          </DrawerHeader>
+          <div className="flex flex-col gap-2 p-4">
+            <Button
+              variant="outline"
+              nativeButton={false}
+              className="w-full"
+              render={
+                <Link to="/" role="link" onClick={handleMobileLinkClick} />
+              }
+            >
+              <HugeiconsIcon
+                icon={Home07Icon}
+                strokeWidth={2}
+                className="size-4"
+              />
+              Home
+            </Button>
+            <Button
+              variant="outline"
+              nativeButton={false}
+              className="w-full"
+              render={
+                <Link
+                  to="/"
+                  hash="projects"
+                  role="link"
+                  onClick={handleMobileLinkClick}
+                />
+              }
+            >
+              <HugeiconsIcon
+                icon={SourceCodeSquareIcon}
+                strokeWidth={2}
+                className="size-4"
+              />
+              Projects
+            </Button>
+            <div>
+              <Button
+                type="button"
+                variant="outline"
+                className="relative w-full"
+                aria-expanded={isGalleryOpen}
+                aria-controls="mobile-gallery-links"
+                onClick={() => setIsGalleryOpen((isOpen) => !isOpen)}
+              >
+                <HugeiconsIcon
+                  icon={DashboardSquare02Icon}
+                  strokeWidth={2}
+                  className="size-4"
+                />
+                Gallery
+                <HugeiconsIcon
+                  icon={ArrowDown01Icon}
+                  strokeWidth={2}
+                  className={`absolute right-3 size-4 transition-transform ${isGalleryOpen ? 'rotate-180' : ''}`}
+                />
+              </Button>
+              <div
+                id="mobile-gallery-links"
+                aria-hidden={!isGalleryOpen}
+                inert={!isGalleryOpen}
+                className={`grid transition-[grid-template-rows,opacity,margin] duration-200 ease-out ${
+                  isGalleryOpen
+                    ? 'mt-2 grid-rows-[1fr] opacity-100'
+                    : 'pointer-events-none grid-rows-[0fr] opacity-0'
+                }`}
+              >
+                <div className="min-h-0 overflow-hidden">
+                  <div className="grid gap-1.5 rounded-xl border bg-muted/40 p-1.5">
+                    <Button
+                      variant="secondary"
+                      size="sm"
+                      nativeButton={false}
+                      className="w-full justify-center px-1"
+                      render={
+                        <Link
+                          to="/gallery/art"
+                          role="link"
+                          onClick={handleMobileLinkClick}
+                        />
+                      }
+                    >
+                      <HugeiconsIcon
+                        icon={CanvasIcon}
+                        strokeWidth={2}
+                        className="size-4"
+                      />
+                      Art
+                    </Button>
+                    <Button
+                      variant="secondary"
+                      size="sm"
+                      nativeButton={false}
+                      className="w-full justify-center px-1"
+                      render={
+                        <Link
+                          to="/gallery/photos"
+                          role="link"
+                          onClick={handleMobileLinkClick}
+                        />
+                      }
+                    >
+                      <HugeiconsIcon
+                        icon={Camera01Icon}
+                        strokeWidth={2}
+                        className="size-4"
+                      />
+                      Photography
+                    </Button>
+                    <Button
+                      variant="secondary"
+                      size="sm"
+                      nativeButton={false}
+                      className="w-full justify-center px-1"
+                      render={
+                        <Link
+                          to="/gallery/videos"
+                          role="link"
+                          onClick={handleMobileLinkClick}
+                        />
+                      }
+                    >
+                      <HugeiconsIcon
+                        icon={Video01Icon}
+                        strokeWidth={2}
+                        className="size-4"
+                      />
+                      Videos
+                    </Button>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <Separator className="my-2" />
+            <Button
+              type="button"
+              variant="outline"
+              className="w-full"
+              onClick={handleContactClick}
+            >
+              <HugeiconsIcon
+                icon={ContactIcon}
+                strokeWidth={2}
+                className="size-4"
+              />
+              Contact
+            </Button>
+            <DrawerClose
+              render={<Button variant="outline" className="w-full" />}
+            >
+              <HugeiconsIcon
+                icon={Cancel01Icon}
+                strokeWidth={2}
+                data-icon="inline-start"
+              />
+              Close menu
+            </DrawerClose>
+          </div>
+        </DrawerContent>
+      </Drawer>
+    </div>
+  )
+}

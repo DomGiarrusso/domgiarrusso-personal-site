@@ -1,0 +1,57 @@
+import { Link } from '@tanstack/react-router'
+import { useEffect, useState } from 'react'
+
+import NavMenu from '@/components/nav/nav-menu'
+import { cn } from '@/lib/utils'
+
+export default function Navbar() {
+  const [isScrolled, setIsScrolled] = useState(false)
+
+  const navSurfaceClass = isScrolled
+    ? 'md:bg-background/70 md:backdrop-blur-md md:shadow-md md:ring-foreground/10 dark:md:bg-background/80'
+    : 'md:bg-transparent md:border-transparent md:shadow-none md:ring-transparent md:backdrop-blur-none'
+
+  useEffect(() => {
+    const handleScroll = () => setIsScrolled(window.scrollY > 50)
+
+    handleScroll()
+    window.addEventListener('scroll', handleScroll, { passive: true })
+
+    return () => {
+      window.removeEventListener('scroll', handleScroll)
+    }
+  }, [])
+
+  return (
+    <nav
+      className={cn(
+        'flex h-16 justify-center border-t bg-background/80 text-lg ring ring-foreground/10 backdrop-blur-md transition-[background-color,border-color,box-shadow] duration-300 md:border-t-0 md:border-b dark:bg-background/90',
+        navSurfaceClass,
+      )}
+    >
+      <div className="flex w-full max-w-6xl items-center justify-between px-4 py-3 text-md sm:px-6 lg:px-8">
+        <div className="flex min-w-0 flex-1 items-center gap-3">
+          <Link
+            to="/"
+            className="flex items-center gap-2 rounded-md text-base font-bold outline-none focus-visible:ring-[3px] focus-visible:ring-ring/50 sm:text-lg md:text-2xl"
+          >
+            <img
+              src="/images/monogram/Monogram_DG_Blue.svg"
+              alt=""
+              className="size-9 shrink-0 dark:hidden"
+            />
+            <img
+              src="/images/monogram/Monogram_DG_Red.svg"
+              alt=""
+              className="hidden size-9 shrink-0 dark:block"
+            />
+            <span className="whitespace-nowrap">Dominic Giarrusso</span>
+          </Link>
+        </div>
+        <div className="flex shrink-0 flex-row-reverse items-center gap-3">
+          <NavMenu isScrolled={isScrolled} />
+        </div>
+      </div>
+    </nav>
+  )
+}
