@@ -12,3 +12,11 @@ count.txt
 .vinxi
 .env.local
 todos.json
+
+
+coverage/
+
+/content/drafts/my-personal-site-journey.md
+
+.agents/skills/
+skills-lock.json

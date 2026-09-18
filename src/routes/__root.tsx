@@ -1,9 +1,18 @@
 import { HeadContent, Scripts, createRootRoute } from '@tanstack/react-router'
 import { TanStackRouterDevtoolsPanel } from '@tanstack/react-router-devtools'
 import { TanStackDevtools } from '@tanstack/react-devtools'
-import { ThemeProvider } from '@/components/theme-provider'
 
-import appCss from '../styles.css?url'
+import appCss from '@/styles.css?url'
+
+import { HapticsProvider } from '@/components/haptics-provider'
+import { NotFound } from '@/components/not-found'
+import { ThemeProvider } from '@/components/theme-provider'
+import { createPageMetadata, defaultPageDescription } from '@/lib/metadata'
+
+const defaultMetadata = createPageMetadata({
+  description: defaultPageDescription,
+  path: '/',
+})
 
 export const Route = createRootRoute({
   head: () => ({
@@ -15,14 +24,21 @@ export const Route = createRootRoute({
         name: 'viewport',
         content: 'width=device-width, initial-scale=1',
       },
-      {
-        title: 'Dominic Giarrusso',
-      },
+      ...defaultMetadata.meta,
     ],
     links: [
       {
         rel: 'stylesheet',
         href: appCss,
+      },
+      {
+        rel: 'icon',
+        type: 'image/x-icon',
+        href: '/favicon.ico',
+      },
+      {
+        rel: 'manifest',
+        href: '/manifest.json',
       },
     ],
     scripts: [
@@ -44,20 +60,26 @@ export const Route = createRootRoute({
   }),
 
   shellComponent: RootDocument,
-  notFoundComponent: () => <div>404 - Page Not Found</div>,
+  notFoundComponent: NotFound,
 })
 
 function RootDocument({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className="scroll-smooth scroll-pt-24" suppressHydrationWarning>
+    <html
+      lang="en"
+      className="scroll-smooth scroll-pt-24"
+      suppressHydrationWarning
+    >
       <head>
         <HeadContent />
       </head>
       <body className="min-h-screen flex flex-col items-center">
-        <ThemeProvider defaultTheme="system" storageKey="vite-ui-theme">
-          {children}
-        </ThemeProvider>
-        <TanStackDevtools
+        <HapticsProvider>
+          <ThemeProvider defaultTheme="system" storageKey="vite-ui-theme">
+            {children}
+          </ThemeProvider>
+        </HapticsProvider>
+        {/* <TanStackDevtools
           config={{
             position: 'bottom-right',
           }}
@@ -67,7 +89,7 @@ function RootDocument({ children }: { children: React.ReactNode }) {
               render: <TanStackRouterDevtoolsPanel />,
             },
           ]}
-        />
+        /> */}
         <Scripts />
       </body>
     </html>

@@ -41,9 +41,7 @@ export function ThemeProvider({
       // Always update to ensure client state matches localStorage
       setTheme(stored)
     }
-    // Only run once on mount
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [])
+  }, [storageKey])
 
   useEffect(() => {
     if (typeof window === 'undefined') return
@@ -88,10 +86,5 @@ export function ThemeProvider({
 }
 
 export const useTheme = () => {
-  const context = useContext(ThemeProviderContext)
-
-  if (context === undefined)
-    throw new Error('useTheme must be used within a ThemeProvider')
-
-  return context
+  return useContext(ThemeProviderContext)
 }

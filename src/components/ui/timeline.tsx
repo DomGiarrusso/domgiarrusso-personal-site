@@ -1,26 +1,27 @@
-import React from "react";
-import type { VariantProps } from "class-variance-authority";
-import { cva } from "class-variance-authority";
-import { Checkmark, Circle, X } from "@hugeicons/core-free-icons";
-import { HugeiconsIcon } from "@hugeicons/react";
+import React from 'react'
+import { Checkmark, Circle, X } from '@hugeicons/core-free-icons'
+import { HugeiconsIcon } from '@hugeicons/react'
+import { cva } from 'class-variance-authority'
+import type { VariantProps } from 'class-variance-authority'
 
-import { cn } from "@/lib/utils";
+import { cn } from '@/lib/utils'
 
-const timelineVariants = cva("grid", {
+const timelineVariants = cva('grid', {
   variants: {
     positions: {
-      left: "[&>li]:grid-cols-[0_min-content_1fr]",
-      right: "[&>li]:grid-cols-[1fr_min-content]",
-      center: "[&>li]:grid-cols-[1fr_min-content_1fr]",
+      left: '[&>li]:grid-cols-[0_min-content_1fr]',
+      right: '[&>li]:grid-cols-[1fr_min-content]',
+      center: '[&>li]:grid-cols-[1fr_min-content_1fr]',
     },
   },
   defaultVariants: {
-    positions: "left",
+    positions: 'left',
   },
-});
+})
 
 interface TimelineProps
-  extends React.HTMLAttributes<HTMLUListElement>,
+  extends
+    React.HTMLAttributes<HTMLUListElement>,
     VariantProps<typeof timelineVariants> {}
 
 const Timeline = React.forwardRef<HTMLUListElement, TimelineProps>(
@@ -33,25 +34,26 @@ const Timeline = React.forwardRef<HTMLUListElement, TimelineProps>(
       >
         {children}
       </ul>
-    );
-  }
-);
-Timeline.displayName = "Timeline";
+    )
+  },
+)
+Timeline.displayName = 'Timeline'
 
-const timelineItemVariants = cva("grid items-center gap-x-2", {
+const timelineItemVariants = cva('grid items-center gap-x-2', {
   variants: {
     status: {
-      done: "text-primary",
-      default: "text-muted-foreground",
+      done: 'text-primary-alt',
+      default: 'text-muted-foreground',
     },
   },
   defaultVariants: {
-    status: "default",
+    status: 'default',
   },
-});
+})
 
 interface TimelineItemProps
-  extends React.HTMLAttributes<HTMLLIElement>,
+  extends
+    React.HTMLAttributes<HTMLLIElement>,
     VariantProps<typeof timelineItemVariants> {}
 
 const TimelineItem = React.forwardRef<HTMLLIElement, TimelineItemProps>(
@@ -61,41 +63,42 @@ const TimelineItem = React.forwardRef<HTMLLIElement, TimelineItemProps>(
       ref={ref}
       {...props}
     />
-  )
-);
-TimelineItem.displayName = "TimelineItem";
+  ),
+)
+TimelineItem.displayName = 'TimelineItem'
 
 const timelineDotVariants = cva(
-  "col-start-2 col-end-3 row-start-1 row-end-1 flex size-4 items-center justify-center rounded-full border border-current",
+  'col-start-2 col-end-3 row-start-1 row-end-1 flex size-4 items-center justify-center rounded-full border border-current text-primary-alt',
   {
     variants: {
       status: {
-        default: "[&>*]:hidden",
+        default: '[&>*]:hidden',
         current:
-          "[&>*:not(:nth-child(1))]:hidden [&>*:nth-child(1)]:block [&>*:nth-child(1)]:fill-current [&>*:nth-child(1)]:text-current",
-        done: "bg-primary [&>*:not(:nth-child(2))]:hidden [&>*:nth-child(2)]:block [&>*:nth-child(2)]:text-background",
+          '[&>*:not(:nth-child(1))]:hidden [&>*:nth-child(1)]:block [&>*:nth-child(1)]:fill-current [&>*:nth-child(1)]:text-current',
+        done: 'bg-primary-alt [&>*:not(:nth-child(2))]:hidden [&>*:nth-child(2)]:block [&>*:nth-child(2)]:text-background',
         error:
-          "border-destructive bg-destructive [&>*:not(:nth-child(3))]:hidden [&>*:nth-child(3)]:block [&>*:nth-child(3)]:text-background",
-        custom: "[&>*:not(:nth-child(4))]:hidden [&>*:nth-child(4)]:block",
+          'border-destructive bg-destructive [&>*:not(:nth-child(3))]:hidden [&>*:nth-child(3)]:block [&>*:nth-child(3)]:text-background',
+        custom: '[&>*:not(:nth-child(4))]:hidden [&>*:nth-child(4)]:block',
       },
     },
     defaultVariants: {
-      status: "default",
+      status: 'default',
     },
-  }
-);
+  },
+)
 
 interface TimelineDotProps
-  extends React.HTMLAttributes<HTMLDivElement>,
+  extends
+    React.HTMLAttributes<HTMLDivElement>,
     VariantProps<typeof timelineDotVariants> {
-  customIcon?: React.ReactNode;
+  customIcon?: React.ReactNode
 }
 
 const TimelineDot = React.forwardRef<HTMLDivElement, TimelineDotProps>(
   ({ className, status, customIcon, ...props }, ref) => (
     <div
       role="status"
-      className={cn("timeline-dot", timelineDotVariants({ status }), className)}
+      className={cn('timeline-dot', timelineDotVariants({ status }), className)}
       ref={ref}
       {...props}
     >
@@ -104,27 +107,28 @@ const TimelineDot = React.forwardRef<HTMLDivElement, TimelineDotProps>(
       <HugeiconsIcon icon={X} strokeWidth={2} className="size-3" />
       {customIcon}
     </div>
-  )
-);
-TimelineDot.displayName = "TimelineDot";
+  ),
+)
+TimelineDot.displayName = 'TimelineDot'
 
 const timelineContentVariants = cva(
-  "row-start-2 row-end-2 pb-8 text-muted-foreground",
+  'row-start-2 row-end-2 pb-8 text-sm text-muted-foreground',
   {
     variants: {
       side: {
-        right: "col-start-3 col-end-4 mr-auto text-left",
-        left: "col-start-1 col-end-2 ml-auto text-right",
+        right: 'col-start-3 col-end-4 mr-auto text-left',
+        left: 'col-start-1 col-end-2 ml-auto text-right',
       },
     },
     defaultVariants: {
-      side: "right",
+      side: 'right',
     },
-  }
-);
+  },
+)
 
 interface TimelineContentProps
-  extends React.HTMLAttributes<HTMLDivElement>,
+  extends
+    React.HTMLAttributes<HTMLDivElement>,
     VariantProps<typeof timelineContentVariants> {}
 
 const TimelineContent = React.forwardRef<HTMLDivElement, TimelineContentProps>(
@@ -134,32 +138,33 @@ const TimelineContent = React.forwardRef<HTMLDivElement, TimelineContentProps>(
       ref={ref}
       {...props}
     />
-  )
-);
-TimelineContent.displayName = "TimelineContent";
+  ),
+)
+TimelineContent.displayName = 'TimelineContent'
 
 const timelineHeadingVariants = cva(
-  "row-start-1 row-end-1 line-clamp-1 max-w-full truncate",
+  'row-start-1 row-end-1 line-clamp-1 max-w-full truncate',
   {
     variants: {
       side: {
-        right: "col-start-3 col-end-4 mr-auto text-left",
-        left: "col-start-1 col-end-2 ml-auto text-right",
+        right: 'col-start-3 col-end-4 mr-auto text-left',
+        left: 'col-start-1 col-end-2 ml-auto text-right',
       },
       variant: {
-        primary: "text-base font-medium text-primary",
-        secondary: "text-sm font-light text-muted-foreground",
+        primary: 'text-lg font-semibold text-foreground',
+        secondary: 'text-sm font-light text-muted-foreground',
       },
     },
     defaultVariants: {
-      side: "right",
-      variant: "primary",
+      side: 'right',
+      variant: 'primary',
     },
-  }
-);
+  },
+)
 
 interface TimelineHeadingProps
-  extends React.HTMLAttributes<HTMLParagraphElement>,
+  extends
+    React.HTMLAttributes<HTMLParagraphElement>,
     VariantProps<typeof timelineHeadingVariants> {}
 
 const TimelineHeading = React.forwardRef<
@@ -168,16 +173,16 @@ const TimelineHeading = React.forwardRef<
 >(({ className, side, variant, ...props }, ref) => (
   <p
     role="heading"
-    aria-level={variant === "primary" ? 2 : 3}
+    aria-level={variant === 'primary' ? 2 : 3}
     className={cn(timelineHeadingVariants({ side, variant }), className)}
     ref={ref}
     {...props}
   />
-));
-TimelineHeading.displayName = "TimelineHeading";
+))
+TimelineHeading.displayName = 'TimelineHeading'
 
 interface TimelineLineProps extends React.HTMLAttributes<HTMLHRElement> {
-  done?: boolean;
+  done?: boolean
 }
 
 const TimelineLine = React.forwardRef<HTMLHRElement, TimelineLineProps>(
@@ -187,17 +192,17 @@ const TimelineLine = React.forwardRef<HTMLHRElement, TimelineLineProps>(
         role="separator"
         aria-orientation="vertical"
         className={cn(
-          "col-start-2 col-end-3 row-start-2 row-end-2 mx-auto flex h-full min-h-16 w-0.5 justify-center rounded-full",
-          done ? "bg-primary" : "bg-muted",
-          className
+          'col-start-2 col-end-3 row-start-2 row-end-2 mx-auto flex h-full min-h-16 w-0.5 justify-center rounded-full',
+          done ? 'bg-primary-alt' : 'bg-muted',
+          className,
         )}
         ref={ref}
         {...props}
       />
-    );
-  }
-);
-TimelineLine.displayName = "TimelineLine";
+    )
+  },
+)
+TimelineLine.displayName = 'TimelineLine'
 
 export {
   Timeline,
@@ -206,4 +211,4 @@ export {
   TimelineContent,
   TimelineHeading,
   TimelineLine,
-};
+}

@@ -1,5 +1,4 @@
 name = "domgiarrusso-personal-site"
 compatibility_date = "2026-01-16"
 compatibility_flags = ["nodejs_compat"]
-#main = "@tanstack/react-start/server-entry" # This is the entry point for the server not needed right now
-
+main = "@tanstack/react-start/server-entry" # This is the entry point for the server not needed right now

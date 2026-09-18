@@ -1,69 +1,23 @@
-import { createFileRoute } from '@tanstack/react-router'
+import { Link, createFileRoute } from '@tanstack/react-router'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
+import { getArtImages, getPhotoImages } from '@/content/gallery-images'
+import { getVideoPreviews } from '@/content/videos'
+import { createPageMetadata } from '@/lib/metadata'
 import { cn } from '@/lib/utils'
-import { supabase } from '@/lib/supabase'
-
-type PreviewImage = {
-  id: string
-  title: string
-  alt: string
-  thumb_url: string
-}
-
-type PreviewVideo = {
-  id: string
-  title: string
-  description: string | null
-  thumbnail_url: string | null
-  duration: string | null
-}
 
 export const Route = createFileRoute('/_main-layout/gallery/')({
-  loader: async () => {
-    const [artResult, photoResult, videoResult] = await Promise.all([
-      supabase
-        .from('images')
-        .select('id, title, alt, thumb_url')
-        .eq('page', 'art')
-        .eq('is_published', true)
-        .order('sort_order', { ascending: true })
-        .order('created_at', { ascending: false })
-        .limit(3),
-      supabase
-        .from('images')
-        .select('id, title, alt, thumb_url')
-        .eq('page', 'photos')
-        .eq('is_published', true)
-        .order('sort_order', { ascending: true })
-        .order('created_at', { ascending: false })
-        .limit(3),
-      supabase
-        .from('videos')
-        .select('id, title, description, thumbnail_url, duration')
-        .eq('is_published', true)
-        .order('sort_order', { ascending: true })
-        .order('created_at', { ascending: false })
-        .limit(2),
-    ])
-
-    if (artResult.error) {
-      console.error('Error fetching gallery art previews', artResult.error)
-    }
-
-    if (photoResult.error) {
-      console.error('Error fetching gallery photo previews', photoResult.error)
-    }
-
-    if (videoResult.error) {
-      console.error('Error fetching gallery video previews', videoResult.error)
-    }
-
-    return {
-      artPreviews: (artResult.data ?? []) as Array<PreviewImage>,
-      photoPreviews: (photoResult.data ?? []) as Array<PreviewImage>,
-      videoPreviews: (videoResult.data ?? []) as Array<PreviewVideo>,
-    }
-  },
+  loader: () => ({
+    artPreviews: getArtImages().slice(0, 3),
+    photoPreviews: getPhotoImages().slice(0, 3),
+    videoPreviews: getVideoPreviews(),
+  }),
+  head: () =>
+    createPageMetadata({
+      title: 'Gallery',
+      description:
+        'Browse art, photography, and video work by Dominic Giarrusso.',
+      path: '/gallery',
+    }),
   component: GalleryPage,
 })
 
@@ -90,7 +44,7 @@ function GalleryPage() {
             eyebrow="Section"
             title="Art"
             description="Illustration, sketches, and experiments collected in a more visual gallery layout."
-            imageSrc={artFeaturedImage?.thumb_url}
+            imageSrc={artFeaturedImage?.thumbnailUrl}
             imageAlt={artFeaturedImage?.alt ?? 'Art preview'}
           />
 
@@ -99,7 +53,7 @@ function GalleryPage() {
             eyebrow="Section"
             title="Photography"
             description="Frames, texture, and place presented in a gallery built for quick browsing and closer viewing."
-            imageSrc={photoFeaturedImage?.thumb_url}
+            imageSrc={photoFeaturedImage?.thumbnailUrl}
             imageAlt={photoFeaturedImage?.alt ?? 'Photography preview'}
           />
 
@@ -108,7 +62,7 @@ function GalleryPage() {
             eyebrow="Section"
             title="Videos"
             description="Motion work and edited pieces with direct links to watch each video in full."
-            imageSrc={videoFeaturedImage?.thumbnail_url}
+            imageSrc={videoFeaturedImage?.thumbnailUrl}
             imageAlt={
               videoFeaturedImage
                 ? `${videoFeaturedImage.title} thumbnail`
@@ -142,20 +96,23 @@ function ShowcaseCard({
   imageLabel,
 }: ShowcaseCardProps) {
   return (
-    <a href={href} className="group block h-full">
-      <Card className="h-full gap-5 border-border/70 bg-card/80 pt-4 transition-all duration-300 hover:-translate-y-1 hover:shadow-lg">
+    <Link
+      to={href}
+      className="group block h-full rounded-xl outline-none focus-visible:ring-[3px] focus-visible:ring-ring/50"
+    >
+      <Card className="h-full gap-5 border-border/70 bg-card/80 pt-4 transition-all duration-300 hover:-translate-y-1 hover:shadow-lg group-focus-visible:border-ring group-focus-visible:ring-ring/50">
         <CardHeader className="space-y-3 px-4">
           <PreviewTile
             src={imageSrc}
             alt={imageAlt}
-            className="aspect-[16/10]"
+            className="aspect-16/10"
             label={imageLabel}
           />
           <div className="text-xs font-medium uppercase tracking-[0.18em] text-muted-foreground">
             {eyebrow}
           </div>
           <div className="space-y-2">
-            <CardTitle className="text-xl leading-tight transition-colors group-hover:text-red-500">
+            <CardTitle className="text-xl leading-tight transition-colors group-hover:text-primary-alt-600 group-focus-visible:text-primary-alt-600">
               {title}
             </CardTitle>
             <p className="text-sm leading-6 text-muted-foreground">
@@ -169,7 +126,7 @@ function ShowcaseCard({
           </p>
         </CardContent>
       </Card>
-    </a>
+    </Link>
   )
 }
 

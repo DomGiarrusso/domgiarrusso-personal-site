@@ -1,33 +1,29 @@
 import { createFileRoute } from '@tanstack/react-router'
-import type { VideosRow } from '@/types/database'
+import type { Video } from '@/content/types'
+import { Reveal } from '@/components/motion/reveal'
 import VideoCard from '@/components/ui/video-card'
-import { supabase } from '@/lib/supabase'
+import { getVideos } from '@/content/videos'
+import { createPageMetadata } from '@/lib/metadata'
 
 export const Route = createFileRoute('/_main-layout/gallery/videos')({
-  loader: async () => {
-    const { data, error } = await supabase
-      .from('videos')
-      .select('*')
-      .eq('is_published', true)
-      .order('sort_order', { ascending: true })
-      .order('created_at', { ascending: false })
-
-    if (error) {
-      console.error('Error fetching videos', error)
-    }
-
-    return { videos: data ?? [] }
-  },
+  loader: () => ({ videos: getVideos() }),
+  head: () =>
+    createPageMetadata({
+      title: 'Videos',
+      description:
+        'Watch video projects by Dominic Giarrusso about game development, design, and documentary subjects.',
+      path: '/gallery/videos',
+    }),
   component: VideosPage,
 })
 
-function videoRowToCardProps(video: VideosRow) {
+function videoToCardProps(video: Video) {
   return {
     title: video.title,
     duration: video.duration ?? undefined,
-    thumbnailUrl: video.thumbnail_url ?? undefined,
-    href: video.video_url,
-    description: video.description ?? undefined,
+    thumbnailUrl: video.thumbnailUrl,
+    href: video.videoUrl,
+    description: video.description,
   }
 }
 
@@ -35,17 +31,21 @@ function VideosPage() {
   const { videos } = Route.useLoaderData()
 
   return (
-    <div className="container mx-auto px-4 py-12 space-y-8">
-      <div className="space-y-4 text-center">
-        <h1 className="text-4xl font-bold">Videos</h1>
-        <p className="mx-auto max-w-2xl text-muted-foreground">
-          A selection of my video work. Click any piece to view on YouTube.
-        </p>
-      </div>
+    <div className="container mx-auto space-y-8 px-4 py-12">
+      <Reveal>
+        <div className="space-y-4 text-center">
+          <h1 className="text-4xl font-bold">Videos</h1>
+          <p className="mx-auto max-w-2xl text-muted-foreground">
+            A selection of my video work. Click any piece to view on YouTube.
+          </p>
+        </div>
+      </Reveal>
 
       <div className="grid gap-6 sm:grid-cols-2 xl:grid-cols-3">
-        {videos.map((video) => (
-          <VideoCard key={video.id} {...videoRowToCardProps(video)} />
+        {videos.map((video, index) => (
+          <Reveal key={video.id} className="h-full" delay={(index % 3) * 80}>
+            <VideoCard {...videoToCardProps(video)} />
+          </Reveal>
         ))}
       </div>
     </div>

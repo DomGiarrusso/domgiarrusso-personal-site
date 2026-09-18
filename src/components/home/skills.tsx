@@ -1,66 +1,123 @@
-import SkillsCard, { SkillConfig } from '@/components/home/skills-card'
+import {
+  BookOpen01Icon,
+  Briefcase01Icon,
+  SourceCodeIcon,
+  ToolsIcon,
+} from '@hugeicons/core-free-icons'
+import type { SkillConfig } from '@/components/home/skills-card'
+import SkillsCard from '@/components/home/skills-card'
+import { Reveal } from '@/components/motion/reveal'
 import { getSkills } from '@/lib/skills-registry'
-import { CodeIcon, Layers01Icon, ToolsIcon } from '@hugeicons/core-free-icons'
-import { HugeiconsIcon } from '@hugeicons/react'
 
-type Props = {}
-
-const frameworkSkills: SkillConfig[] = getSkills([
-  'dotnet', 
-  'react', 
-  'next', 
-  'tailwind', 
-  'bootstrap', 
-  'node', 
-  'express', 
-  'flask', 
-  'postgres', 
-  'sqlserver', 
-  'sqlite', 
-  'firebase'
-])
-
-const languageSkills: SkillConfig[] = getSkills([
+const coreSkills: Array<SkillConfig> = getSkills([
   'csharp',
   'typescript',
   'javascript',
-  'python',
+  'jquery',
   'html',
   'css',
   'sql',
+  'dotnet',
+  'react',
+  'tanstackStart',
+  'next',
+  'tailwind',
+  'vite',
+  'postgres',
+  'sqlserver',
+  'node',
+  'express',
+  'markdown',
+  'sqlite',
+  'sass',
+  'docker',
+  'json',
+  'bootstrap',
+])
+
+const additionalExperienceSkills: Array<SkillConfig> = getSkills([
+  'python',
   'c',
   'cpp',
-  'markdown',
-  'sass',
+  'flask',
+  'firebase',
   'xml',
-  'json',
 ])
-const toolSkills: SkillConfig[] = getSkills([
+
+const toolsAndPlatformsSkills: Array<SkillConfig> = getSkills([
   'vscode',
   'visualstudio',
+  'zed',
+  'codex',
+  't3code',
+  'opencode',
   'windows',
-  'linux',
   'git',
   'github',
+  'ssms',
+  'dbeaver',
+  'pgadmin',
+  'office',
+  'adobe',
+  'affinity',
+  'linux',
+  'blender',
   'unreal',
   'unity',
   'godot',
-  'adobe',
-  'office',
-  'blender',
-  'affinity',
-  'docker',
 ])
 
-export default function Skills({}: Props) {
-  return (
-    <section className="flex flex-col items-center justify-center my-24">
-      <h3 className="text-5xl font-bold text-center">Skills</h3>
+const learningSkills: Array<SkillConfig> = getSkills(['agenticCoding', 'figma'])
 
-      <div className="grid grid-cols-3 gap-6 mt-8 w-full">
-        <SkillsCard title="Languages" titleIcon={<HugeiconsIcon icon={CodeIcon} strokeWidth={2} className="size-8" />} skills={languageSkills} />
-        <SkillsCard title="Frameworks" titleIcon={<HugeiconsIcon icon={Layers01Icon} strokeWidth={2} className="size-8" />} skills={frameworkSkills} />
-        <SkillsCard title="Tools" titleIcon={<HugeiconsIcon icon={ToolsIcon} strokeWidth={2} className="size-8" />} skills={toolSkills} />
+export default function Skills() {
+  return (
+    <section className="my-20 flex flex-col items-center justify-center sm:my-24">
+      <Reveal>
+        <h3 className="text-center text-4xl font-bold sm:text-5xl">Skills</h3>
+      </Reveal>
+
+      <div className="mt-8 grid w-full grid-cols-1 gap-6 md:grid-cols-2 xl:grid-cols-12">
+        <Reveal className="md:col-span-2 xl:col-span-8" delay={0} origin="left">
+          <SkillsCard
+            title="Core Technologies"
+            icon={SourceCodeIcon}
+            description="The technologies I am most comfortable using to build projects."
+            skills={coreSkills}
+            className="h-full"
+          />
+        </Reveal>
+        <Reveal
+          className="md:col-span-2 xl:col-span-4"
+          delay={90}
+          origin="right"
+        >
+          <SkillsCard
+            title="Additional Experience"
+            icon={Briefcase01Icon}
+            description="Technologies I have worked with outside my primary stack."
+            skills={additionalExperienceSkills}
+            className="h-full"
+          />
+        </Reveal>
+        <Reveal className="xl:col-span-7" delay={0} origin="left">
+          <SkillsCard
+            title="Tools & Platforms"
+            icon={ToolsIcon}
+            description="Software and environments that support my technical and creative work."
+            skills={toolsAndPlatformsSkills}
+            className="h-full"
+          />
+        </Reveal>
+        <Reveal className="xl:col-span-5" delay={90} origin="right">
+          <SkillsCard
+            title="Learning & Tinkering"
+            icon={BookOpen01Icon}
+            description="Technologies I am actively making time to learn and experiment with."
+            emptyMessage="Nothing here right now. I am focused on applying and deepening my current skills."
+            skills={learningSkills}
+            className="h-full"
+          />
+        </Reveal>
       </div>
     </section>
   )
