@@ -233,6 +233,11 @@
   }
 
   html,
+  body {
+    overflow-x: clip;
+  }
+
+  html,
   body,
   body::before,
   body::after,
@@ -328,6 +333,17 @@
     scrollbar-color: var(--muted-foreground) var(--background);
     scrollbar-gutter: stable;
     scrollbar-width: auto;
+  }
+
+  @media (max-width: 47.999rem) {
+    html {
+      scrollbar-gutter: auto;
+      scrollbar-width: none;
+    }
+
+    html::-webkit-scrollbar {
+      display: none;
+    }
   }
 
   *::-webkit-scrollbar {
