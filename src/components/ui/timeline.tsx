@@ -103,7 +103,7 @@ const TimelineDot = React.forwardRef<HTMLDivElement, TimelineDotProps>(
       {...props}
     >
       <HugeiconsIcon icon={Circle} strokeWidth={2} className="size-2.5" />
-      <HugeiconsIcon icon={Checkmark} strokeWidth={2} className="size-3" />
+      <HugeiconsIcon icon={Checkmark} strokeWidth={3} className="size-3" />
       <HugeiconsIcon icon={X} strokeWidth={2} className="size-3" />
       {customIcon}
     </div>
