@@ -419,6 +419,331 @@
   }
 }
 
+/* Only icons with an explicit motion opt in to hover animation. */
+@media (prefers-reduced-motion: no-preference) and (hover: hover) and (pointer: fine) {
+  .icon-hover:not(:disabled):not([aria-disabled='true']):not(
+      [data-disabled]
+    ):hover
+    [data-icon-motion],
+  .yarl__button:hover [data-icon-motion] {
+    transform-origin: center;
+    animation: var(--icon-hover-animation);
+  }
+
+  .icon-hover:not(:disabled):not([aria-disabled='true']):not(
+      [data-disabled]
+    ):hover
+    [data-icon-motion='gallery']
+    path {
+    transform-box: fill-box;
+    transform-origin: center;
+    animation: icon-gallery-tile 560ms cubic-bezier(0.34, 1.56, 0.64, 1);
+  }
+
+  .icon-hover:hover [data-icon-motion='gallery'] path:nth-child(1) {
+    --gallery-tile-scale: 1 0.58;
+    --gallery-tile-shift: 0 -0.1rem;
+  }
+
+  .icon-hover:hover [data-icon-motion='gallery'] path:nth-child(2) {
+    --gallery-tile-scale: 1 1.73;
+    --gallery-tile-shift: 0 -0.1rem;
+  }
+
+  .icon-hover:hover [data-icon-motion='gallery'] path:nth-child(3) {
+    --gallery-tile-scale: 1 0.58;
+    --gallery-tile-shift: 0 0.1rem;
+  }
+
+  .icon-hover:hover [data-icon-motion='gallery'] path:nth-child(4) {
+    --gallery-tile-scale: 1 1.73;
+    --gallery-tile-shift: 0 0.1rem;
+  }
+
+  .icon-hover:not(:disabled):not([aria-disabled='true']):not(
+      [data-disabled]
+    ):hover
+    [data-icon-motion='art']
+    path:nth-child(3) {
+    animation: icon-art-draw 720ms ease-out;
+  }
+}
+
+[data-icon-motion='home'] {
+  --icon-hover-animation: icon-home 480ms cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+[data-icon-motion='code'] {
+  --icon-hover-animation: icon-code 450ms cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+[data-icon-motion='contact'] {
+  --icon-hover-animation: icon-contact 500ms ease-out;
+}
+
+[data-icon-motion='menu'] {
+  --icon-hover-animation: icon-menu 420ms cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+[data-icon-motion='close'] {
+  --icon-hover-animation: icon-close 400ms cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+[data-icon-motion='theme-system'] {
+  --icon-hover-animation: icon-theme-system 450ms ease-out;
+}
+
+[data-icon-motion='theme-sun'] {
+  --icon-hover-animation: icon-theme-sun 600ms cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+[data-icon-motion='theme-moon'] {
+  --icon-hover-animation: icon-theme-moon 500ms ease-in-out;
+}
+
+[data-icon-motion='arrow-left'] {
+  --icon-hover-animation: icon-arrow-left 420ms
+    cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+[data-icon-motion='arrow-right'] {
+  --icon-hover-animation: icon-arrow-right 420ms
+    cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+[data-icon-motion='launch'],
+[data-icon-motion='send'] {
+  --icon-hover-animation: icon-launch 500ms cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+[data-icon-motion='copy'] {
+  --icon-hover-animation: icon-copy 480ms cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+[data-icon-motion='confirm'] {
+  --icon-hover-animation: icon-confirm 450ms cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+[data-icon-motion='camera'] {
+  --icon-hover-animation: icon-camera 420ms cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+[data-icon-motion='video'] {
+  --icon-hover-animation: icon-video 480ms cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+[data-icon-motion='zoom-in'] {
+  --icon-hover-animation: icon-zoom-in 420ms cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+[data-icon-motion='zoom-out'] {
+  --icon-hover-animation: icon-zoom-out 420ms cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+[data-icon-motion='play'] {
+  --icon-hover-animation: icon-play 420ms cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+[data-icon-motion='pause'] {
+  --icon-hover-animation: icon-pause 420ms ease-out;
+}
+
+@keyframes icon-home {
+  35% {
+    scale: 1.08 0.92;
+    translate: 0 0.08rem;
+  }
+
+  65% {
+    scale: 0.96 1.08;
+    translate: 0 -0.2rem;
+  }
+}
+
+@keyframes icon-code {
+  40% {
+    scale: 1.25 0.92;
+  }
+
+  70% {
+    scale: 0.94 1.06;
+  }
+}
+
+@keyframes icon-gallery-tile {
+  40%,
+  62% {
+    scale: var(--gallery-tile-scale);
+    translate: var(--gallery-tile-shift);
+  }
+}
+
+@keyframes icon-contact {
+  25% {
+    rotate: 12deg;
+  }
+
+  50% {
+    rotate: -9deg;
+  }
+
+  75% {
+    rotate: 5deg;
+  }
+}
+
+@keyframes icon-menu {
+  40% {
+    scale: 1.25 0.85;
+  }
+
+  70% {
+    scale: 0.95 1.08;
+  }
+}
+
+@keyframes icon-close {
+  50% {
+    rotate: 100deg;
+    scale: 1.12;
+  }
+}
+
+@keyframes icon-theme-system {
+  35% {
+    rotate: -6deg;
+    translate: 0 -0.08rem;
+  }
+
+  70% {
+    rotate: 5deg;
+  }
+}
+
+@keyframes icon-theme-sun {
+  55% {
+    rotate: 180deg;
+    scale: 1.15;
+  }
+}
+
+@keyframes icon-theme-moon {
+  35% {
+    rotate: -14deg;
+    translate: 0 -0.08rem;
+  }
+
+  70% {
+    rotate: 8deg;
+  }
+}
+
+@keyframes icon-arrow-left {
+  45% {
+    scale: 1.12;
+    translate: -0.24rem 0;
+  }
+}
+
+@keyframes icon-arrow-right {
+  45% {
+    scale: 1.12;
+    translate: 0.24rem 0;
+  }
+}
+
+@keyframes icon-launch {
+  45% {
+    rotate: 6deg;
+    scale: 1.08;
+    translate: 0.2rem -0.2rem;
+  }
+}
+
+@keyframes icon-copy {
+  35% {
+    rotate: -4deg;
+    translate: -0.1rem 0.08rem;
+  }
+
+  70% {
+    rotate: 3deg;
+    translate: 0.08rem -0.08rem;
+  }
+}
+
+@keyframes icon-confirm {
+  45% {
+    scale: 1.2;
+    translate: 0 -0.12rem;
+  }
+}
+
+@keyframes icon-art-draw {
+  from {
+    stroke-dasharray: 40;
+    stroke-dashoffset: 40;
+  }
+
+  to {
+    stroke-dasharray: 40;
+    stroke-dashoffset: 0;
+  }
+}
+
+@keyframes icon-camera {
+  40% {
+    scale: 0.82;
+  }
+
+  70% {
+    scale: 1.16;
+  }
+}
+
+@keyframes icon-video {
+  35% {
+    rotate: -4deg;
+    translate: -0.1rem 0;
+  }
+
+  70% {
+    rotate: 4deg;
+    translate: 0.14rem 0;
+  }
+}
+
+@keyframes icon-zoom-in {
+  50% {
+    scale: 1.22;
+    translate: -0.04rem 0.04rem;
+  }
+}
+
+@keyframes icon-zoom-out {
+  50% {
+    scale: 0.78;
+    translate: 0.04rem -0.04rem;
+  }
+}
+
+@keyframes icon-play {
+  45% {
+    scale: 1.12;
+    translate: 0.2rem 0;
+  }
+}
+
+@keyframes icon-pause {
+  35% {
+    scale: 1.18 0.82;
+  }
+
+  70% {
+    scale: 0.94 1.1;
+  }
+}
+
 .scroll-reveal {
   --reveal-duration: 850ms;
   --reveal-x: 0;

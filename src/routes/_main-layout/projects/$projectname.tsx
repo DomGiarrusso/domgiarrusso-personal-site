@@ -71,6 +71,7 @@ function ProjectPage() {
               icon={ArrowLeft01Icon}
               strokeWidth={2}
               className="size-4"
+              data-icon-motion="arrow-left"
             />
             Back to projects
           </Link>
@@ -100,6 +101,7 @@ function ProjectPage() {
                     icon={LinkSquare02Icon}
                     strokeWidth={2}
                     className="size-4"
+                    data-icon-motion="launch"
                   />
                 </a>
               )}
@@ -118,6 +120,7 @@ function ProjectPage() {
                     icon={LinkSquare02Icon}
                     strokeWidth={2}
                     className="size-4"
+                    data-icon-motion="launch"
                   />
                 </a>
               )}

@@ -523,7 +523,11 @@ export default function ContactDialog() {
                     </>
                   ) : (
                     <>
-                      <HugeiconsIcon icon={SentIcon} strokeWidth={2} />
+                      <HugeiconsIcon
+                        icon={SentIcon}
+                        strokeWidth={2}
+                        data-icon-motion="send"
+                      />
                       Send message
                     </>
                   )}

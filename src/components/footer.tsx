@@ -55,6 +55,7 @@ export default function Footer() {
                   icon={ContactIcon}
                   strokeWidth={2}
                   data-icon="inline-start"
+                  data-icon-motion="contact"
                 />
                 Get in touch
               </DialogTrigger>

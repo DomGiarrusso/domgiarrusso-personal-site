@@ -38,6 +38,7 @@ export function ThemeToggle() {
               ? 'scale-100 rotate-0 opacity-100'
               : 'scale-0 rotate-90 opacity-0'
           }`}
+          data-icon-motion="theme-system"
           suppressHydrationWarning
         />
         <HugeiconsIcon
@@ -48,6 +49,7 @@ export function ThemeToggle() {
               ? 'scale-100 rotate-0 opacity-100'
               : 'scale-0 -rotate-90 opacity-0'
           }`}
+          data-icon-motion="theme-sun"
           suppressHydrationWarning
         />
         {/* Overlay icons - absolutely positioned */}
@@ -59,6 +61,7 @@ export function ThemeToggle() {
               ? 'scale-100 rotate-0 opacity-100'
               : 'scale-0 rotate-90 opacity-0'
           }`}
+          data-icon-motion="theme-moon"
           suppressHydrationWarning
         />
         <span className="sr-only">Toggle theme</span>
@@ -70,7 +73,11 @@ export function ThemeToggle() {
             data-haptic-managed
             onClick={handleThemeSelect}
           >
-            <HugeiconsIcon icon={ComputerIcon} strokeWidth={2} />
+            <HugeiconsIcon
+              icon={ComputerIcon}
+              strokeWidth={2}
+              data-icon-motion="theme-system"
+            />
             System
           </DropdownMenuRadioItem>
           <DropdownMenuRadioItem
@@ -78,7 +85,11 @@ export function ThemeToggle() {
             data-haptic-managed
             onClick={handleThemeSelect}
           >
-            <HugeiconsIcon icon={SunIcon} strokeWidth={2} />
+            <HugeiconsIcon
+              icon={SunIcon}
+              strokeWidth={2}
+              data-icon-motion="theme-sun"
+            />
             Light
           </DropdownMenuRadioItem>
           <DropdownMenuRadioItem
@@ -86,7 +97,11 @@ export function ThemeToggle() {
             data-haptic-managed
             onClick={handleThemeSelect}
           >
-            <HugeiconsIcon icon={MoonIcon} strokeWidth={2} />
+            <HugeiconsIcon
+              icon={MoonIcon}
+              strokeWidth={2}
+              data-icon-motion="theme-moon"
+            />
             <span className="flex flex-col items-start leading-tight">
               <span>Dark</span>
               <span className="text-muted-foreground text-xs">Recommended</span>

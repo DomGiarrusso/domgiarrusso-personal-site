@@ -64,6 +64,7 @@ export default function CodeBlock({
             icon={copied ? Tick02Icon : Copy01Icon}
             className="size-3.5"
             strokeWidth={2}
+            data-icon-motion={copied ? 'confirm' : 'copy'}
           />
           <span aria-live="polite">{copied ? 'Copied' : 'Copy'}</span>
         </Button>
