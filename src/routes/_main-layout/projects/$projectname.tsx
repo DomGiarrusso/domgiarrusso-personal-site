@@ -70,8 +70,8 @@ function ProjectPage() {
             <HugeiconsIcon
               icon={ArrowLeft01Icon}
               strokeWidth={2}
-              className="size-4"
-              data-icon-motion="arrow-left"
+              data-icon="inline-start"
+              data-icon-motion="back"
             />
             Back to projects
           </Link>
@@ -95,14 +95,8 @@ function ProjectPage() {
                     'w-full cursor-pointer sm:w-auto',
                   )}
                 >
-                  <GitHubIcon className="size-4" />
+                  <GitHubIcon data-icon="inline-start" />
                   View repo
-                  <HugeiconsIcon
-                    icon={LinkSquare02Icon}
-                    strokeWidth={2}
-                    className="size-4"
-                    data-icon-motion="launch"
-                  />
                 </a>
               )}
               {project.externalUrl && (
@@ -119,7 +113,7 @@ function ProjectPage() {
                   <HugeiconsIcon
                     icon={LinkSquare02Icon}
                     strokeWidth={2}
-                    className="size-4"
+                    data-icon="inline-end"
                     data-icon-motion="launch"
                   />
                 </a>

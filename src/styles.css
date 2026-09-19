@@ -506,6 +506,10 @@
     cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 
+[data-icon-motion='back'] {
+  --icon-hover-animation: icon-back 460ms cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
 [data-icon-motion='arrow-right'] {
   --icon-hover-animation: icon-arrow-right 420ms
     cubic-bezier(0.34, 1.56, 0.64, 1);
@@ -642,6 +646,16 @@
   45% {
     scale: 1.12;
     translate: -0.24rem 0;
+  }
+}
+
+@keyframes icon-back {
+  30% {
+    translate: 0.08rem 0;
+  }
+
+  65% {
+    translate: -0.28rem 0;
   }
 }
 
