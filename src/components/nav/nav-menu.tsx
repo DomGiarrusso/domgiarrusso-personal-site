@@ -55,6 +55,7 @@ export default function NavMenu({ isScrolled }: NavMenuProps) {
                 icon={Home07Icon}
                 strokeWidth={2}
                 className="mb-0.5 size-4.5"
+                data-icon-motion="home"
               />
               Home
             </NavigationMenuLink>
@@ -72,6 +73,7 @@ export default function NavMenu({ isScrolled }: NavMenuProps) {
                 icon={SourceCodeSquareIcon}
                 strokeWidth={2}
                 className="mb-0.5 size-4.5"
+                data-icon-motion="code"
               />
               Projects
             </NavigationMenuLink>
@@ -85,6 +87,7 @@ export default function NavMenu({ isScrolled }: NavMenuProps) {
                   icon={DashboardSquare02Icon}
                   strokeWidth={2}
                   className="mb-0.5 size-4.5"
+                  data-icon-motion="gallery"
                 />
                 Gallery
               </span>
@@ -99,6 +102,7 @@ export default function NavMenu({ isScrolled }: NavMenuProps) {
                       icon={CanvasIcon}
                       strokeWidth={2}
                       className="size-4"
+                      data-icon-motion="art"
                     />
                   }
                 >
@@ -112,6 +116,7 @@ export default function NavMenu({ isScrolled }: NavMenuProps) {
                       icon={Camera01Icon}
                       strokeWidth={2}
                       className="size-4"
+                      data-icon-motion="camera"
                     />
                   }
                 >
@@ -125,6 +130,7 @@ export default function NavMenu({ isScrolled }: NavMenuProps) {
                       icon={Video01Icon}
                       strokeWidth={2}
                       className="size-4"
+                      data-icon-motion="video"
                     />
                   }
                 >
@@ -146,6 +152,7 @@ export default function NavMenu({ isScrolled }: NavMenuProps) {
                   icon={ContactIcon}
                   strokeWidth={2}
                   className="mb-0.5 size-4.5"
+                  data-icon-motion="contact"
                 />
                 Contact
               </span>

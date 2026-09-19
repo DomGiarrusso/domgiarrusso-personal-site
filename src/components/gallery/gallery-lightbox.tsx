@@ -111,6 +111,7 @@ export function GalleryLightbox({
             icon={ArrowLeft01Icon}
             className={iconClassName}
             strokeWidth={2}
+            data-icon-motion="arrow-left"
           />
         ),
         iconNext: () => (
@@ -118,6 +119,7 @@ export function GalleryLightbox({
             icon={ArrowRight01Icon}
             className={iconClassName}
             strokeWidth={2}
+            data-icon-motion="arrow-right"
           />
         ),
         iconZoomIn: () => (
@@ -125,6 +127,7 @@ export function GalleryLightbox({
             icon={SearchAddIcon}
             className={iconClassName}
             strokeWidth={2}
+            data-icon-motion="zoom-in"
           />
         ),
         iconZoomOut: () => (
@@ -132,6 +135,7 @@ export function GalleryLightbox({
             icon={SearchMinusIcon}
             className={iconClassName}
             strokeWidth={2}
+            data-icon-motion="zoom-out"
           />
         ),
         iconSlideshowPlay: () => (
@@ -139,6 +143,7 @@ export function GalleryLightbox({
             icon={PlayIcon}
             className={iconClassName + ' fill-foreground'}
             strokeWidth={2}
+            data-icon-motion="play"
           />
         ),
         iconSlideshowPause: () => (
@@ -146,6 +151,7 @@ export function GalleryLightbox({
             icon={PauseIcon}
             className={iconClassName + ' fill-foreground'}
             strokeWidth={2}
+            data-icon-motion="pause"
           />
         ),
       }}

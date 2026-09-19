@@ -58,7 +58,12 @@ export default function MobileMenu({ onContactOpen }: MobileMenuProps) {
           aria-label="Open menu"
           render={<Button variant="outline" size="icon-lg" />}
         >
-          <HugeiconsIcon icon={Menu01Icon} className="size-5" strokeWidth={2} />
+          <HugeiconsIcon
+            icon={Menu01Icon}
+            className="size-5"
+            strokeWidth={2}
+            data-icon-motion="menu"
+          />
         </DrawerTrigger>
         <DrawerContent>
           <DrawerHeader className="flex-row items-center justify-between border-b pb-4 text-left">
@@ -90,6 +95,7 @@ export default function MobileMenu({ onContactOpen }: MobileMenuProps) {
                 icon={Home07Icon}
                 strokeWidth={2}
                 className="size-4"
+                data-icon-motion="home"
               />
               Home
             </Button>
@@ -110,6 +116,7 @@ export default function MobileMenu({ onContactOpen }: MobileMenuProps) {
                 icon={SourceCodeSquareIcon}
                 strokeWidth={2}
                 className="size-4"
+                data-icon-motion="code"
               />
               Projects
             </Button>
@@ -126,6 +133,7 @@ export default function MobileMenu({ onContactOpen }: MobileMenuProps) {
                   icon={DashboardSquare02Icon}
                   strokeWidth={2}
                   className="size-4"
+                  data-icon-motion="gallery"
                 />
                 Gallery
                 <HugeiconsIcon
@@ -163,6 +171,7 @@ export default function MobileMenu({ onContactOpen }: MobileMenuProps) {
                         icon={CanvasIcon}
                         strokeWidth={2}
                         className="size-4"
+                        data-icon-motion="art"
                       />
                       Art
                     </Button>
@@ -183,6 +192,7 @@ export default function MobileMenu({ onContactOpen }: MobileMenuProps) {
                         icon={Camera01Icon}
                         strokeWidth={2}
                         className="size-4"
+                        data-icon-motion="camera"
                       />
                       Photography
                     </Button>
@@ -203,6 +213,7 @@ export default function MobileMenu({ onContactOpen }: MobileMenuProps) {
                         icon={Video01Icon}
                         strokeWidth={2}
                         className="size-4"
+                        data-icon-motion="video"
                       />
                       Videos
                     </Button>
@@ -221,6 +232,7 @@ export default function MobileMenu({ onContactOpen }: MobileMenuProps) {
                 icon={ContactIcon}
                 strokeWidth={2}
                 className="size-4"
+                data-icon-motion="contact"
               />
               Contact
             </Button>
@@ -231,6 +243,7 @@ export default function MobileMenu({ onContactOpen }: MobileMenuProps) {
                 icon={Cancel01Icon}
                 strokeWidth={2}
                 data-icon="inline-start"
+                data-icon-motion="close"
               />
               Close menu
             </DrawerClose>

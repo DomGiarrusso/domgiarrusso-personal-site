@@ -193,7 +193,11 @@ function DrawerContent({
                   />
                 }
               >
-                <HugeiconsIcon icon={Cancel01Icon} strokeWidth={2} />
+                <HugeiconsIcon
+                  icon={Cancel01Icon}
+                  strokeWidth={2}
+                  data-icon-motion="close"
+                />
                 <span className="sr-only">Close</span>
               </DrawerPrimitive.Close>
             )}
