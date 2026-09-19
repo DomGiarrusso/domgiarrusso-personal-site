@@ -286,7 +286,10 @@ export default function ContactDialog() {
   }
 
   return (
-    <DialogContent className="max-h-[calc(100dvh-2rem)] gap-0 overflow-y-auto p-0 sm:max-w-3xl">
+    <DialogContent
+      animateCloseIcon={false}
+      className="max-h-[calc(100dvh-2rem)] gap-0 overflow-y-auto p-0 sm:max-w-3xl"
+    >
       <div className="grid md:grid-cols-[minmax(0,0.8fr)_minmax(0,1.2fr)]">
         <aside className="relative flex flex-col overflow-hidden border-b border-primary-alt bg-card p-6 md:min-h-144 md:border-r md:border-b-0 md:p-8">
           <div className="flex flex-1 flex-col">

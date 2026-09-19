@@ -104,7 +104,6 @@ export function GalleryLightbox({
             icon={Cancel01Icon}
             className={iconClassName}
             strokeWidth={2}
-            data-icon-motion="close"
           />
         ),
         iconPrev: () => (

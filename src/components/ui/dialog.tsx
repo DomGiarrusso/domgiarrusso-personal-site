@@ -44,9 +44,11 @@ function DialogContent({
   className,
   children,
   showCloseButton = true,
+  animateCloseIcon = true,
   ...props
 }: DialogPrimitive.Popup.Props & {
   showCloseButton?: boolean
+  animateCloseIcon?: boolean
 }) {
   return (
     <DialogPortal>
@@ -74,7 +76,7 @@ function DialogContent({
             <HugeiconsIcon
               icon={Cancel01Icon}
               strokeWidth={2}
-              data-icon-motion="close"
+              data-icon-motion={animateCloseIcon ? 'close' : undefined}
             />
             <span className="sr-only">Close</span>
           </DialogPrimitive.Close>
